@@ -1953,6 +1953,7 @@ const EduPlatform = () => {
     if (pass === "168859") {
       setUserType("parent");
       setView("parent-dashboard");
+      setParentPass("");
     } else {
       alert("Hatalı şifre!");
     }
@@ -2285,11 +2286,10 @@ const EduPlatform = () => {
               {badges.map((badge) => (
                 <div
                   key={badge.id}
-                  className={`p-4 rounded-2xl text-center transition ${
-                    badge.earned
+                  className={`p-4 rounded-2xl text-center transition ${badge.earned
                       ? "bg-gradient-to-br from-yellow-100 to-orange-100 border-2 border-yellow-400"
                       : "bg-gray-100 opacity-50"
-                  }`}
+                    }`}
                 >
                   <div className="text-4xl mb-2">{badge.icon}</div>
                   <p className="font-bold text-sm text-gray-700">
@@ -2387,11 +2387,10 @@ const EduPlatform = () => {
                       key={index}
                       onClick={() => handleAnswer(index)}
                       disabled={answered}
-                      className={`w-full p-5 rounded-2xl font-extrabold text-lg text-left transition-all duration-200 ${bgColor} ${
-                        !answered
+                      className={`w-full p-5 rounded-2xl font-extrabold text-lg text-left transition-all duration-200 ${bgColor} ${!answered
                           ? "transform hover:-translate-y-1"
                           : "opacity-100"
-                      }`}
+                        }`}
                     >
                       {answer}
                     </button>
@@ -2409,7 +2408,7 @@ const EduPlatform = () => {
     const getSuccessRate = (subject: string) => {
       const stats =
         studentData.subjectStats[
-          subject as keyof typeof studentData.subjectStats
+        subject as keyof typeof studentData.subjectStats
         ];
       if (stats.total === 0) return 0;
       return Math.round((stats.correct / stats.total) * 100);
