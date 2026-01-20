@@ -1356,7 +1356,7 @@ const EduPlatform = () => {
                 setUserType("student");
                 setView("dashboard");
               }}
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-5 rounded-2xl font-bold text-2xl hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] transform hover:-translate-y-1 transition-all duration-300 active:scale-95 flex items-center justify-center gap-3 group"
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-5 rounded-2xl font-extrabold text-2xl hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] transform hover:-translate-y-1 transition-all duration-300 active:scale-95 flex items-center justify-center gap-3 group border-b-4 border-indigo-800"
             >
               <span>Başla!</span>
               <span className="group-hover:translate-x-1 transition-transform">
@@ -1366,7 +1366,7 @@ const EduPlatform = () => {
 
             <button
               onClick={() => setView("parent-login")}
-              className="w-full bg-gray-50 text-gray-700 py-4 rounded-2xl font-bold text-lg border-2 border-gray-100 hover:bg-gray-100 hover:border-gray-200 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+              className="w-full bg-white text-gray-900 py-4 rounded-2xl font-extrabold text-lg border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm"
             >
               Veli Girişi 👨‍👩‍👦
             </button>
@@ -1408,13 +1408,13 @@ const EduPlatform = () => {
             />
             <button
               onClick={() => handleParentLogin(parentPass)}
-              className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-xl font-bold hover:shadow-lg transform hover:scale-105 transition"
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-extrabold text-lg shadow-md hover:shadow-xl transform hover:-translate-y-0.5 transition-all active:scale-95"
             >
               Giriş Yap
             </button>
             <button
               onClick={() => setView("welcome")}
-              className="w-full bg-gray-200 text-gray-700 py-2 rounded-xl font-bold hover:bg-gray-300 transition"
+              className="w-full bg-white text-gray-900 py-3 rounded-xl font-extrabold border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-95"
             >
               Geri
             </button>
@@ -1575,8 +1575,8 @@ const EduPlatform = () => {
               >
                 <div className="text-6xl mb-4">{subject.emoji}</div>
                 <h3 className="text-2xl font-bold mb-2">{subject.name}</h3>
-                <div className="bg-white bg-opacity-20 rounded-xl p-2">
-                  <p className="text-sm">
+                <div className="bg-black/10 backdrop-blur-sm rounded-xl p-2 border border-white/20">
+                  <p className="text-sm font-extrabold text-white">
                     Doğru:{" "}
                     {
                       studentData.subjectStats[
@@ -1661,13 +1661,13 @@ const EduPlatform = () => {
             <div className="flex justify-between items-center mb-6">
               <button
                 onClick={() => setView("dashboard")}
-                className="px-4 py-2 bg-gray-200 rounded-xl hover:bg-gray-300 transition"
+                className="px-5 py-2.5 bg-white text-gray-900 rounded-2xl hover:bg-gray-50 transition-all font-extrabold flex items-center gap-2 shadow-md border-2 border-gray-200 hover:border-gray-300 active:scale-95"
               >
-                Geri
+                <span className="text-xl">←</span> Geri
               </button>
-              <div className="flex items-center gap-2">
-                <Zap className="w-6 h-6 text-yellow-500" />
-                <span className="font-bold">
+              <div className="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-2xl border border-yellow-200 shadow-sm">
+                <Zap className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                <span className="font-bold text-yellow-700">
                   Soru {currentQ + 1}/{questions.length}
                 </span>
               </div>
@@ -1689,12 +1689,15 @@ const EduPlatform = () => {
 
               <div className="space-y-3">
                 {currentQuestion.a.map((answer: string, index: number) => {
-                  let bgColor = "bg-gray-100 hover:bg-gray-200";
+                  let bgColor =
+                    "bg-white text-gray-900 border-2 border-gray-200 hover:border-indigo-400 hover:bg-indigo-50/50 shadow-sm";
                   if (answered) {
                     if (index === currentQuestion.c) {
-                      bgColor = "bg-green-500 text-white";
+                      bgColor =
+                        "bg-green-600 text-white border-green-700 shadow-lg shadow-green-100";
                     } else if (index === selectedAnswer) {
-                      bgColor = "bg-red-500 text-white";
+                      bgColor =
+                        "bg-red-600 text-white border-red-700 shadow-lg shadow-red-100";
                     }
                   }
 
@@ -1703,10 +1706,10 @@ const EduPlatform = () => {
                       key={index}
                       onClick={() => handleAnswer(index)}
                       disabled={answered}
-                      className={`w-full p-4 rounded-xl font-bold text-left transition ${bgColor} ${
+                      className={`w-full p-5 rounded-2xl font-extrabold text-lg text-left transition-all duration-200 ${bgColor} ${
                         !answered
-                          ? "transform hover:scale-105 cursor-pointer"
-                          : "cursor-not-allowed"
+                          ? "transform hover:-translate-y-1"
+                          : "opacity-100"
                       }`}
                     >
                       {answer}
