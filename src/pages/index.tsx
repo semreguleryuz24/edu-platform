@@ -23,7 +23,7 @@ const EduPlatform = () => {
     points: 0,
     level: 1,
     badges: [] as string[],
-    completedActivities: [],
+    completedActivities: [] as string[],
     dailyStats: {},
     subjectStats: {
       matematik: { correct: 0, total: 0, timeSpent: 0 },
@@ -2335,8 +2335,21 @@ const EduPlatform = () => {
   };
 
   const startQuiz = (subjectId: string) => {
+    // Tamamlanmamış ilk soruyu bul
+    const questions = allQuestions[subjectId as keyof typeof allQuestions];
+    const completedActivities: string[] = Array.isArray(studentData.completedActivities) ? studentData.completedActivities : [];
+
+    let startQuestionIndex = 0;
+    for (let i = 0; i < questions.length; i++) {
+      const activityId = `${subjectId}-question-${i}`;
+      if (!completedActivities.includes(activityId)) {
+        startQuestionIndex = i;
+        break;
+      }
+    }
+
     setCurrentSubject(subjectId);
-    setCurrentQ(0);
+    setCurrentQ(startQuestionIndex);
     setScore(0);
     setAnswered(false);
     setSelectedAnswer(null);
@@ -2372,10 +2385,18 @@ const EduPlatform = () => {
     // Zaman ekle
     newStats[currentSubject as keyof typeof newStats].timeSpent = (newStats[currentSubject as keyof typeof newStats].timeSpent || 0) + timeSpent;
 
+    // Tamamlanan aktiviteyi kaydıt
+    const activityId = `${currentSubject}-question-${currentQ}`;
+    const completedActivities: string[] = Array.isArray(studentData.completedActivities) ? studentData.completedActivities : [];
+    if (!completedActivities.includes(activityId)) {
+      completedActivities.push(activityId);
+    }
+
     const updatedData = {
       ...studentData,
       points: studentData.points + points,
       subjectStats: newStats,
+      completedActivities: completedActivities,
     };
 
     saveData(updatedData);
