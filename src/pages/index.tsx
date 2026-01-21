@@ -25,31 +25,55 @@ const EduPlatform = () => {
     completedActivities: [],
     dailyStats: {},
     subjectStats: {
-      matematik: { correct: 0, total: 0 },
-      fen: { correct: 0, total: 0 },
-      turkce: { correct: 0, total: 0 },
-      ingilizce: { correct: 0, total: 0 },
+      matematik: { correct: 0, total: 0, timeSpent: 0 },
+      fen: { correct: 0, total: 0, timeSpent: 0 },
+      turkce: { correct: 0, total: 0, timeSpent: 0 },
+      ingilizce: { correct: 0, total: 0, timeSpent: 0 },
     },
   });
 
   useEffect(() => {
+    // Önce localStorage'dan kontrol et
+    const stored = localStorage.getItem("emir_taha_progress");
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        setStudentData(data);
+      } catch (e) {
+        console.error("LocalStorage parse hatası:", e);
+      }
+    }
+
     // Firebase'den veriyi dinle (Gerçek zamanlı)
     const docRef = doc(db, "students", "emir_taha");
 
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
-        setStudentData(docSnap.data() as typeof studentData);
+        const firebaseData = docSnap.data() as typeof studentData;
+        setStudentData(firebaseData);
+        // Aynı zamanda localStorage'a da kaydet
+        localStorage.setItem("emir_taha_progress", JSON.stringify(firebaseData));
         // Sadece ilk yüklemede hoşgeldin ekranına yönlendir
         setView((prev) => (prev === "loading" ? "welcome" : prev));
       } else {
-        // Eğer Firebase'de veri yoksa LocalStorage'dan kurtarmayı dene
-        const stored = localStorage.getItem("emir_taha_progress");
-        if (stored) {
-          const data = JSON.parse(stored);
-          setStudentData(data);
-          // Firebase'e ilk veriyi yükle
-          setDoc(docRef, data);
-        }
+        // Firebase'de veri yoksa yeni veri oluştur
+        const defaultData = {
+          name: "Emir Taha",
+          points: 0,
+          level: 1,
+          badges: [],
+          completedActivities: [],
+          dailyStats: {},
+          subjectStats: {
+            matematik: { correct: 0, total: 0, timeSpent: 0 },
+            fen: { correct: 0, total: 0, timeSpent: 0 },
+            turkce: { correct: 0, total: 0, timeSpent: 0 },
+            ingilizce: { correct: 0, total: 0, timeSpent: 0 },
+          },
+        };
+        setStudentData(defaultData);
+        localStorage.setItem("emir_taha_progress", JSON.stringify(defaultData));
+        setDoc(docRef, defaultData);
         setView((prev) => (prev === "loading" ? "welcome" : prev));
       }
     });
@@ -60,12 +84,16 @@ const EduPlatform = () => {
   const saveData = async (data: typeof studentData) => {
     setStudentData(data);
     try {
-      // Hem LocalStorage'a hem Firebase'e kaydet
+      // 1. LocalStorage'a HEMEN kaydet (öncelikli)
       localStorage.setItem("emir_taha_progress", JSON.stringify(data));
-      await setDoc(doc(db, "students", "emir_taha"), data);
-      console.log("Veri buluta ve yerele kaydedildi!");
+
+      // 2. Firebase'e arka planda kaydet (hata olursa localStorage'da kalır)
+      setDoc(doc(db, "students", "emir_taha"), data).catch((error) => {
+        console.error("Firebase kaydetme hatası:", error);
+        console.log("LocalStorage'da güvenli şekilde kaydedildi!");
+      });
     } catch (error) {
-      console.error("Veri kaydetme hatası:", error);
+      console.error("LocalStorage kaydetme hatası:", error);
     }
   };
 
@@ -76,6 +104,7 @@ const EduPlatform = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [quizComplete, setQuizComplete] = useState(false);
   const [parentPass, setParentPass] = useState("");
+  const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
 
   const allQuestions = {
     matematik: [
@@ -2276,8 +2305,20 @@ const EduPlatform = () => {
   const handleParentLogin = (pass: string) => {
     if (pass === "168859") {
       setUserType("parent");
-      setView("parent-dashboard");
       setParentPass("");
+
+      // Parent dashboard'a girmeden önce Firebase'den son verileri çek
+      const docRef = doc(db, "students", "emir_taha");
+      onSnapshot(docRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const firebaseData = docSnap.data() as typeof studentData;
+          setStudentData(firebaseData);
+          // Aynı zamanda localStorage'a da kaydet
+          localStorage.setItem("emir_taha_progress", JSON.stringify(firebaseData));
+        }
+      });
+
+      setView("parent-dashboard");
     } else {
       alert("Hatalı şifre!");
     }
@@ -2290,6 +2331,7 @@ const EduPlatform = () => {
     setAnswered(false);
     setSelectedAnswer(null);
     setQuizComplete(false);
+    setQuizStartTime(Date.now());
     setView("quiz");
   };
 
@@ -2307,10 +2349,15 @@ const EduPlatform = () => {
 
     if (isCorrect) setScore(score + 1);
 
+    // Zaman hesapla (saniye cinsinden)
+    const timeSpent = quizStartTime ? Math.floor((Date.now() - quizStartTime) / 1000) : 0;
+
     const newStats = { ...studentData.subjectStats };
     newStats[currentSubject as keyof typeof newStats].total += 1;
     if (isCorrect)
       newStats[currentSubject as keyof typeof newStats].correct += 1;
+    // Zaman ekle
+    newStats[currentSubject as keyof typeof newStats].timeSpent = (newStats[currentSubject as keyof typeof newStats].timeSpent || 0) + timeSpent;
 
     const updatedData = {
       ...studentData,
@@ -2325,6 +2372,7 @@ const EduPlatform = () => {
         setCurrentQ(currentQ + 1);
         setAnswered(false);
         setSelectedAnswer(null);
+        setQuizStartTime(Date.now());
       } else {
         setQuizComplete(true);
       }
@@ -2734,7 +2782,7 @@ const EduPlatform = () => {
         studentData.subjectStats[
         subject as keyof typeof studentData.subjectStats
         ];
-      if (stats.total === 0) return 0;
+      if (!stats || stats.total === 0) return 0;
       return Math.round((stats.correct / stats.total) * 100);
     };
 
@@ -2748,10 +2796,10 @@ const EduPlatform = () => {
           completedActivities: [],
           dailyStats: {},
           subjectStats: {
-            matematik: { correct: 0, total: 0 },
-            fen: { correct: 0, total: 0 },
-            turkce: { correct: 0, total: 0 },
-            ingilizce: { correct: 0, total: 0 },
+            matematik: { correct: 0, total: 0, timeSpent: 0 },
+            fen: { correct: 0, total: 0, timeSpent: 0 },
+            turkce: { correct: 0, total: 0, timeSpent: 0 },
+            ingilizce: { correct: 0, total: 0, timeSpent: 0 },
           },
         };
         await saveData(freshData);
@@ -2827,53 +2875,58 @@ const EduPlatform = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             {["matematik", "fen", "turkce", "ingilizce"].map((subject, idx) => {
-              const colors = ["blue", "green", "purple", "red"];
+              const colorMap: { [key: string]: { text: string; bg: string; icon: string } } = {
+                blue: { text: "text-blue-600", bg: "bg-blue-500", icon: "text-blue-600" },
+                green: { text: "text-green-600", bg: "bg-green-500", icon: "text-green-600" },
+                purple: { text: "text-purple-600", bg: "bg-purple-500", icon: "text-purple-600" },
+                red: { text: "text-red-600", bg: "bg-red-500", icon: "text-red-600" },
+              };
+              const colorNames = ["blue", "green", "purple", "red"];
               const icons = [Calculator, Microscope, BookOpen, Award];
               const Icon = icons[idx];
-              const color = colors[idx];
+              const color = colorMap[colorNames[idx]];
               const names = ["Matematik", "Fen Bilgisi", "Türkçe", "İngilizce"];
+              const stats = studentData.subjectStats[subject as keyof typeof studentData.subjectStats];
+              const minutes = Math.floor((stats.timeSpent || 0) / 60);
+              const successRate = getSuccessRate(subject);
 
               return (
                 <div
                   key={subject}
-                  className="bg-white rounded-2xl shadow-lg p-6"
+                  className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition"
                 >
                   <h3
-                    className={`font-bold text-lg mb-4 flex items-center gap-2 text-${color}-500`}
+                    className={`font-bold text-lg mb-4 flex items-center gap-2 ${color.text}`}
                   >
-                    <Icon className={`w-6 h-6 text-${color}-500`} />
+                    <Icon className={`w-6 h-6 ${color.icon}`} />
                     {names[idx]}
                   </h3>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Başarı</span>
-                      <span className={`font-bold text-${color}-600`}>
-                        {getSuccessRate(subject)}%
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700 font-semibold">Başarı Oranı</span>
+                      <span className={`font-bold text-lg ${color.text}`}>
+                        {successRate}%
                       </span>
                     </div>
-                    <div className="bg-gray-200 rounded-full h-2">
+                    <div className="bg-gray-200 rounded-full h-3 overflow-hidden">
                       <div
-                        className={`bg-${color}-500 h-2 rounded-full`}
-                        style={{ width: `${getSuccessRate(subject)}%` }}
+                        className={`${color.bg} h-3 rounded-full transition-all`}
+                        style={{ width: `${successRate}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">
-                        Doğru:{" "}
-                        {
-                          studentData.subjectStats[
-                            subject as keyof typeof studentData.subjectStats
-                          ].correct
-                        }
-                      </span>
-                      <span className="text-gray-600">
-                        Toplam:{" "}
-                        {
-                          studentData.subjectStats[
-                            subject as keyof typeof studentData.subjectStats
-                          ].total
-                        }
-                      </span>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      <div className="bg-green-50 rounded-lg p-2 border border-green-200">
+                        <p className="text-green-700 font-semibold">Doğru: {stats.correct}</p>
+                      </div>
+                      <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
+                        <p className="text-blue-700 font-semibold">Toplam: {stats.total}</p>
+                      </div>
+                    </div>
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3 border border-orange-200">
+                      <p className="text-sm font-semibold text-orange-700 flex items-center gap-2">
+                        <span>⏱️</span>
+                        <span>Geçirilen Süre: {minutes} dakika</span>
+                      </p>
                     </div>
                   </div>
                 </div>
