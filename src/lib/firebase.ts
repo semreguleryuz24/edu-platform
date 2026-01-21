@@ -11,12 +11,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
-  throw new Error(
-    "Missing Firebase configuration. Please ensure environment variables are set."
-  );
-}
-
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
