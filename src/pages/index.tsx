@@ -1946,6 +1946,330 @@ const EduPlatform = () => {
         a: ["Well", "River", "Lake", "Sea"],
         c: 0,
       },
+
+      {
+        q: "What time is it? (03:15)",
+        a: [
+          "It is quarter past three",
+          "It is half past three",
+          "It is quarter to three",
+          "It is three o'clock",
+        ],
+        c: 0,
+      },
+      {
+        q: "What time is it? (09:45)",
+        a: [
+          "It is quarter past nine",
+          "It is quarter to ten",
+          "It is half past ten",
+          "It is ten o'clock",
+        ],
+        c: 1,
+      },
+      {
+        q: "He _____ up at 7 o'clock.",
+        a: ["get", "gets", "getting", "got"],
+        c: 1,
+      },
+      {
+        q: "I _____ TV after school.",
+        a: ["watch", "watches", "watching", "watched"],
+        c: 0,
+      },
+      {
+        q: "She _____ to school by bus.",
+        a: ["go", "goes", "going", "gone"],
+        c: 1,
+      },
+      {
+        q: "We _____ football on Sundays.",
+        a: ["plays", "play", "playing", "played"],
+        c: 1,
+      },
+      {
+        q: "He is _____ late.",
+        a: ["always", "sometimes", "never", "usually"],
+        c: 2,
+      },
+      {
+        q: "I _____ go to bed at 10 p.m. every day.",
+        a: ["always", "never", "sometimes", "hardly"],
+        c: 0,
+      },
+      {
+        q: "My brother _____ his teeth twice a day.",
+        a: ["brush", "brushes", "brushing", "brushed"],
+        c: 1,
+      },
+      {
+        q: "Which one is a hobby?",
+        a: ["Reading books", "Running late", "Driving a bus", "Sleeping in class"],
+        c: 0,
+      },
+      {
+        q: "I like _____ to music.",
+        a: ["listen", "listens", "listening", "listened"],
+        c: 2,
+      },
+      {
+        q: "In the morning, I _____ my face.",
+        a: ["wash", "washes", "washing", "washed"],
+        c: 0,
+      },
+      {
+        q: "Where do you live?",
+        a: ["In a city", "In a sandwich", "In a pencil", "In a rain"],
+        c: 0,
+      },
+      {
+        q: "Which one is a daily activity?",
+        a: ["Do homework", "Ride a camel", "Climb a mountain", "Fly a rocket"],
+        c: 0,
+      },
+      {
+        q: "What is the opposite of 'early'?",
+        a: ["Late", "Fast", "Quiet", "Tall"],
+        c: 0,
+      },
+
+      {
+        q: "Milk is a _____.",
+        a: ["drink", "place", "job", "animal"],
+        c: 0,
+      },
+      {
+        q: "Which one is countable?",
+        a: ["Bread", "Cheese", "An egg", "Butter"],
+        c: 2,
+      },
+      {
+        q: "Which one is uncountable?",
+        a: ["Apple", "Sandwich", "Bread", "Tomato"],
+        c: 2,
+      },
+      {
+        q: "How many _____ are there? - Two.",
+        a: ["milk", "apples", "bread", "cheese"],
+        c: 1,
+      },
+      {
+        q: "How much _____ do you need? - A little.",
+        a: ["eggs", "apples", "cheese", "sandwiches"],
+        c: 2,
+      },
+      {
+        q: "There is _____ butter on the table.",
+        a: ["some", "any", "a", "an"],
+        c: 0,
+      },
+      {
+        q: "There aren't _____ tomatoes in the fridge.",
+        a: ["some", "any", "much", "a"],
+        c: 1,
+      },
+      {
+        q: "I would like _____ orange juice.",
+        a: ["some", "any", "many", "a"],
+        c: 0,
+      },
+      {
+        q: "Do you like _____?",
+        a: ["potato", "potatoes", "a potatoes", "potatos"],
+        c: 1,
+      },
+      {
+        q: "Which one is a breakfast utensil?",
+        a: ["Spoon", "Cloud", "Street", "Garden"],
+        c: 0,
+      },
+      {
+        q: "What is 'peynir' in English?",
+        a: ["Cheese", "Chicken", "Cherry", "Chips"],
+        c: 0,
+      },
+      {
+        q: "What is 'zeytin' in English?",
+        a: ["Onion", "Olives", "Orange", "Oil"],
+        c: 1,
+      },
+      {
+        q: "Let's make a sandwich. First, _____ the bread.",
+        a: ["slice", "sleep", "swim", "sit"],
+        c: 0,
+      },
+      {
+        q: "I don't like carrots. I _____ eat them.",
+        a: ["don't", "doesn't", "isn't", "aren't"],
+        c: 0,
+      },
+      {
+        q: "My favorite breakfast is _____.",
+        a: ["scrambled eggs", "a hospital", "a library", "a bicycle"],
+        c: 0,
+      },
+      {
+        q: "We need _____ eggs for the cake.",
+        a: ["some", "any", "much", "a"],
+        c: 0,
+      },
+      {
+        q: "Is there _____ milk?",
+        a: ["some", "any", "many", "a"],
+        c: 1,
+      },
+      {
+        q: "Do you prefer tea _____ coffee?",
+        a: ["and", "but", "or", "because"],
+        c: 2,
+      },
+      {
+        q: "Yummy means _____.",
+        a: ["delicious", "dangerous", "difficult", "dirty"],
+        c: 0,
+      },
+      {
+        q: "There _____ some milk in the fridge.",
+        a: ["is", "are", "am", "be"],
+        c: 0,
+      },
+
+      {
+        q: "Where can you buy medicine?",
+        a: ["Pharmacy", "Bakery", "Museum", "Playground"],
+        c: 0,
+      },
+      {
+        q: "Where can you borrow a book?",
+        a: ["Library", "Hospital", "Bank", "Restaurant"],
+        c: 0,
+      },
+      {
+        q: "Turn _____ at the traffic lights.",
+        a: ["left", "sleep", "hungry", "yummy"],
+        c: 0,
+      },
+      {
+        q: "Go _____ and then turn right.",
+        a: ["straight", "sweet", "slow", "small"],
+        c: 0,
+      },
+      {
+        q: "The bank is _____ the post office.",
+        a: ["next to", "under", "inside", "behind of"],
+        c: 0,
+      },
+      {
+        q: "The park is _____ the cinema.",
+        a: ["in front of", "yesterday", "delicious", "sleepy"],
+        c: 0,
+      },
+      {
+        q: "The café is _____ the street.",
+        a: ["on", "at", "in", "from"],
+        c: 0,
+      },
+      {
+        q: "There _____ two schools in my town.",
+        a: ["is", "are", "am", "be"],
+        c: 1,
+      },
+      {
+        q: "_____ there a hospital near here?",
+        a: ["Is", "Are", "Do", "Does"],
+        c: 0,
+      },
+      {
+        q: "How can I get to the museum?",
+        a: [
+          "Go straight and turn left",
+          "Eat breakfast and sleep",
+          "It is rainy and sad",
+          "Brush your teeth at 7",
+        ],
+        c: 0,
+      },
+      {
+        q: "Which one is a place in downtown?",
+        a: ["Bakery", "Season", "Emotion", "Breakfast"],
+        c: 0,
+      },
+      {
+        q: "I want to buy a ticket. I go to the _____.",
+        a: ["bus station", "kitchen", "bedroom", "classroom"],
+        c: 0,
+      },
+      {
+        q: "Excuse me, _____ is the bus stop?",
+        a: ["where", "what", "when", "who"],
+        c: 0,
+      },
+      {
+        q: "The supermarket is _____ the corner.",
+        a: ["on", "in", "at", "to"],
+        c: 0,
+      },
+      {
+        q: "Opposite means _____.",
+        a: ["across from", "next to", "behind", "between"],
+        c: 0,
+      },
+      {
+        q: "Between means _____.",
+        a: [
+          "in the middle of two places",
+          "on the left",
+          "in the morning",
+          "in the fridge",
+        ],
+        c: 0,
+      },
+      {
+        q: "The police officer works at the _____.",
+        a: ["police station", "post office", "bakery", "museum"],
+        c: 0,
+      },
+      {
+        q: "You can watch a movie at the _____.",
+        a: ["cinema", "pharmacy", "farm", "classroom"],
+        c: 0,
+      },
+      {
+        q: "I need to send a letter. I go to the _____.",
+        a: ["post office", "zoo", "pool", "forest"],
+        c: 0,
+      },
+      {
+        q: "Let's meet _____ the park gate.",
+        a: ["at", "on", "in", "from"],
+        c: 0,
+      },
+
+      {
+        q: "How is the weather? (🌧️)",
+        a: ["It is rainy", "It is sunny", "It is windy", "It is hot"],
+        c: 0,
+      },
+      {
+        q: "In winter, it is usually _____.",
+        a: ["cold", "hot", "yummy", "noisy"],
+        c: 0,
+      },
+      {
+        q: "Which season comes after winter?",
+        a: ["Spring", "Summer", "Autumn", "Monday"],
+        c: 0,
+      },
+      {
+        q: "I feel _____ when I get a good grade.",
+        a: ["happy", "sad", "angry", "bored"],
+        c: 0,
+      },
+      {
+        q: "Why are you tired? - Because I _____ to bed late.",
+        a: ["go", "goes", "going", "gone"],
+        c: 0,
+      },
     ],
   };
 
@@ -2287,8 +2611,8 @@ const EduPlatform = () => {
                 <div
                   key={badge.id}
                   className={`p-4 rounded-2xl text-center transition ${badge.earned
-                      ? "bg-gradient-to-br from-yellow-100 to-orange-100 border-2 border-yellow-400"
-                      : "bg-gray-100 opacity-50"
+                    ? "bg-gradient-to-br from-yellow-100 to-orange-100 border-2 border-yellow-400"
+                    : "bg-gray-100 opacity-50"
                     }`}
                 >
                   <div className="text-4xl mb-2">{badge.icon}</div>
@@ -2388,8 +2712,8 @@ const EduPlatform = () => {
                       onClick={() => handleAnswer(index)}
                       disabled={answered}
                       className={`w-full p-5 rounded-2xl font-extrabold text-lg text-left transition-all duration-200 ${bgColor} ${!answered
-                          ? "transform hover:-translate-y-1"
-                          : "opacity-100"
+                        ? "transform hover:-translate-y-1"
+                        : "opacity-100"
                         }`}
                     >
                       {answer}
