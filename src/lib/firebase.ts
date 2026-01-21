@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBvjaeGXSFiG5ukouRidn5t0iiTdisWb54",
-  authDomain: "edu-platform-27a17.firebaseapp.com",
-  projectId: "edu-platform-27a17",
-  storageBucket: "edu-platform-27a17.firebasestorage.app",
-  messagingSenderId: "77254498501",
-  appId: "1:77254498501:web:3af07a3d218c0717b878ac",
-  measurementId: "G-W8D6HZDK9R",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
