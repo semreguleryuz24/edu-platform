@@ -2412,13 +2412,20 @@ const EduPlatform = () => {
     const skippedQuestions: string[] = Array.isArray(studentData.skippedQuestions) ? studentData.skippedQuestions : [];
     const wasSkipped = skippedQuestions.includes(activityId);
     let updatedSkippedQuestions = skippedQuestions;
-    let updatedPassedBySubject = studentData.passedQuestionsBySubject;
+
+    const passedBySubject = studentData.passedQuestionsBySubject || {
+      matematik: 0,
+      fen: 0,
+      turkce: 0,
+      ingilizce: 0,
+    };
+    let updatedPassedBySubject = passedBySubject;
 
     if (wasSkipped) {
       updatedSkippedQuestions = skippedQuestions.filter(q => q !== activityId);
       updatedPassedBySubject = {
-        ...studentData.passedQuestionsBySubject,
-        [currentSubject]: Math.max(0, (studentData.passedQuestionsBySubject[currentSubject as keyof typeof studentData.passedQuestionsBySubject] || 0) - 1),
+        ...passedBySubject,
+        [currentSubject]: Math.max(0, (passedBySubject[currentSubject as keyof typeof passedBySubject] || 0) - 1),
       };
     }
 
@@ -2467,9 +2474,15 @@ const EduPlatform = () => {
     }
 
     // Pas geçilen soruları arttır
+    const passedBySubject = studentData.passedQuestionsBySubject || {
+      matematik: 0,
+      fen: 0,
+      turkce: 0,
+      ingilizce: 0,
+    };
     const passedQuestionsBySubject = {
-      ...studentData.passedQuestionsBySubject,
-      [currentSubject]: (studentData.passedQuestionsBySubject[currentSubject as keyof typeof studentData.passedQuestionsBySubject] || 0) + 1,
+      ...passedBySubject,
+      [currentSubject]: (passedBySubject[currentSubject as keyof typeof passedBySubject] || 0) + 1,
     };
 
     const updatedData = {
