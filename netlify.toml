@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# Disable smart detection for Firebase public API keys (AIza*)
+[build.environment]
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
