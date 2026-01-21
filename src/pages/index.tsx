@@ -2394,6 +2394,17 @@ const EduPlatform = () => {
     // Zaman hesapla (saniye cinsinden)
     const timeSpent = quizStartTime ? Math.floor((Date.now() - quizStartTime) / 1000) : 0;
 
+    // Günün tarihini al (YYYY-MM-DD format'ında)
+    const today = new Date().toISOString().split('T')[0];
+    const newDailyStats: { [date: string]: { [subject: string]: number } } = { ...studentData.dailyStats };
+    if (!newDailyStats[today]) {
+      newDailyStats[today] = {};
+    }
+    if (!newDailyStats[today][currentSubject]) {
+      newDailyStats[today][currentSubject] = 0;
+    }
+    newDailyStats[today][currentSubject] += timeSpent;
+
     const newStats = { ...studentData.subjectStats };
     newStats[currentSubject as keyof typeof newStats].total += 1;
     if (isCorrect)
@@ -2436,6 +2447,7 @@ const EduPlatform = () => {
       completedActivities: completedActivities,
       skippedQuestions: updatedSkippedQuestions,
       passedQuestionsBySubject: updatedPassedBySubject,
+      dailyStats: newDailyStats,
     };
 
     saveData(updatedData);
@@ -3089,8 +3101,72 @@ const EduPlatform = () => {
             })}
           </div>
 
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h3 className="font-extrabold text-2xl mb-4 flex items-center gap-2 text-gray-900">
+              <Zap className="w-6 h-6 text-yellow-500" />
+              Günlük Çalışma Süresi
+            </h3>
+            <div className="space-y-3">
+              {Object.keys((studentData.dailyStats as { [date: string]: { [subject: string]: number } }) || {})
+                .sort()
+                .reverse()
+                .slice(0, 7)
+                .map((date) => {
+                  const dailyData = ((studentData.dailyStats as { [date: string]: { [subject: string]: number } }) || {})[date] || {};
+                  const totalSeconds = Object.values(dailyData || {}).reduce((sum, sec) => sum + sec, 0);
+                  const totalMinutes = Math.floor(totalSeconds / 60);
+                  const subjects = Object.keys(dailyData || {});
+
+                  // Tarihi daha okunaklı formata çevir
+                  const dateObj = new Date(date + 'T00:00:00');
+                  const formattedDate = dateObj.toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    weekday: 'short'
+                  });
+
+                  return (
+                    <div key={date} className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <p className="font-bold text-gray-800">{formattedDate}</p>
+                          <p className="text-sm text-gray-600">{subjects.length} derste çalışıldı</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-2xl font-bold text-blue-600">{totalMinutes}</p>
+                          <p className="text-sm text-gray-600">dakika</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        {["matematik", "fen", "turkce", "ingilizce"].map((subject) => {
+                          const minutes = Math.floor(((dailyData as Record<string, number>)?.[subject] || 0) / 60);
+                          return (
+                            <div key={subject} className="bg-white rounded-lg p-2 border border-gray-200">
+                              <p className="text-gray-700 font-semibold capitalize">{
+                                subject === "matematik" ? "Matematik" :
+                                  subject === "fen" ? "Fen" :
+                                    subject === "turkce" ? "Türkçe" :
+                                      "İngilizce"
+                              }</p>
+                              <p className="text-blue-600 font-bold">{minutes} min</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              {Object.keys(studentData.dailyStats || {}).length === 0 && (
+                <div className="bg-gray-50 rounded-xl p-6 text-center border border-gray-200">
+                  <p className="text-gray-500">Henüz hiç çalışma kaydı yok</p>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h3 className="font-bold text-xl mb-4 flex items-center gap-2">
+            <h3 className="font-extrabold text-2xl mb-4 flex items-center gap-2 text-gray-900">
               <BarChart3 className="w-6 h-6 text-indigo-500" />
               Öneriler
             </h3>
