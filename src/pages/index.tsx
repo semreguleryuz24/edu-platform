@@ -24,6 +24,13 @@ const EduPlatform = () => {
     level: 1,
     badges: [] as string[],
     completedActivities: [] as string[],
+    skippedQuestions: [] as string[],
+    passedQuestionsBySubject: {
+      matematik: 0,
+      fen: 0,
+      turkce: 0,
+      ingilizce: 0,
+    } as { [key: string]: number },
     dailyStats: {},
     subjectStats: {
       matematik: { correct: 0, total: 0, timeSpent: 0 },
@@ -64,6 +71,13 @@ const EduPlatform = () => {
           level: 1,
           badges: [],
           completedActivities: [],
+          skippedQuestions: [],
+          passedQuestionsBySubject: {
+            matematik: 0,
+            fen: 0,
+            turkce: 0,
+            ingilizce: 0,
+          },
           dailyStats: {},
           subjectStats: {
             matematik: { correct: 0, total: 0, timeSpent: 0 },
@@ -113,6 +127,7 @@ const EduPlatform = () => {
   const [answered, setAnswered] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [quizComplete, setQuizComplete] = useState(false);
+  const [passedQuestions, setPassedQuestions] = useState<number[]>([]);
   const [parentPass, setParentPass] = useState("");
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
 
@@ -2353,6 +2368,7 @@ const EduPlatform = () => {
     setScore(0);
     setAnswered(false);
     setSelectedAnswer(null);
+    setPassedQuestions([]);
     setQuizComplete(false);
     setQuizStartTime(Date.now());
     setView("quiz");
@@ -2392,11 +2408,27 @@ const EduPlatform = () => {
       completedActivities.push(activityId);
     }
 
+    // Eğer soru daha önce pas geçildiyse, skipped listesinden çıkar ve sayıyı azalt
+    const skippedQuestions: string[] = Array.isArray(studentData.skippedQuestions) ? studentData.skippedQuestions : [];
+    const wasSkipped = skippedQuestions.includes(activityId);
+    let updatedSkippedQuestions = skippedQuestions;
+    let updatedPassedBySubject = studentData.passedQuestionsBySubject;
+
+    if (wasSkipped) {
+      updatedSkippedQuestions = skippedQuestions.filter(q => q !== activityId);
+      updatedPassedBySubject = {
+        ...studentData.passedQuestionsBySubject,
+        [currentSubject]: Math.max(0, (studentData.passedQuestionsBySubject[currentSubject as keyof typeof studentData.passedQuestionsBySubject] || 0) - 1),
+      };
+    }
+
     const updatedData = {
       ...studentData,
       points: studentData.points + points,
       subjectStats: newStats,
       completedActivities: completedActivities,
+      skippedQuestions: updatedSkippedQuestions,
+      passedQuestionsBySubject: updatedPassedBySubject,
     };
 
     saveData(updatedData);
@@ -2411,6 +2443,54 @@ const EduPlatform = () => {
         setQuizComplete(true);
       }
     }, 1500);
+  };
+
+  const handlePassQuestion = () => {
+    if (!currentSubject) return;
+
+    const questions = allQuestions[currentSubject as keyof typeof allQuestions];
+
+    // Pas geçilen soru numarasını ekle
+    setPassedQuestions([...passedQuestions, currentQ]);
+
+    // Soruyu tamamlanmış olarak işaretle
+    const activityId = `${currentSubject}-question-${currentQ}`;
+    const completedActivities: string[] = Array.isArray(studentData.completedActivities) ? studentData.completedActivities : [];
+    if (!completedActivities.includes(activityId)) {
+      completedActivities.push(activityId);
+    }
+
+    // Pas geçilen soruları skippedQuestions listesine ekle
+    const skippedQuestions: string[] = Array.isArray(studentData.skippedQuestions) ? studentData.skippedQuestions : [];
+    if (!skippedQuestions.includes(activityId)) {
+      skippedQuestions.push(activityId);
+    }
+
+    // Pas geçilen soruları arttır
+    const passedQuestionsBySubject = {
+      ...studentData.passedQuestionsBySubject,
+      [currentSubject]: (studentData.passedQuestionsBySubject[currentSubject as keyof typeof studentData.passedQuestionsBySubject] || 0) + 1,
+    };
+
+    const updatedData = {
+      ...studentData,
+      completedActivities: completedActivities,
+      skippedQuestions: skippedQuestions,
+      passedQuestionsBySubject: passedQuestionsBySubject,
+    };
+
+    saveData(updatedData);
+
+    setTimeout(() => {
+      if (currentQ < questions.length - 1) {
+        setCurrentQ(currentQ + 1);
+        setAnswered(false);
+        setSelectedAnswer(null);
+        setQuizStartTime(Date.now());
+      } else {
+        setQuizComplete(true);
+      }
+    }, 500);
   };
 
   if (view === "loading") {
@@ -2723,10 +2803,15 @@ const EduPlatform = () => {
               {percentage >= 80 ? "🎉" : percentage >= 60 ? "👏" : "💪"}
             </div>
             <h2 className="text-3xl font-bold mb-4">Tebrikler</h2>
-            <p className="text-xl mb-6">
+            <p className="text-xl mb-2">
               {questions.length} sorudan{" "}
               <span className="text-green-600 font-bold">{score}</span> doğru
             </p>
+            {passedQuestions.length > 0 && (
+              <p className="text-lg mb-6 text-yellow-600 font-semibold">
+                ⏭️ {passedQuestions.length} soru pas geçildi
+              </p>
+            )}
             <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl p-4 mb-6">
               <p className="text-lg font-bold">+{score * 20} Puan Kazandın</p>
             </div>
@@ -2803,6 +2888,17 @@ const EduPlatform = () => {
                   );
                 })}
               </div>
+
+              {!answered && (
+                <div className="mt-6">
+                  <button
+                    onClick={handlePassQuestion}
+                    className="w-full p-4 rounded-2xl font-bold text-lg bg-yellow-100 text-yellow-700 border-2 border-yellow-300 hover:bg-yellow-200 transition-all duration-200 transform hover:-translate-y-1"
+                  >
+                    ⏭️ Pas Geç
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -2828,6 +2924,13 @@ const EduPlatform = () => {
           level: 1,
           badges: [],
           completedActivities: [],
+          skippedQuestions: [],
+          passedQuestionsBySubject: {
+            matematik: 0,
+            fen: 0,
+            turkce: 0,
+            ingilizce: 0,
+          },
           dailyStats: {},
           subjectStats: {
             matematik: { correct: 0, total: 0, timeSpent: 0 },
@@ -2956,6 +3059,11 @@ const EduPlatform = () => {
                         <p className="text-blue-700 font-semibold">Toplam: {stats.total}</p>
                       </div>
                     </div>
+                    {(studentData.passedQuestionsBySubject[subject as keyof typeof studentData.passedQuestionsBySubject] || 0) > 0 && (
+                      <div className="bg-yellow-50 rounded-lg p-2 border border-yellow-200">
+                        <p className="text-yellow-700 font-semibold">⏭️ Pas Geçilen: {studentData.passedQuestionsBySubject[subject as keyof typeof studentData.passedQuestionsBySubject]}</p>
+                      </div>
+                    )}
                     <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3 border border-orange-200">
                       <p className="text-sm font-semibold text-orange-700 flex items-center gap-2">
                         <span>⏱️</span>
