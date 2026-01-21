@@ -1,3 +1,4 @@
+import confetti from "canvas-confetti";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import {
   Award,
@@ -21,7 +22,7 @@ const EduPlatform = () => {
     name: "Emir Taha",
     points: 0,
     level: 1,
-    badges: [],
+    badges: [] as string[],
     completedActivities: [],
     dailyStats: {},
     subjectStats: {
@@ -80,6 +81,15 @@ const EduPlatform = () => {
 
     return () => unsubscribe();
   }, []);
+
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 150,
+      spread: 180,
+      origin: { y: -0.1 },
+      gravity: 3,
+    });
+  };
 
   const saveData = async (data: typeof studentData) => {
     setStudentData(data);
@@ -2347,7 +2357,10 @@ const EduPlatform = () => {
     const isCorrect = answerIndex === currentQuestion.c;
     const points = isCorrect ? 20 : 0;
 
-    if (isCorrect) setScore(score + 1);
+    if (isCorrect) {
+      setScore(score + 1);
+      triggerConfetti();
+    }
 
     // Zaman hesapla (saniye cinsinden)
     const timeSpent = quizStartTime ? Math.floor((Date.now() - quizStartTime) / 1000) : 0;
