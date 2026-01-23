@@ -45,12 +45,15 @@ export default function RecommendationOverview({
                   Kişisel Analiz Özeti
                 </h3>
                 <span className="text-xs font-bold uppercase tracking-widest text-white/70">
-                  Öğrenme Stili: {insights.learningStyle}
+                  Öğrenme Stili: {insights?.learningStyle || "Keşfediliyor..."}
                 </span>
               </div>
             </div>
             <p className="text-2xl font-medium leading-relaxed max-w-2xl italic">
-              "{insights.motivationalMessage}"
+              "
+              {insights?.motivationalMessage ||
+                "Harika bir öğrenme günü seni bekliyor!"}
+              "
             </p>
           </div>
         </div>
@@ -66,7 +69,7 @@ export default function RecommendationOverview({
                 Mevcut Seviye
               </span>
               <div className="text-2xl font-black text-gray-900">
-                {gamification.currentLevel}
+                {gamification?.currentLevel || "Başlangıç"}
               </div>
             </div>
           </div>
@@ -74,7 +77,8 @@ export default function RecommendationOverview({
           <div className="mb-6">
             <div className="flex justify-between text-xs font-bold mb-2">
               <span className="text-gray-500">
-                {gamification.nextLevelRequirement}
+                {gamification?.nextLevelRequirement ||
+                  "Yeni seviyeye az kaldı!"}
               </span>
             </div>
             <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
@@ -86,7 +90,7 @@ export default function RecommendationOverview({
           </div>
 
           <div className="flex gap-2">
-            {gamification.badges.map((badge, i) => (
+            {(gamification?.badges || []).map((badge, i) => (
               <span
                 key={i}
                 className="px-3 py-1 bg-amber-50 text-amber-700 text-[10px] font-black rounded-full border border-amber-100"
@@ -96,7 +100,7 @@ export default function RecommendationOverview({
             ))}
             <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-[10px] font-black rounded-full border border-indigo-100 flex items-center gap-1">
               <Star className="w-3 h-3 fill-indigo-600" />
-              {gamification.streakDays}
+              {gamification?.streakDays || "0"} Gün
             </span>
           </div>
         </div>
@@ -114,7 +118,7 @@ export default function RecommendationOverview({
             </h4>
           </div>
           <ul className="space-y-4">
-            {insights.strengths.map((strength, i) => (
+            {(insights?.strengths || []).map((strength, i) => (
               <li
                 key={i}
                 className="flex items-start gap-4 p-4 rounded-[24px] bg-emerald-50/50 text-emerald-900 border border-emerald-100/50"
@@ -139,7 +143,7 @@ export default function RecommendationOverview({
             </h4>
           </div>
           <ul className="space-y-4">
-            {insights.improvements.map((improvement, i) => (
+            {(insights?.improvements || []).map((improvement, i) => (
               <li
                 key={i}
                 className="flex items-start gap-4 p-4 rounded-[24px] bg-rose-50/50 text-rose-900 border border-rose-100/50"
@@ -172,7 +176,7 @@ export default function RecommendationOverview({
               </h4>
             </div>
             <ul className="space-y-4 relative z-10">
-              {insights.parentTips.map((tip, i) => (
+              {(insights?.parentTips || []).map((tip, i) => (
                 <li
                   key={i}
                   className="flex items-start gap-3 text-indigo-800 font-medium bg-white/50 backdrop-blur-sm p-4 rounded-2xl"
@@ -205,7 +209,7 @@ export default function RecommendationOverview({
                   Sıradaki Hedef
                 </h4>
                 <p className="text-2xl font-black text-gray-900 leading-tight">
-                  {insights.nextAchievement}
+                  {insights?.nextAchievement || "Yolculuk devam ediyor..."}
                 </p>
               </div>
             </div>

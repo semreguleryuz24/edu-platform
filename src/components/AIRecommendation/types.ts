@@ -37,6 +37,8 @@ export interface StudentAnalytics {
 // AI Recommendations
 export interface AIRecommendations {
   timestamp: string;
+  modelName: string;
+  modelVersion: string;
 
   focusTopics: {
     priority: "high" | "medium" | "low";

@@ -46,8 +46,12 @@ export default function AIRecommendationPanel({
           const cacheDate = new Date(parsed.timestamp).toDateString();
           const todayDate = new Date().toDateString();
 
-          // Eğer bugün yapılmış bir analiz varsa onu kullan
-          if (cacheDate === todayDate) {
+          // Eğer bugün yapılmış bir analiz varsa ve gerekli alanlar mevcutsa onu kullan
+          if (
+            cacheDate === todayDate &&
+            parsed.gamification &&
+            parsed.insights
+          ) {
             console.log(
               "Bugün için önbellekte veri bulundu, API çağrısı yapılmıyor.",
             );
@@ -159,7 +163,7 @@ export default function AIRecommendationPanel({
               </h1>
               <p className="text-gray-500 font-bold text-lg flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-500" />
-                Gemini 3 Pro ile gelişmiş analiz
+                {recommendations?.modelName || "Gemini"} ile gelişmiş analiz
               </p>
             </div>
           </div>
@@ -282,6 +286,10 @@ export default function AIRecommendationPanel({
                 {new Date(recommendations.timestamp).toLocaleString("tr-TR")}
               </div>
               <div className="flex items-center gap-4">
+                <p className="text-xs font-bold text-gray-400 uppercase">
+                  Analiz Motoru: {recommendations.modelVersion}
+                </p>
+                <div className="w-1 h-1 bg-gray-300 rounded-full" />
                 <p className="text-xs font-bold text-gray-400 uppercase">
                   Veri Güvenliği Sağlandı
                 </p>

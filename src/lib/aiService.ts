@@ -15,43 +15,14 @@ interface AnalyzeStudentParams {
   requestType: "full" | "topics" | "timing" | "plan";
 }
 
-export async function analyzeStudentPerformance(
-  params: AnalyzeStudentParams,
-): Promise<AIRecommendations> {
-  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-
-  if (!apiKey) {
-    throw new Error(
-      "Gemini API key bulunamadı. Lütfen .env.local dosyasına NEXT_PUBLIC_GEMINI_API_KEY ekleyin.",
-    );
-  }
-
-  // 1. Student data'yı analiz için hazırla
-  const analysisPrompt = generateAnalysisPrompt(params);
-
-  // 2. Gemini API'ye istek gönder
-  // 'v1beta' API ve 'gemini-3-pro-preview' kullanıyoruz
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent?key=${apiKey}`;
-
-  console.log("Gemini API İstek Gönderiliyor...", {
-    model: "gemini-3-pro-preview",
-  });
+async function callGeminiAPI(apiKey: string, prompt: string, model: string) {
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
   const response = await fetch(apiUrl, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      contents: [
-        {
-          parts: [
-            {
-              text: analysisPrompt,
-            },
-          ],
-        },
-      ],
+      contents: [{ parts: [{ text: prompt }] }],
       generationConfig: {
         temperature: 0.7,
         topK: 40,
@@ -64,25 +35,87 @@ export async function analyzeStudentPerformance(
 
   if (!response.ok) {
     const errorData = await response.json();
-    console.error("Gemini API Hata Detayı:", errorData);
-    throw new Error(
-      `Gemini API Hatası: ${errorData.error?.message || response.statusText}`,
-    );
+    return {
+      ok: false,
+      error: errorData.error?.message || response.statusText,
+      status: response.status,
+    };
   }
 
-  // 3. Response'u parse et
   const data = await response.json();
-
-  if (
-    !data.candidates ||
-    data.candidates.length === 0 ||
-    !data.candidates[0].content
-  ) {
-    console.error("Gemini API Beklenmeyen Yanıt Formatı:", data);
-    throw new Error("Gemini API geçersiz bir yanıt döndürdü.");
+  if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
+    return { ok: false, error: "Geçersiz yanıt formatı" };
   }
 
-  const aiResponse = data.candidates[0].content.parts[0].text;
+  return {
+    ok: true,
+    text: data.candidates[0].content.parts[0].text,
+    model: model,
+  };
+}
+
+export async function analyzeStudentPerformance(
+  params: AnalyzeStudentParams,
+): Promise<AIRecommendations> {
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("Gemini API key bulunamadı.");
+  }
+
+  const prompt = generateAnalysisPrompt(params);
+
+  // Fallback dizisi: 2026 güncel modelleri
+  const models = [
+    "gemini-3-pro-preview",
+    "gemini-3-flash-preview",
+    "gemini-2.5-pro",
+    "gemini-2.5-flash",
+    "gemini-2.0-flash",
+  ];
+
+  let result: any = { ok: false, error: "Hiçbir model yanıt vermedi" };
+
+  for (const model of models) {
+    console.log(`${model} deneniyor...`);
+    result = await callGeminiAPI(apiKey, prompt, model);
+
+    if (result.ok) {
+      console.log(`${model} başarıyla sonuç döndürdü.`);
+      break;
+    }
+
+    // Failover için geçerli hata türleri: Kota aşımı veya Modelin bulunamaması
+    const isRetryableError =
+      result.error?.toLowerCase().includes("quota") ||
+      result.error?.toLowerCase().includes("not found") ||
+      result.error?.toLowerCase().includes("not supported") ||
+      result.status === 429;
+
+    if (!isRetryableError) {
+      // Eğer hata modelden bağımsız başka bir teknik sorunsa döngüyü kırabiliriz
+      // Ancak stabilite için bir sonraki modeli denemeye devam ediyoruz
+      console.error(`${model} hatası:`, result.error);
+    } else {
+      console.warn(`${model} devre dışı, sıradaki modele geçiliyor...`);
+    }
+  }
+
+  if (!result.ok) {
+    throw new Error(`Gemini API Hatası: ${result.error}`);
+  }
+
+  // Başarılı modeli belirle
+  const successfulModel = result.model as string;
+  const modelDisplayMap: Record<string, string> = {
+    "gemini-3-pro-preview": "Gemini 3 Pro",
+    "gemini-3-flash-preview": "Gemini 3 Flash",
+    "gemini-2.5-pro": "Gemini 2.5 Pro",
+    "gemini-2.5-flash": "Gemini 2.5 Flash",
+    "gemini-2.0-flash": "Gemini 2.0 Flash",
+  };
+
+  const aiResponse = result.text as string;
 
   // 4. JSON olarak parse et ve döndür
   try {
@@ -93,6 +126,8 @@ export async function analyzeStudentPerformance(
     return {
       ...recommendations,
       timestamp: new Date().toISOString(),
+      modelName: modelDisplayMap[successfulModel] || successfulModel,
+      modelVersion: successfulModel,
     };
   } catch (error) {
     console.warn(
@@ -103,6 +138,8 @@ export async function analyzeStudentPerformance(
       return {
         ...recommendations,
         timestamp: new Date().toISOString(),
+        modelName: modelDisplayMap[successfulModel] || successfulModel,
+        modelVersion: successfulModel,
       };
     } catch (parseError: any) {
       console.error("AI Yanıtı Parse Edilemedi. Yanıt:", aiResponse);
