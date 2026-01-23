@@ -4,8 +4,10 @@ import {
   Award,
   BarChart3,
   BookOpen,
+  Brain,
   Calculator,
   Microscope,
+  Sparkles,
   Star,
   Target,
   TrendingUp,
@@ -13,6 +15,8 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import AIRecommendationPanel from "../components/AIRecommendation/AIRecommendationPanel";
+import ErrorBoundary from "../components/ErrorBoundary";
 import { db } from "../lib/firebase";
 
 const EduPlatform = () => {
@@ -60,7 +64,10 @@ const EduPlatform = () => {
         const firebaseData = docSnap.data() as typeof studentData;
         setStudentData(firebaseData);
         // Aynı zamanda localStorage'a da kaydet
-        localStorage.setItem("emir_taha_progress", JSON.stringify(firebaseData));
+        localStorage.setItem(
+          "emir_taha_progress",
+          JSON.stringify(firebaseData),
+        );
         // Sadece ilk yüklemede hoşgeldin ekranına yönlendir
         setView((prev) => (prev === "loading" ? "welcome" : prev));
       } else {
@@ -2058,7 +2065,12 @@ const EduPlatform = () => {
       },
       {
         q: "Which one is a hobby?",
-        a: ["Reading books", "Running late", "Driving a bus", "Sleeping in class"],
+        a: [
+          "Reading books",
+          "Running late",
+          "Driving a bus",
+          "Sleeping in class",
+        ],
         c: 0,
       },
       {
@@ -2339,7 +2351,10 @@ const EduPlatform = () => {
           const firebaseData = docSnap.data() as typeof studentData;
           setStudentData(firebaseData);
           // Aynı zamanda localStorage'a da kaydet
-          localStorage.setItem("emir_taha_progress", JSON.stringify(firebaseData));
+          localStorage.setItem(
+            "emir_taha_progress",
+            JSON.stringify(firebaseData),
+          );
         }
       });
 
@@ -2352,7 +2367,11 @@ const EduPlatform = () => {
   const startQuiz = (subjectId: string) => {
     // Tamamlanmamış ilk soruyu bul
     const questions = allQuestions[subjectId as keyof typeof allQuestions];
-    const completedActivities: string[] = Array.isArray(studentData.completedActivities) ? studentData.completedActivities : [];
+    const completedActivities: string[] = Array.isArray(
+      studentData.completedActivities,
+    )
+      ? studentData.completedActivities
+      : [];
 
     let startQuestionIndex = 0;
     for (let i = 0; i < questions.length; i++) {
@@ -2392,11 +2411,15 @@ const EduPlatform = () => {
     }
 
     // Zaman hesapla (saniye cinsinden)
-    const timeSpent = quizStartTime ? Math.floor((Date.now() - quizStartTime) / 1000) : 0;
+    const timeSpent = quizStartTime
+      ? Math.floor((Date.now() - quizStartTime) / 1000)
+      : 0;
 
     // Günün tarihini al (YYYY-MM-DD format'ında)
-    const today = new Date().toISOString().split('T')[0];
-    const newDailyStats: { [date: string]: { [subject: string]: number } } = { ...studentData.dailyStats };
+    const today = new Date().toISOString().split("T")[0];
+    const newDailyStats: { [date: string]: { [subject: string]: number } } = {
+      ...studentData.dailyStats,
+    };
     if (!newDailyStats[today]) {
       newDailyStats[today] = {};
     }
@@ -2410,17 +2433,27 @@ const EduPlatform = () => {
     if (isCorrect)
       newStats[currentSubject as keyof typeof newStats].correct += 1;
     // Zaman ekle
-    newStats[currentSubject as keyof typeof newStats].timeSpent = (newStats[currentSubject as keyof typeof newStats].timeSpent || 0) + timeSpent;
+    newStats[currentSubject as keyof typeof newStats].timeSpent =
+      (newStats[currentSubject as keyof typeof newStats].timeSpent || 0) +
+      timeSpent;
 
     // Tamamlanan aktiviteyi kaydıt
     const activityId = `${currentSubject}-question-${currentQ}`;
-    const completedActivities: string[] = Array.isArray(studentData.completedActivities) ? studentData.completedActivities : [];
+    const completedActivities: string[] = Array.isArray(
+      studentData.completedActivities,
+    )
+      ? studentData.completedActivities
+      : [];
     if (!completedActivities.includes(activityId)) {
       completedActivities.push(activityId);
     }
 
     // Eğer soru daha önce pas geçildiyse, skipped listesinden çıkar ve sayıyı azalt
-    const skippedQuestions: string[] = Array.isArray(studentData.skippedQuestions) ? studentData.skippedQuestions : [];
+    const skippedQuestions: string[] = Array.isArray(
+      studentData.skippedQuestions,
+    )
+      ? studentData.skippedQuestions
+      : [];
     const wasSkipped = skippedQuestions.includes(activityId);
     let updatedSkippedQuestions = skippedQuestions;
 
@@ -2433,10 +2466,16 @@ const EduPlatform = () => {
     let updatedPassedBySubject = passedBySubject;
 
     if (wasSkipped) {
-      updatedSkippedQuestions = skippedQuestions.filter(q => q !== activityId);
+      updatedSkippedQuestions = skippedQuestions.filter(
+        (q) => q !== activityId,
+      );
       updatedPassedBySubject = {
         ...passedBySubject,
-        [currentSubject]: Math.max(0, (passedBySubject[currentSubject as keyof typeof passedBySubject] || 0) - 1),
+        [currentSubject]: Math.max(
+          0,
+          (passedBySubject[currentSubject as keyof typeof passedBySubject] ||
+            0) - 1,
+        ),
       };
     }
 
@@ -2474,13 +2513,21 @@ const EduPlatform = () => {
 
     // Soruyu tamamlanmış olarak işaretle
     const activityId = `${currentSubject}-question-${currentQ}`;
-    const completedActivities: string[] = Array.isArray(studentData.completedActivities) ? studentData.completedActivities : [];
+    const completedActivities: string[] = Array.isArray(
+      studentData.completedActivities,
+    )
+      ? studentData.completedActivities
+      : [];
     if (!completedActivities.includes(activityId)) {
       completedActivities.push(activityId);
     }
 
     // Pas geçilen soruları skippedQuestions listesine ekle
-    const skippedQuestions: string[] = Array.isArray(studentData.skippedQuestions) ? studentData.skippedQuestions : [];
+    const skippedQuestions: string[] = Array.isArray(
+      studentData.skippedQuestions,
+    )
+      ? studentData.skippedQuestions
+      : [];
     if (!skippedQuestions.includes(activityId)) {
       skippedQuestions.push(activityId);
     }
@@ -2494,7 +2541,9 @@ const EduPlatform = () => {
     };
     const passedQuestionsBySubject = {
       ...passedBySubject,
-      [currentSubject]: (passedBySubject[currentSubject as keyof typeof passedBySubject] || 0) + 1,
+      [currentSubject]:
+        (passedBySubject[currentSubject as keyof typeof passedBySubject] || 0) +
+        1,
     };
 
     const updatedData = {
@@ -2728,6 +2777,17 @@ const EduPlatform = () => {
               </button>
             </div>
 
+            <div className="mb-6">
+              <button
+                onClick={() => setView("ai-recommendations")}
+                className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-4 rounded-2xl text-white font-black text-xl flex items-center justify-center gap-3 hover:shadow-2xl hover:scale-[1.02] transition-all group"
+              >
+                <Brain className="w-8 h-8 animate-pulse text-indigo-200" />
+                <span>AI Öğrenme Planımı Gör</span>
+                <Sparkles className="w-6 h-6 text-amber-300 group-hover:rotate-12 transition-transform" />
+              </button>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl p-4 text-white">
                 <div className="flex items-center gap-2 mb-2">
@@ -2797,10 +2857,11 @@ const EduPlatform = () => {
               {badges.map((badge) => (
                 <div
                   key={badge.id}
-                  className={`p-4 rounded-2xl text-center transition ${badge.earned
-                    ? "bg-gradient-to-br from-yellow-100 to-orange-100 border-2 border-yellow-400"
-                    : "bg-gray-100 opacity-50"
-                    }`}
+                  className={`p-4 rounded-2xl text-center transition ${
+                    badge.earned
+                      ? "bg-gradient-to-br from-yellow-100 to-orange-100 border-2 border-yellow-400"
+                      : "bg-gray-100 opacity-50"
+                  }`}
                 >
                   <div className="text-4xl mb-2">{badge.icon}</div>
                   <p className="font-bold text-sm text-gray-700">
@@ -2903,10 +2964,11 @@ const EduPlatform = () => {
                       key={index}
                       onClick={() => handleAnswer(index)}
                       disabled={answered}
-                      className={`w-full p-5 rounded-2xl font-extrabold text-lg text-left transition-all duration-200 ${bgColor} ${!answered
-                        ? "transform hover:-translate-y-1"
-                        : "opacity-100"
-                        }`}
+                      className={`w-full p-5 rounded-2xl font-extrabold text-lg text-left transition-all duration-200 ${bgColor} ${
+                        !answered
+                          ? "transform hover:-translate-y-1"
+                          : "opacity-100"
+                      }`}
                     >
                       {answer}
                     </button>
@@ -2935,7 +2997,7 @@ const EduPlatform = () => {
     const getSuccessRate = (subject: string) => {
       const stats =
         studentData.subjectStats[
-        subject as keyof typeof studentData.subjectStats
+          subject as keyof typeof studentData.subjectStats
         ];
       if (!stats || stats.total === 0) return 0;
       return Math.round((stats.correct / stats.total) * 100);
@@ -3000,6 +3062,31 @@ const EduPlatform = () => {
                 </button>
               </div>
             </div>
+
+            <div className="mb-8">
+              <button
+                onClick={() => setView("ai-recommendations")}
+                className="w-full bg-white border-4 border-indigo-100 p-6 rounded-[32px] flex items-center justify-between group hover:border-indigo-500 transition-all hover:shadow-2xl"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="bg-indigo-600 rounded-3xl p-4 shadow-xl shadow-indigo-200 group-hover:scale-110 transition-transform">
+                    <Brain className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-2xl font-black text-gray-900 leading-tight">
+                      AI Gelişim Analizi
+                    </h3>
+                    <p className="text-gray-500 font-bold">
+                      Öğrenci verilerine dayalı kişiselleştirilmiş öneriler
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-indigo-50 text-indigo-600 px-6 py-3 rounded-2xl font-black flex items-center gap-2 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                  <span>Raporu Aç</span>
+                  <Sparkles className="w-5 h-5" />
+                </div>
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -3037,18 +3124,39 @@ const EduPlatform = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             {["matematik", "fen", "turkce", "ingilizce"].map((subject, idx) => {
-              const colorMap: { [key: string]: { text: string; bg: string; icon: string } } = {
-                blue: { text: "text-blue-600", bg: "bg-blue-500", icon: "text-blue-600" },
-                green: { text: "text-green-600", bg: "bg-green-500", icon: "text-green-600" },
-                purple: { text: "text-purple-600", bg: "bg-purple-500", icon: "text-purple-600" },
-                red: { text: "text-red-600", bg: "bg-red-500", icon: "text-red-600" },
+              const colorMap: {
+                [key: string]: { text: string; bg: string; icon: string };
+              } = {
+                blue: {
+                  text: "text-blue-600",
+                  bg: "bg-blue-500",
+                  icon: "text-blue-600",
+                },
+                green: {
+                  text: "text-green-600",
+                  bg: "bg-green-500",
+                  icon: "text-green-600",
+                },
+                purple: {
+                  text: "text-purple-600",
+                  bg: "bg-purple-500",
+                  icon: "text-purple-600",
+                },
+                red: {
+                  text: "text-red-600",
+                  bg: "bg-red-500",
+                  icon: "text-red-600",
+                },
               };
               const colorNames = ["blue", "green", "purple", "red"];
               const icons = [Calculator, Microscope, BookOpen, Award];
               const Icon = icons[idx];
               const color = colorMap[colorNames[idx]];
               const names = ["Matematik", "Fen Bilgisi", "Türkçe", "İngilizce"];
-              const stats = studentData.subjectStats[subject as keyof typeof studentData.subjectStats];
+              const stats =
+                studentData.subjectStats[
+                  subject as keyof typeof studentData.subjectStats
+                ];
               const minutes = Math.floor((stats.timeSpent || 0) / 60);
               const successRate = getSuccessRate(subject);
 
@@ -3065,7 +3173,9 @@ const EduPlatform = () => {
                   </h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700 font-semibold">Başarı Oranı</span>
+                      <span className="text-gray-700 font-semibold">
+                        Başarı Oranı
+                      </span>
                       <span className={`font-bold text-lg ${color.text}`}>
                         {successRate}%
                       </span>
@@ -3078,15 +3188,28 @@ const EduPlatform = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div className="bg-green-50 rounded-lg p-2 border border-green-200">
-                        <p className="text-green-700 font-semibold">Doğru: {stats.correct}</p>
+                        <p className="text-green-700 font-semibold">
+                          Doğru: {stats.correct}
+                        </p>
                       </div>
                       <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
-                        <p className="text-blue-700 font-semibold">Toplam: {stats.total}</p>
+                        <p className="text-blue-700 font-semibold">
+                          Toplam: {stats.total}
+                        </p>
                       </div>
                     </div>
-                    {(studentData.passedQuestionsBySubject[subject as keyof typeof studentData.passedQuestionsBySubject] || 0) > 0 && (
+                    {(studentData.passedQuestionsBySubject[
+                      subject as keyof typeof studentData.passedQuestionsBySubject
+                    ] || 0) > 0 && (
                       <div className="bg-yellow-50 rounded-lg p-2 border border-yellow-200">
-                        <p className="text-yellow-700 font-semibold">⏭️ Pas Geçilen: {studentData.passedQuestionsBySubject[subject as keyof typeof studentData.passedQuestionsBySubject]}</p>
+                        <p className="text-yellow-700 font-semibold">
+                          ⏭️ Pas Geçilen:{" "}
+                          {
+                            studentData.passedQuestionsBySubject[
+                              subject as keyof typeof studentData.passedQuestionsBySubject
+                            ]
+                          }
+                        </p>
                       </div>
                     )}
                     <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3 border border-orange-200">
@@ -3107,52 +3230,85 @@ const EduPlatform = () => {
               Günlük Çalışma Süresi
             </h3>
             <div className="space-y-3">
-              {Object.keys((studentData.dailyStats as { [date: string]: { [subject: string]: number } }) || {})
+              {Object.keys(
+                (studentData.dailyStats as {
+                  [date: string]: { [subject: string]: number };
+                }) || {},
+              )
                 .sort()
                 .reverse()
                 .slice(0, 7)
                 .map((date) => {
-                  const dailyData = ((studentData.dailyStats as { [date: string]: { [subject: string]: number } }) || {})[date] || {};
-                  const totalSeconds = Object.values(dailyData || {}).reduce((sum, sec) => sum + sec, 0);
+                  const dailyData =
+                    ((studentData.dailyStats as {
+                      [date: string]: { [subject: string]: number };
+                    }) || {})[date] || {};
+                  const totalSeconds = Object.values(dailyData || {}).reduce(
+                    (sum, sec) => sum + sec,
+                    0,
+                  );
                   const totalMinutes = Math.floor(totalSeconds / 60);
                   const subjects = Object.keys(dailyData || {});
 
                   // Tarihi daha okunaklı formata çevir
-                  const dateObj = new Date(date + 'T00:00:00');
-                  const formattedDate = dateObj.toLocaleDateString('tr-TR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    weekday: 'short'
+                  const dateObj = new Date(date + "T00:00:00");
+                  const formattedDate = dateObj.toLocaleDateString("tr-TR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    weekday: "short",
                   });
 
                   return (
-                    <div key={date} className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200">
+                    <div
+                      key={date}
+                      className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200"
+                    >
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <p className="font-bold text-gray-800">{formattedDate}</p>
-                          <p className="text-sm text-gray-600">{subjects.length} derste çalışıldı</p>
+                          <p className="font-bold text-gray-800">
+                            {formattedDate}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            {subjects.length} derste çalışıldı
+                          </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-2xl font-bold text-blue-600">{totalMinutes}</p>
+                          <p className="text-2xl font-bold text-blue-600">
+                            {totalMinutes}
+                          </p>
                           <p className="text-sm text-gray-600">dakika</p>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-                        {["matematik", "fen", "turkce", "ingilizce"].map((subject) => {
-                          const minutes = Math.floor(((dailyData as Record<string, number>)?.[subject] || 0) / 60);
-                          return (
-                            <div key={subject} className="bg-white rounded-lg p-2 border border-gray-200">
-                              <p className="text-gray-700 font-semibold capitalize">{
-                                subject === "matematik" ? "Matematik" :
-                                  subject === "fen" ? "Fen" :
-                                    subject === "turkce" ? "Türkçe" :
-                                      "İngilizce"
-                              }</p>
-                              <p className="text-blue-600 font-bold">{minutes} min</p>
-                            </div>
-                          );
-                        })}
+                        {["matematik", "fen", "turkce", "ingilizce"].map(
+                          (subject) => {
+                            const minutes = Math.floor(
+                              ((dailyData as Record<string, number>)?.[
+                                subject
+                              ] || 0) / 60,
+                            );
+                            return (
+                              <div
+                                key={subject}
+                                className="bg-white rounded-lg p-2 border border-gray-200"
+                              >
+                                <p className="text-gray-700 font-semibold capitalize">
+                                  {subject === "matematik"
+                                    ? "Matematik"
+                                    : subject === "fen"
+                                      ? "Fen"
+                                      : subject === "turkce"
+                                        ? "Türkçe"
+                                        : "İngilizce"}
+                                </p>
+                                <p className="text-blue-600 font-bold">
+                                  {minutes} min
+                                </p>
+                              </div>
+                            );
+                          },
+                        )}
                       </div>
                     </div>
                   );
@@ -3178,6 +3334,48 @@ const EduPlatform = () => {
             </div>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (view === "ai-recommendations") {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-7xl mx-auto mb-6 flex justify-between items-center">
+          <button
+            onClick={() =>
+              setView(userType === "parent" ? "parent-dashboard" : "dashboard")
+            }
+            className="px-6 py-3 bg-white text-gray-900 rounded-2xl font-black shadow-md border-2 border-gray-100 hover:border-indigo-500 transition-all flex items-center gap-2"
+          >
+            <span className="text-xl">←</span>
+            Paneline Dön
+          </button>
+        </div>
+        <ErrorBoundary
+          fallback={
+            <div className="bg-white rounded-[40px] p-12 text-center border-2 border-rose-100 shadow-xl">
+              <h2 className="text-3xl font-black text-gray-900 mb-4">
+                Bir Şeyler Ters Gitti
+              </h2>
+              <p className="text-gray-500 font-bold text-lg mb-8">
+                AI Panel yüklenirken bir hata oluştu. Lütfen sayfayı yenileyip
+                tekrar deneyin.
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-8 py-4 bg-indigo-600 text-white rounded-3xl font-black shadow-lg hover:bg-indigo-700 transition-all"
+              >
+                Sayfayı Yenile
+              </button>
+            </div>
+          }
+        >
+          <AIRecommendationPanel
+            studentData={studentData}
+            userType={userType}
+          />
+        </ErrorBoundary>
       </div>
     );
   }
