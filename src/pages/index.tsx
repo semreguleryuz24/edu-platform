@@ -137,2204 +137,2261 @@ const EduPlatform = () => {
   const [passedQuestions, setPassedQuestions] = useState<number[]>([]);
   const [parentPass, setParentPass] = useState("");
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
+  const [isRevisitMode, setIsRevisitMode] = useState(false);
 
   const allQuestions = {
     matematik: [
+      // ====== DOĞAL SAYILAR VE TAM SAYILAR ======
       {
-        q: "6² + 2³ - 10 işleminin sonucu kaçtır?",
-        a: ["32", "34", "38", "44"],
-        c: 1,
-      },
-      {
-        q: "72 ÷ (2³ + 1) × 2 işleminin sonucu kaçtır?",
-        a: ["4", "8", "16", "18"],
+        q: "(-8) + (+12) işleminin sonucu kaçtır?",
+        a: ["-20", "-4", "+4", "+20"],
         c: 2,
       },
       {
-        q: "12, 18 ve 24 sayılarının en büyük ortak böleni (EBOB) kaçtır?",
-        a: ["2", "4", "6", "12"],
-        c: 2,
-      },
-      {
-        q: "Rakamları farklı üç basamaklı en küçük asal sayı kaçtır?",
-        a: ["101", "103", "107", "109"],
+        q: "(-15) - (-7) işleminin sonucu kaçtır?",
+        a: ["-22", "-8", "+8", "+22"],
         c: 1,
       },
       {
-        q: "Aşağıdakilerden hangisi 2, 3 ve 5 ile kalansız bölünebilir?",
-        a: ["120", "155", "182", "215"],
+        q: "(+9) × (-4) işleminin sonucu kaçtır?",
+        a: ["-36", "-13", "+13", "+36"],
         c: 0,
       },
       {
-        q: "48 sayısının kaç tane doğal sayı çarpanı vardır?",
-        a: ["8", "10", "12", "14"],
-        c: 1,
-      },
-      {
-        q: "A = { 10'dan küçük tek asal sayılar } kümesi hangisidir?",
-        a: ["{1, 3, 5, 7}", "{3, 5, 7}", "{2, 3, 5, 7}", "{3, 5, 7, 9}"],
-        c: 1,
-      },
-      {
-        q: "Sayı doğrusunda -12 ile +2 arasında kaç tane tam sayı vardır?",
-        a: ["12", "13", "14", "15"],
-        c: 1,
-      },
-      {
-        q: "|-15| - |+8| + |-3| işleminin sonucu kaçtır?",
-        a: ["4", "10", "20", "26"],
-        c: 1,
-      },
-      {
-        q: "3/8 + 1/4 - 1/8 işleminin sonucu kaçtır?",
-        a: ["3/8", "1/2", "5/8", "3/4"],
-        c: 1,
-      },
-      {
-        q: "İki ucu da sınırsız olan düz çizgiye ne denir?",
-        a: ["Doğru", "Doğru Parçası", "Işın", "Açı"],
+        q: "(-72) ÷ (+8) işleminin sonucu kaçtır?",
+        a: ["-9", "-8", "+8", "+9"],
         c: 0,
       },
       {
-        q: "Bir ucu kapalı, diğer ucu sınırsız uzayan çizgiye ne denir?",
-        a: ["Doğru", "Doğru Parçası", "Işın", "Nokta"],
-        c: 2,
-      },
-      {
-        q: "Sembolle gösterimi [AB] olan geometrik kavram hangisidir?",
-        a: ["AB Doğrusu", "AB Doğru Parçası", "AB Işını", "A noktası"],
-        c: 1,
-      },
-      {
-        q: "Aynı düzlemde hiçbir noktası kesişmeyen doğrulara ne denir?",
-        a: [
-          "Kesen Doğrular",
-          "Dik Doğrular",
-          "Paralel Doğrular",
-          "Çakışık Doğrular",
-        ],
-        c: 2,
-      },
-      {
-        q: "Toplamları 90 derece olan iki açıya ne denir?",
-        a: ["Bütünler Açılar", "Tümler Açılar", "Ters Açılar", "Komşu Açılar"],
-        c: 1,
-      },
-      {
-        q: "Toplamları 180 derece olan iki açıya ne denir?",
-        a: ["Bütünler Açılar", "Tümler Açılar", "Ters Açılar", "Yöndeş Açılar"],
-        c: 0,
-      },
-      {
-        q: "Ölçüsü 42 derece olan bir açının tümleri kaç derecedir?",
-        a: ["38", "48", "58", "138"],
-        c: 1,
-      },
-      {
-        q: "Ölçüsü 75 derece olan bir açının bütünleri kaç derecedir?",
-        a: ["15", "95", "105", "115"],
-        c: 2,
-      },
-      {
-        q: "Birbirini kesen iki doğrunun oluşturduğu karşılıklı açılara ne denir?",
-        a: ["Komşu Açılar", "Yöndeş Açılar", "Ters Açılar", "İç Ters Açılar"],
-        c: 2,
-      },
-      {
-        q: "Ters açıların ölçüleri için hangisi doğrudur?",
-        a: [
-          "Toplamları 180'dir",
-          "Toplamları 90'dur",
-          "Birbirine eşittir",
-          "Farkları 90'dır",
-        ],
-        c: 2,
-      },
-      {
-        q: "Paralel iki doğruyu kesen bir doğrunun oluşturduğu, aynı yöne bakan açılara ne denir?",
-        a: [
-          "İç Ters Açılar",
-          "Dış Ters Açılar",
-          "Yöndeş Açılar",
-          "Ters Açılar",
-        ],
-        c: 2,
-      },
-      {
-        q: "Yöndeş açıların ölçüleri için hangisi söylenebilir?",
-        a: [
-          "Ölçüleri eşittir",
-          "Bütünler açılardır",
-          "Tümler açılardır",
-          "Toplamları 360'tır",
-        ],
-        c: 0,
-      },
-      {
-        q: "Paralel doğruların arasında kalan ve kesen doğrunun farklı tarafında olan açılara ne denir?",
-        a: [
-          "Dış Ters Açılar",
-          "İç Ters Açılar",
-          "Yöndeş Açılar",
-          "Ters Açılar",
-        ],
-        c: 1,
-      },
-      {
-        q: "Paralel doğruların dışında kalan ve kesen doğrunun farklı tarafında olan açılara ne denir?",
-        a: [
-          "İç Ters Açılar",
-          "Dış Ters Açılar",
-          "Yöndeş Açılar",
-          "Bütünler Açılar",
-        ],
-        c: 1,
-      },
-      {
-        q: "İki doğrunun birbirini 90 derecelik açıyla kesmesine ne denir?",
-        a: ["Paralellik", "Diklik", "Çakışıklık", "Doğrusallık"],
-        c: 1,
-      },
-      {
-        q: "Komşu bütünler iki açıdan biri 60 derece ise diğeri kaç derecedir?",
-        a: ["30", "60", "120", "150"],
-        c: 2,
-      },
-      {
-        q: "Bir açının bütünleri 110 derece ise bu açının tümleri kaç derecedir?",
-        a: ["20", "30", "70", "80"],
-        c: 0,
-      },
-      {
-        q: "Sembolle gösterimi d // k olan ifade ne anlama gelir?",
-        a: [
-          "d ve k paraleldir",
-          "d ve k diktir",
-          "d ve k kesişir",
-          "d ve k çakışıktır",
-        ],
-        c: 0,
-      },
-      {
-        q: "d // k ise, iç ters açıların ölçüleri toplamı hakkında ne söylenebilir?",
-        a: [
-          "Her zaman 180'dir",
-          "Biri diğerinden büyüktür",
-          "Ölçüleri birbirine eşittir",
-          "Toplamları 90'dır",
-        ],
-        c: 2,
-      },
-      {
-        q: "Aşağıdakilerden hangisi bir açının sembolle gösterimi olabilir?",
-        a: ["[AB", "AB", "s(ABC)", "|AB|"],
-        c: 2,
-      },
-      { q: "5³ ifadesinin değeri kaçtır?", a: ["15", "25", "75", "125"], c: 3 },
-      {
-        q: "10⁴ sayısının sonunda kaç sıfır vardır?",
-        a: ["3", "4", "5", "10"],
-        c: 1,
-      },
-      {
-        q: "25 × (12 + 8) işleminin sonucu kaçtır?",
-        a: ["308", "400", "500", "600"],
-        c: 2,
-      },
-      {
-        q: "40 ÷ 5 × 2 + 6 işleminin sonucu kaçtır?",
-        a: ["10", "16", "22", "30"],
-        c: 2,
-      },
-      {
-        q: "Rakamları farklı dört basamaklı en küçük sayı kaçtır?",
-        a: ["1000", "1023", "1234", "1024"],
-        c: 1,
-      },
-      {
-        q: "36 ve 48 sayılarının ortak bölenlerinden en büyüğü kaçtır?",
-        a: ["6", "8", "12", "18"],
-        c: 2,
-      },
-      {
-        q: "Aşağıdaki sayılardan hangisi 9 ile tam bölünür?",
-        a: ["123", "456", "789", "891"],
+        q: "(-5) × (-6) işleminin sonucu kaçtır?",
+        a: ["-30", "-11", "+11", "+30"],
         c: 3,
       },
-      { q: "Hangi sayı asal değildir?", a: ["2", "13", "27", "31"], c: 2 },
       {
-        q: "20 sayısının doğal sayı çarpanlarından kaç tanesi çifttir?",
+        q: "Sayı doğrusunda -7'nin 5 birim sağındaki sayı kaçtır?",
+        a: ["-12", "-2", "+2", "+12"],
+        c: 1,
+      },
+      {
+        q: "(-3) + (-8) + (+15) işleminin sonucu kaçtır?",
+        a: ["-26", "-4", "+4", "+26"],
+        c: 2,
+      },
+      {
+        q: "|-12| + |-8| - |+5| işleminin sonucu kaçtır?",
+        a: ["1", "5", "15", "25"],
+        c: 2,
+      },
+      {
+        q: "(-4)² işleminin sonucu kaçtır?",
+        a: ["-16", "-8", "+8", "+16"],
+        c: 3,
+      },
+      {
+        q: "-3³ işleminin sonucu kaçtır?",
+        a: ["-27", "-9", "+9", "+27"],
+        c: 0,
+      },
+
+      // ====== KESIRLERLE İŞLEMLER ======
+      {
+        q: "3/4 + 1/4 işleminin sonucu kaçtır?",
+        a: ["1/2", "2/4", "4/4", "4/8"],
+        c: 2,
+      },
+      {
+        q: "5/6 - 1/3 işleminin sonucu kaçtır?",
+        a: ["1/2", "1/3", "2/3", "4/3"],
+        c: 0,
+      },
+      {
+        q: "2/3 × 3/4 işleminin sonucu kaçtır?",
+        a: ["1/2", "5/7", "6/12", "2/1"],
+        c: 0,
+      },
+      {
+        q: "4/5 ÷ 2/3 işleminin sonucu kaçtır?",
+        a: ["6/5", "8/15", "2/5", "8/5"],
+        c: 0,
+      },
+      {
+        q: "2 1/2 + 1 3/4 işleminin sonucu kaçtır?",
+        a: ["3 1/4", "4 1/4", "3 3/4", "4 3/4"],
+        c: 1,
+      },
+      {
+        q: "15/20 kesrinin en sade hali nedir?",
+        a: ["3/4", "5/10", "1/2", "15/20"],
+        c: 0,
+      },
+      {
+        q: "0.25 ondalık sayısının kesir şekli nedir?",
+        a: ["1/2", "1/4", "2/5", "1/5"],
+        c: 1,
+      },
+      {
+        q: "3/8 kesri ondalık gösterimde kaçtır?",
+        a: ["0.3", "0.375", "0.38", "0.8"],
+        c: 1,
+      },
+      {
+        q: "Hangisi 2/3'ten büyüktür?",
+        a: ["1/2", "3/5", "5/6", "4/7"],
+        c: 2,
+      },
+      {
+        q: "1/2 + 1/3 + 1/6 işleminin sonucu kaçtır?",
+        a: ["1/2", "2/3", "5/6", "1"],
+        c: 3,
+      },
+
+      // ====== GEOMETRİ: AÇILAR VE ÇOKGENLER ======
+      {
+        q: "Bir açının tümleyeni 35 derece ise bu açı kaç derecedir?",
+        a: ["45", "55", "65", "145"],
+        c: 1,
+      },
+      {
+        q: "Bir açının bütünleyeni 125 derece ise bu açı kaç derecedir?",
+        a: ["35", "45", "55", "65"],
+        c: 2,
+      },
+      {
+        q: "İki ters açının ölçüleri toplamı kaç derecedir?",
+        a: ["90", "180", "270", "Eşittir, toplamları değişir"],
+        c: 1,
+      },
+      {
+        q: "Bir üçgenin iç açıları 50°, 60° ve x° ise x kaçtır?",
+        a: ["60", "70", "80", "90"],
+        c: 1,
+      },
+      {
+        q: "İkizkenar üçgenin taban açıları 40'ar derece ise tepe açısı kaç derecedir?",
+        a: ["80", "90", "100", "110"],
+        c: 2,
+      },
+      {
+        q: "Eşkenar üçgenin her bir açısı kaç derecedir?",
+        a: ["45", "60", "90", "120"],
+        c: 1,
+      },
+      {
+        q: "Bir dörtgenin iç açıları toplamı kaç derecedir?",
+        a: ["180", "270", "360", "540"],
+        c: 2,
+      },
+      {
+        q: "Beşgenin iç açıları toplamı kaç derecedir?",
+        a: ["360", "450", "540", "720"],
+        c: 2,
+      },
+      {
+        q: "Altıgenin iç açıları toplamı kaç derecedir?",
+        a: ["540", "720", "900", "1080"],
+        c: 1,
+      },
+      {
+        q: "Bir karenin bir iç açısı kaç derecedir?",
+        a: ["60", "90", "120", "180"],
+        c: 1,
+      },
+
+      // ====== ALAN VE ÇEVRİ HESAPLAMALARI ======
+      {
+        q: "Kenar uzunluğu 7 cm olan bir karenin alanı kaç cm²'dir?",
+        a: ["28", "35", "49", "56"],
+        c: 2,
+      },
+      {
+        q: "Uzun kenarı 12 cm, kısa kenarı 7 cm olan dikdörtgenin çevresi kaç cm'dir?",
+        a: ["19", "38", "84", "168"],
+        c: 1,
+      },
+      {
+        q: "Taban uzunluğu 10 cm, yüksekliği 6 cm olan üçgenin alanı kaç cm²'dir?",
+        a: ["16", "30", "60", "100"],
+        c: 1,
+      },
+      {
+        q: "Yarıçapı 7 cm olan dairenin çevresi kaç π cm'dir?",
+        a: ["7π", "14π", "28π", "49π"],
+        c: 1,
+      },
+      {
+        q: "Yarıçapı 10 cm olan dairenin alanı kaç π cm²'dir?",
+        a: ["10π", "20π", "50π", "100π"],
+        c: 3,
+      },
+      {
+        q: "Paralelkenarın bir kenarı 8 cm, yüksekliği 5 cm ise alanı kaç cm²'dir?",
+        a: ["13", "26", "40", "80"],
+        c: 2,
+      },
+      {
+        q: "Tabanları 6 cm ve 10 cm, yüksekliği 4 cm olan yamuğun alanı kaç cm²'dir?",
+        a: ["24", "32", "40", "64"],
+        c: 1,
+      },
+      {
+        q: "Çevresi 24 cm olan eşkenar üçgenin bir kenarı kaç cm'dir?",
+        a: ["6", "8", "12", "18"],
+        c: 1,
+      },
+      {
+        q: "Alanı 64 cm² olan karenin bir kenarı kaç cm'dir?",
+        a: ["4", "8", "16", "32"],
+        c: 1,
+      },
+      {
+        q: "Çevresi 30 cm olan bir karenin alanı kaç cm²'dir?",
+        a: ["30", "36", "49", "56.25"],
+        c: 3,
+      },
+
+      // ====== CEBİRSEL İFADELER ======
+      {
+        q: "3x + 5 = 20 denkleminde x kaçtır?",
+        a: ["3", "5", "7", "15"],
+        c: 1,
+      },
+      {
+        q: "5x - 8 = 17 denkleminde x kaçtır?",
+        a: ["3", "5", "9", "25"],
+        c: 1,
+      },
+      {
+        q: "2(x + 3) = 14 denkleminde x kaçtır?",
+        a: ["2", "4", "5", "7"],
+        c: 1,
+      },
+      {
+        q: "x/4 = 5 denkleminde x kaçtır?",
+        a: ["1.25", "9", "20", "25"],
+        c: 2,
+      },
+      {
+        q: "4x + 3x işleminin sonucu nedir?",
+        a: ["7x", "7x²", "12x", "x⁷"],
+        c: 0,
+      },
+      {
+        q: "5a - 2a işleminin sonucu nedir?",
+        a: ["3", "3a", "7a", "3a²"],
+        c: 1,
+      },
+      {
+        q: "3 × 4x işleminin sonucu nedir?",
+        a: ["7x", "12x", "12", "3x⁴"],
+        c: 1,
+      },
+      {
+        q: "8y ÷ 2 işleminin sonucu nedir?",
+        a: ["4", "4y", "6y", "16y"],
+        c: 1,
+      },
+      {
+        q: "x = 5 için 3x + 7 ifadesinin değeri kaçtır?",
+        a: ["15", "22", "35", "42"],
+        c: 1,
+      },
+      {
+        q: "a = 4 için 2a² - 5 ifadesinin değeri kaçtır?",
+        a: ["11", "27", "32", "37"],
+        c: 1,
+      },
+
+      // ====== ORAN VE ORANTILAR ======
+      {
+        q: "12:18 oranının en sade hali nedir?",
+        a: ["2:3", "3:2", "4:6", "6:9"],
+        c: 0,
+      },
+      {
+        q: "3:5 = x:15 orantısında x kaçtır?",
+        a: ["5", "9", "25", "45"],
+        c: 1,
+      },
+      {
+        q: "Bir sınıfta 15 kız, 10 erkek vardır. Kızların erkeklere oranı nedir?",
+        a: ["2:3", "3:2", "5:10", "10:15"],
+        c: 1,
+      },
+      {
+        q: "4:7 = 12:x orantısında x kaçtır?",
+        a: ["3", "16", "21", "28"],
+        c: 2,
+      },
+      {
+        q: "Bir tarif 6 kişilik, 300 gram un gerekiyor. 9 kişilik kaç gram un gerekir?",
+        a: ["350", "400", "450", "500"],
+        c: 2,
+      },
+      {
+        q: "2:5 oranı ondalık kesir olarak nasıl yazılır?",
+        a: ["0.25", "0.4", "0.5", "2.5"],
+        c: 1,
+      },
+      {
+        q: "18:24 oranının basit şekli nedir?",
+        a: ["3:4", "4:3", "6:8", "9:12"],
+        c: 0,
+      },
+      {
+        q: "Bir haritada 2 cm gerçekte 50 km ise ölçek nedir?",
+        a: ["1:25", "1:2500", "1:25000", "1:2500000"],
+        c: 3,
+      },
+      {
+        q: "x:8 = 9:12 orantısında x kaçtır?",
+        a: ["3", "6", "10", "24"],
+        c: 1,
+      },
+      {
+        q: "Doğru orantılı iki büyüklükte biri 3 kat artarsa diğeri kaç kat artar?",
+        a: ["1/3", "2", "3", "6"],
+        c: 2,
+      },
+
+      // ====== YÜZDELER ======
+      {
+        q: "200 sayısının %15'i kaçtır?",
+        a: ["15", "20", "30", "40"],
+        c: 2,
+      },
+      {
+        q: "80 sayısının %25'i kaçtır?",
+        a: ["20", "25", "32", "40"],
+        c: 0,
+      },
+      {
+        q: "Bir ürün %30 indirimle 140 TL oldu. İndirimsiz fiyatı kaç TL'dir?",
+        a: ["182", "200", "210", "230"],
+        c: 1,
+      },
+      {
+        q: "360 sayısının %40'ı kaçtır?",
+        a: ["120", "144", "180", "216"],
+        c: 1,
+      },
+      {
+        q: "50 sayının %60'ı kaçtır?",
+        a: ["20", "30", "35", "40"],
+        c: 1,
+      },
+      {
+        q: "Bir okuldaki 400 öğrencinin %45'i kız ise kaç kız öğrenci vardır?",
+        a: ["160", "180", "200", "220"],
+        c: 1,
+      },
+      {
+        q: "%20 = ? (Ondalık gösterim)",
+        a: ["0.02", "0.2", "0.20", "2.0"],
+        c: 1,
+      },
+      {
+        q: "0.75 ondalık sayısı yüzde kaçtır?",
+        a: ["%7.5", "%75", "%750", "%0.75"],
+        c: 1,
+      },
+      {
+        q: "Bir ürün 500 TL iken %20 zam geldi. Yeni fiyat kaç TL'dir?",
+        a: ["520", "600", "700", "1000"],
+        c: 1,
+      },
+      {
+        q: "300 TL'nin %10'u ile %15'inin toplamı kaçtır?",
+        a: ["45", "60", "75", "90"],
+        c: 2,
+      },
+
+      // ====== VERİ ANALİZİ ======
+      {
+        q: "2, 4, 6, 8, 10 sayılarının ortalaması kaçtır?",
+        a: ["5", "6", "7", "8"],
+        c: 1,
+      },
+      {
+        q: "5, 5, 7, 8, 10 veri grubunun modu kaçtır?",
+        a: ["5", "7", "8", "10"],
+        c: 0,
+      },
+      {
+        q: "3, 5, 7, 9, 11 sayılarının medyanı kaçtır?",
+        a: ["5", "7", "9", "11"],
+        c: 1,
+      },
+      {
+        q: "10, 20, 15, 25, 30 sayılarının açıklığı kaçtır?",
+        a: ["5", "10", "15", "20"],
+        c: 3,
+      },
+      {
+        q: "4, 6, 8, 10, 12 sayılarının ortalaması kaçtır?",
+        a: ["6", "8", "9", "10"],
+        c: 1,
+      },
+      {
+        q: "Bir veri grubunda 3, 3, 5, 5, 5, 7, 9 sayıları var. Mod kaçtır?",
+        a: ["3", "5", "7", "9"],
+        c: 1,
+      },
+      {
+        q: "2, 4, 6, 8 sayılarının medyanı kaçtır?",
+        a: ["4", "5", "6", "7"],
+        c: 1,
+      },
+      {
+        q: "Bir sınıfın notları: 60, 70, 80, 90. Ortalama kaçtır?",
+        a: ["70", "75", "80", "85"],
+        c: 1,
+      },
+      {
+        q: "5, 10, 15, 20, 25, 30 veri grubunun açıklığı kaçtır?",
+        a: ["5", "15", "20", "25"],
+        c: 3,
+      },
+      {
+        q: "1, 2, 3, 4, 5, 6, 7 sayılarının medyanı kaçtır?",
         a: ["3", "4", "5", "6"],
         c: 1,
       },
+
+      // ====== SAYILAR VE İŞLEMLER ======
       {
-        q: "6 ve 8'in 50'den küçük en büyük ortak katı kaçtır?",
-        a: ["24", "42", "48", "52"],
+        q: "2³ × 2⁴ işleminin sonucu 2'nin kaçıncı kuvvetidir?",
+        a: ["2⁵", "2⁶", "2⁷", "2¹²"],
         c: 2,
       },
       {
-        q: "A = { k, a, l, e, m } kümesinin eleman sayısı kaçtır?",
-        a: ["4", "5", "6", "7"],
+        q: "5⁶ ÷ 5³ işleminin sonucu nedir?",
+        a: ["5²", "5³", "5⁴", "5⁹"],
         c: 1,
       },
       {
-        q: "B = { x | x < 5 ve x bir rakam } kümesi kaç elemanlıdır?",
-        a: ["4", "5", "6", "7"],
+        q: "(3²)³ işleminin sonucu 3'ün kaçıncı kuvvetidir?",
+        a: ["3⁵", "3⁶", "3⁸", "3⁹"],
         c: 1,
       },
       {
-        q: "Boş kümenin sembolü hangisidir?",
-        a: ["{0}", "∅", "{ }", "Her ikisi de (∅ veya { })"],
+        q: "4⁰ + 7⁰ + 10⁰ işleminin sonucu kaçtır?",
+        a: ["0", "1", "3", "21"],
+        c: 2,
+      },
+      {
+        q: "(-2)⁴ işleminin sonucu kaçtır?",
+        a: ["-16", "-8", "+8", "+16"],
         c: 3,
       },
       {
-        q: "-5'ten büyük en küçük tam sayı kaçtır?",
-        a: ["-6", "-4", "0", "1"],
+        q: "100 ÷ 4 × 2 - 10 işleminin sonucu kaçtır?",
+        a: ["30", "40", "50", "60"],
         c: 1,
       },
       {
-        q: "Mutlak değeri 7 olan kaç tane tam sayı vardır?",
-        a: ["0", "1", "2", "Sonsuz"],
-        c: 2,
-      },
-      {
-        q: "Sayı doğrusunda -8'in 3 birim solundaki sayı kaçtır?",
-        a: ["-5", "-11", "+11", "0"],
+        q: "(15 + 25) × 2 - 20 işleminin sonucu kaçtır?",
+        a: ["40", "60", "80", "100"],
         c: 1,
       },
       {
-        q: "Aşağıdaki sıralamalardan hangisi doğrudur?",
-        a: ["-10 > -2", "0 < -5", "|-8| > 5", "-3 > 0"],
-        c: 2,
-      },
-      {
-        q: "En büyük negatif tam sayı kaçtır?",
-        a: ["-100", "-99", "-1", "0"],
-        c: 2,
-      },
-      {
-        q: "2/5 kesrinin 4 ile genişletilmiş hali hangisidir?",
-        a: ["6/9", "8/20", "8/5", "2/20"],
+        q: "3⁴ ÷ 3² işleminin sonucu kaçtır?",
+        a: ["3", "9", "27", "81"],
         c: 1,
       },
       {
-        q: "12/18 kesrinin en sade hali hangisidir?",
-        a: ["2/3", "3/4", "1/2", "6/9"],
-        c: 0,
+        q: "2⁵ - 2³ işleminin sonucu kaçtır?",
+        a: ["4", "8", "16", "24"],
+        c: 3,
       },
       {
-        q: "3¾ bileşik kesre çevrilirse ne olur?",
-        a: ["12/4", "13/4", "15/4", "11/4"],
+        q: "10² - 5² işleminin sonucu kaçtır?",
+        a: ["25", "50", "75", "95"],
         c: 2,
       },
-      { q: "Hangisi 1/2'den büyüktür?", a: ["1/3", "2/5", "3/8", "4/7"], c: 3 },
+      // ====== KOORDİNAT SİSTEMİ VE GENEL TEKRAR ======
       {
-        q: "5 - 2/3 işleminin sonucu kaçtır?",
-        a: ["3/3", "7/3", "13/3", "17/3"],
-        c: 2,
+        q: "(3, -4) noktası koordinat sisteminde kaçıncı bölgededir?",
+        a: ["1. Bölge", "2. Bölge", "3. Bölge", "4. Bölge"],
+        c: 3,
       },
       {
-        q: "Bir tümler açının ölçüsü diğerinin 2 katı ise küçük açı kaç derecedir?",
-        a: ["30", "45", "60", "90"],
-        c: 0,
-      },
-      {
-        q: "Bütünler iki açıdan biri 130 derece ise diğeri kaçtır?",
-        a: ["40", "50", "60", "70"],
+        q: "Orijin noktasının koordinatları nedir?",
+        a: ["(1, 1)", "(0, 0)", "(0, 1)", "(1, 0)"],
         c: 1,
       },
       {
-        q: "İki paralel doğrunun her birini kesen doğruya ne denir?",
-        a: ["Dikme", "Kesen", "Açıortay", "Işın"],
+        q: "x ekseni üzerindeki bir noktanın hangi koordinatı kesinlikle 0'dır?",
+        a: ["x", "y", "Z", "Hiçbiri"],
         c: 1,
       },
       {
-        q: "Ters açılar oluşturulurken en az kaç doğru gereklidir?",
+        q: "(-2, -5) noktası hangi bölgededir?",
+        a: ["1. Bölge", "2. Bölge", "3. Bölge", "4. Bölge"],
+        c: 2,
+      },
+      {
+        q: "Bir ürünün fiyatı 80 TL'den 100 TL'ye çıkarsa yüzde kaç zam yapılmıştır?",
+        a: ["%20", "%25", "%30", "%40"],
+        c: 1,
+      },
+      {
+        q: "Hangi sayı hem 2'ye hem 3'e tam bölünür?",
+        a: ["8", "10", "12", "14"],
+        c: 2,
+      },
+      {
+        q: "15 ve 20 sayılarının en küçük ortak katı (EKOK) kaçtır?",
+        a: ["30", "45", "60", "80"],
+        c: 2,
+      },
+      {
+        q: "12 ve 18 sayılarının en büyük ortak böleni (EBOB) kaçtır?",
+        a: ["3", "4", "6", "9"],
+        c: 2,
+      },
+      {
+        q: "Bir üçgenin yüksekliklerinin kesim noktasına ne denir?",
+        a: ["Ağırlık merkezi", "Diklik merkezi", "Orijin", "Tepe"],
+        c: 1,
+      },
+      {
+        q: "İki basamaklı en büyük asal sayı kaçtır?",
+        a: ["91", "93", "97", "99"],
+        c: 2,
+      },
+    ],
+
+    fen: [
+      // ====== GÜNEŞ SİSTEMİ VE TUTULMALAR ======
+      {
+        q: "Güneş'e en yakın gezegen hangisidir?",
+        a: ["Venüs", "Dünya", "Merkür", "Mars"],
+        c: 2,
+      },
+      {
+        q: "Ay'ın kendi etrafında dönmesi ne kadar sürer?",
+        a: ["1 gün", "27 gün", "29 gün", "365 gün"],
+        c: 1,
+      },
+      {
+        q: "Dünya'nın Güneş etrafında dönmesi ne kadar sürer?",
+        a: ["1 gün", "27 gün", "365 gün", "687 gün"],
+        c: 2,
+      },
+      {
+        q: "Ay tutulması hangi ay evresinde gerçekleşir?",
+        a: ["Yeni Ay", "Hilal", "İlk Dördün", "Dolunay"],
+        c: 3,
+      },
+      {
+        q: "Güneş tutulması sırasında hangi gölge Dünya'ya düşer?",
+        a: [
+          "Dünya'nın gölgesi",
+          "Ay'ın gölgesi",
+          "Güneş'in gölgesi",
+          "Mars'ın gölgesi",
+        ],
+        c: 1,
+      },
+      {
+        q: "Ay'ın Dünya'ya en yakın olduğu noktaya ne denir?",
+        a: ["Apogee", "Perigee", "Equinox", "Solstice"],
+        c: 1,
+      },
+      {
+        q: "Güneş sistemindeki en büyük gezegen hangisidir?",
+        a: ["Satürn", "Jüpiter", "Uranüs", "Neptün"],
+        c: 1,
+      },
+      {
+        q: "Mars'ın kaç tane uydusu vardır?",
         a: ["1", "2", "3", "4"],
         c: 1,
       },
       {
-        q: "d // k ve d ⊥ m ise k ve m arasındaki ilişki nedir?",
-        a: ["Paralel", "Dik", "Çakışı", "Ayrık"],
+        q: "Ay'ın bir evreden diğer evreye geçmesi yaklaşık kaç gün sürer?",
+        a: ["3 gün", "7 gün", "15 gün", "30 gün"],
         c: 1,
       },
       {
-        q: "90 derecelik açıya ne denir?",
-        a: ["Dar", "Geniş", "Dik", "Tam"],
-        c: 2,
-      },
-      {
-        q: "Dar açının ölçüsü hangi aralıktadır?",
-        a: ["0-90", "90-180", "180-360", "Sadece 90"],
-        c: 0,
-      },
-      {
-        q: "Geniş açının ölçüsü hangisi olamaz?",
-        a: ["91", "120", "179", "185"],
-        c: 3,
-      },
-      {
-        q: "İki ışının başlangıç noktalarının birleşmesiyle oluşan geometrik şekil?",
-        a: ["Açı", "Doğru", "Nokta", "Üçgen"],
-        c: 0,
-      },
-      {
-        q: "Aşağıdakilerden hangisi bir küme belirtmez?",
+        q: "Gece-gündüz oluşumunun nedeni nedir?",
         a: [
-          "Okuldaki yakışıklı çocuklar",
-          "Haftanın günleri",
-          "Uçan filler",
-          "Sınıfın kızları",
+          "Dünya'nın Güneş etrafında dönmesi",
+          "Dünya'nın kendi etrafında dönmesi",
+          "Ay'ın Dünya etrafında dönmesi",
+          "Güneş'in dönmesi",
         ],
+        c: 1,
+      },
+
+      // ====== DESTEK VE HAREKET SİSTEMİ ======
+      {
+        q: "İnsan vücudunda kaç tane kemik vardır?",
+        a: ["106", "206", "306", "406"],
+        c: 1,
+      },
+      {
+        q: "Hangi eklem hareketsizdir?",
+        a: ["Dirsek eklemi", "Kafatası eklemi", "Diz eklemi", "Omuz eklemi"],
+        c: 1,
+      },
+      {
+        q: "Vücudumuzun en uzun kemiği hangisidir?",
+        a: ["Kaval kemiği", "Uyluk kemiği", "Kol kemiği", "Omurga"],
+        c: 1,
+      },
+      {
+        q: "Hangi kas türü istemsiz çalışır?",
+        a: ["İskelet kası", "Çizgili kas", "Düz kas", "Kol kası"],
+        c: 2,
+      },
+      {
+        q: "Kemiklerin birbirine bağlandığı yere ne denir?",
+        a: ["Kas", "Eklem", "Tendon", "Kıkırdak"],
+        c: 1,
+      },
+      {
+        q: "Kasları kemiklere bağlayan yapı hangisidir?",
+        a: ["Tendon", "Ligament", "Kıkırdak", "Deri"],
         c: 0,
       },
       {
-        q: "A = { 1, 2, {3, 4} } kümesi için hangisi elemanıdır?",
-        a: ["3", "4", "{3, 4}", "{1}"],
-        c: 2,
-      },
-      { q: "Kesişim sembolü hangisidir?", a: ["∪", "∩", "∈", "⊂"], c: 1 },
-      { q: "Birleşim sembolü hangisidir?", a: ["∩", "∪", "∖", "⊆"], c: 1 },
-      {
-        q: "A = { 1, 2, 3 } ve B = { 3, 4, 5 } ise A ∩ B nedir?",
-        a: ["{3}", "{1, 2, 3, 4, 5}", "{ }", "{1, 2}"],
-        c: 0,
-      },
-      { q: "|-100| kaçtır?", a: ["-100", "0", "100", "1"], c: 2 },
-      {
-        q: "Sıfırın işareti nedir?",
-        a: ["Pozitif", "Negatif", "İşaretsiz", "Nötr"],
-        c: 2,
-      },
-      {
-        q: "Deniz seviyesinin altı hangi tam sayılarla gösterilir?",
-        a: ["Pozitif", "Negatif", "Asal", "Doğal"],
-        c: 1,
-      },
-      { q: "En küçük asal sayı kaçtır?", a: ["0", "1", "2", "3"], c: 2 },
-      {
-        q: "Hem 2'ye hem 3'e bölünen bir sayı hangisine de bölünür?",
-        a: ["4", "5", "6", "9"],
-        c: 2,
-      },
-      {
-        q: "45 sayısının asal çarpanları hangileridir?",
-        a: ["3 ve 5", "2 ve 5", "3 ve 9", "5 ve 9"],
-        c: 0,
-      },
-      {
-        q: "Bir sayının 0. kuvveti (sıfır hariç) her zaman kaçtır?",
-        a: ["0", "1", "Sayının kendisi", "Belirsiz"],
-        c: 1,
-      },
-      { q: "8² - 2⁶ işleminin sonucu kaçtır?", a: ["0", "2", "4", "8"], c: 0 },
-      {
-        q: "İşlem önceliğinde ilk sıra hangisidir?",
-        a: ["Çarpma", "Bölme", "Üslü İfade", "Parantez"],
-        c: 2,
-      },
-      {
-        q: "Çarpmanın toplama üzerine dağılma özelliği: a × (b + c) = ?",
-        a: ["a×b + c", "a + b×c", "a×b + a×c", "a+b + a+c"],
-        c: 2,
-      },
-      {
-        q: "Sayı doğrusu üzerinde sağa gidildikçe sayılar ne olur?",
-        a: ["Küçülür", "Büyür", "Değişmez", "Önce büyür sonra küçülür"],
-        c: 1,
-      },
-      {
-        q: "-15 mi büyük -20 mi?",
-        a: ["-15", "-20", "Eşit", "Karşılaştırılamaz"],
-        c: 0,
-      },
-      {
-        q: "Aşağıdakilerden hangisi doğrudur?",
-        a: ["-5 > 2", "0 < -1", "|-3| = 3", "-8 = 8"],
-        c: 2,
-      },
-      {
-        q: "Paydaları eşit kesirlerde payı büyük olan daha ...?",
-        a: ["Küçüktür", "Büyüktür", "Eşittir", "Belirsizdir"],
-        c: 1,
-      },
-      {
-        q: "Payları eşit kesirlerde paydası küçük olan daha ...?",
-        a: ["Küçüktür", "Büyüktür", "Eşittir", "Belirsizdir"],
-        c: 1,
-      },
-      {
-        q: "Ardışık iki doğal sayının ortak böleni her zaman kaçtır?",
-        a: ["0", "1", "2", "Sayının küçük olanı"],
-        c: 1,
-      },
-      {
-        q: "Bir sayının 1'e bölümü nedir?",
-        a: ["0", "1", "Sayının kendisi", "Belirsiz"],
-        c: 2,
-      },
-      {
-        q: "10³ + 10² işleminin sonucu kaçtır?",
-        a: ["100", "110", "1000", "1100"],
-        c: 3,
-      },
-      { q: "5⁴ mü büyüktür 4⁵ mi?", a: ["5⁴", "4⁵", "Eşit", "Belirsiz"], c: 1 },
-      {
-        q: "Hangisi 2 ile tam bölünemez?",
-        a: ["122", "450", "787", "900"],
-        c: 2,
-      },
-      {
-        q: "Sonu 0 veya 5 olan sayılar hangisine tam bölünür?",
-        a: ["2", "3", "5", "10"],
-        c: 2,
-      },
-      {
-        q: "İki basamaklı en küçük asal sayı kaçtır?",
-        a: ["10", "11", "13", "17"],
-        c: 1,
-      },
-      {
-        q: "1, 2, 3, 4, 6, 12 sayıları hangi sayının çarpanlarıdır?",
-        a: ["6", "12", "18", "24"],
-        c: 1,
-      },
-      {
-        q: "Ölçüsü 180 derece olan açılara ne denir?",
-        a: ["Dik", "Doğru", "Tam", "Dar"],
-        c: 1,
-      },
-      {
-        q: "Ölçüsü 360 derece olan açılara ne denir?",
-        a: ["Doğru", "Geniş", "Tam", "Dar"],
-        c: 2,
-      },
-      {
-        q: "Yarım dairelik bir açı ölçer (iletki) ile en fazla kaç derece ölçülür?",
-        a: ["90", "180", "270", "360"],
-        c: 1,
-      },
-      {
-        q: "Noktanın boyutu nedir?",
-        a: ["Yoktur", "1 boyutlu", "2 boyutlu", "3 boyutlu"],
-        c: 0,
-      },
-      {
-        q: "Aynı noktadan çıkan iki ışın neyi oluşturur?",
-        a: ["Doğruyu", "Açıyı", "Üçgeni", "Daireyi"],
-        c: 1,
-      },
-      {
-        q: "7'nin 100'e kadar kaç tane katı vardır?",
-        a: ["13", "14", "15", "16"],
-        c: 1,
-      },
-      { q: "En küçük doğal sayı kaçtır?", a: ["0", "1", "-1", "Yoktur"], c: 0 },
-      {
-        q: "Sayı doğrusunda -10 ile +10 arasında kaç tane doğal sayı vardır?",
-        a: ["9", "10", "11", "20"],
-        c: 1,
-      },
-      {
-        q: "Bir kesrin pay ve paydasını aynı sayıya bölmeye ne denir?",
-        a: ["Genişletme", "Sadeleştirme", "Bölme", "Çarpma"],
-        c: 1,
-      },
-      {
-        q: "1 tam 1/2 kesri kaça eşittir?",
-        a: ["0.5", "1.2", "1.5", "2.1"],
-        c: 2,
-      },
-      {
-        q: "Bir sayının 5 katının 3 eksiği 12 ise bu sayı kaçtır?",
-        a: ["3", "4", "5", "6"],
-        c: 0,
-      },
-      {
-        q: "x + 7 = 15 denklemini sağlayan x değeri kaçtır?",
-        a: ["7", "8", "9", "10"],
-        c: 1,
-      },
-      {
-        q: "2x - 4 = 10 denklemini sağlayan x değeri kaçtır?",
-        a: ["5", "6", "7", "8"],
-        c: 2,
-      },
-      {
-        q: "Bir üçgenin iç açıları toplamı kaç derecedir?",
-        a: ["90", "180", "270", "360"],
-        c: 1,
-      },
-      {
-        q: "Bir karenin çevresi 20 cm ise alanı kaç cm²'dir?",
-        a: ["16", "20", "25", "100"],
-        c: 2,
-      },
-      {
-        q: "Yarıçapı 5 cm olan bir dairenin çevresi kaç π cm'dir?",
-        a: ["5π", "10π", "25π", "50π"],
-        c: 1,
-      },
-      {
-        q: "Bir dikdörtgenin uzun kenarı 8 cm, kısa kenarı 5 cm ise alanı kaç cm²'dir?",
-        a: ["13", "26", "40", "80"],
-        c: 2,
-      },
-      { q: "Bir küpün kaç yüzü vardır?", a: ["4", "6", "8", "12"], c: 1 },
-      {
-        q: "Bir üçgenin kenar uzunlukları 3, 4, 5 cm ise bu nasıl bir üçgendir?",
-        a: ["Eşkenar", "İkizkenar", "Dik", "Geniş Açılı"],
-        c: 2,
-      },
-      {
-        q: "Bir sayının %20'si 10 ise bu sayı kaçtır?",
-        a: ["20", "40", "50", "100"],
-        c: 2,
-      },
-      { q: "250 sayısının %10'u kaçtır?", a: ["2.5", "10", "25", "50"], c: 2 },
-      {
-        q: "Bir ürün %20 indirimle 80 TL'ye satılıyorsa indirimsiz fiyatı kaç TL'dir?",
-        a: ["90", "100", "120", "160"],
-        c: 1,
-      },
-      {
-        q: "Bir sınıfta 15 kız, 10 erkek öğrenci varsa kız öğrencilerin tüm sınıfa oranı kaçtır?",
-        a: ["1/2", "2/3", "3/5", "3/4"],
-        c: 2,
-      },
-      {
-        q: "Bir torbada 3 kırmızı, 2 mavi top vardır. Rastgele çekilen bir topun kırmızı olma olasılığı kaçtır?",
-        a: ["1/5", "2/5", "3/5", "1/2"],
-        c: 2,
-      },
-      {
-        q: "Bir zar atıldığında üst yüze gelen sayının çift sayı olma olasılığı kaçtır?",
-        a: ["1/6", "1/3", "1/2", "2/3"],
-        c: 2,
-      },
-      {
-        q: "Bir madeni para iki kez atıldığında ikisinin de tura gelme olasılığı kaçtır?",
-        a: ["1/2", "1/3", "1/4", "1/8"],
-        c: 2,
-      },
-      {
-        q: "Ortalaması 7 olan 3 sayının toplamı kaçtır?",
-        a: ["10", "14", "21", "28"],
-        c: 2,
-      },
-      {
-        q: "5, 8, 12, 15 sayılarının aritmetik ortalaması kaçtır?",
-        a: ["9", "10", "11", "12"],
-        c: 0,
-      },
-      {
-        q: "Bir veri grubundaki en büyük değer ile en küçük değer arasındaki farka ne denir?",
-        a: ["Ortalama", "Medyan", "Mod", "Açıklık"],
-        c: 3,
-      },
-      {
-        q: "Bir veri grubunda en çok tekrar eden değere ne denir?",
-        a: ["Ortalama", "Medyan", "Mod", "Açıklık"],
-        c: 2,
-      },
-      {
-        q: "Bir veri grubunda küçükten büyüğe sıralandığında ortada kalan değere ne denir?",
-        a: ["Ortalama", "Medyan", "Mod", "Açıklık"],
-        c: 1,
-      },
-    ],
-    fen: [
-      {
-        q: "Güneş'e en uzak gezegen aşağıdakilerden hangisidir?",
-        a: ["Uranüs", "Neptün", "Satürn", "Jüpiter"],
-        c: 1,
-      },
-      {
-        q: "Hangi iki gezegen arasında Asteroit Kuşağı bulunur?",
+        q: "Göğüs kafesinin görevi nedir?",
         a: [
-          "Dünya - Mars",
-          "Mars - Jüpiter",
-          "Jüpiter - Satürn",
-          "Venüs - Dünya",
+          "Solunumu sağlamak",
+          "İç organları korumak",
+          "Hareket sağlamak",
+          "Kan üretmek",
         ],
         c: 1,
       },
       {
-        q: "Yüzey sıcaklığı en fazla olan 'Sıcak Gezegen' hangisidir?",
-        a: ["Merkür", "Venüs", "Mars", "Jüpiter"],
+        q: "Kemik iliğinin görevi nedir?",
+        a: ["Koruma", "Hareket", "Kan hücresi üretimi", "Sindirim"],
+        c: 2,
+      },
+      {
+        q: "Omurga kaç kemikten oluşur?",
+        a: ["23", "33", "43", "53"],
         c: 1,
       },
       {
-        q: "Güneş tutulması ile ilgili hangisi yanlıştır?",
+        q: "Hangi kemik türü vücudu ayakta tutar?",
         a: [
-          "Ay, Yeni Ay evresindedir",
-          "Gündüz gerçekleşir",
-          "Dünya'nın gölgesi Ay üzerine düşer",
-          "Ay, Dünya ile Güneş arasındadır",
+          "Kısa kemikler",
+          "Yassı kemikler",
+          "Uzun kemikler",
+          "Düzensiz kemikler",
         ],
         c: 2,
       },
+
+      // ====== SİNDİRİM SİSTEMİ ======
       {
-        q: "Ay tutulması hangi evrede gerçekleşir?",
-        a: ["Yeni Ay", "İlk Dördün", "Dolunay", "Son Dördün"],
-        c: 2,
-      },
-      {
-        q: "Oynamaz eklemler nerede bulunur?",
-        a: ["Diz kapağı", "Kafatası", "Omurga", "Parmaklar"],
-        c: 1,
-      },
-      {
-        q: "Mide ve bağırsaklarda bulunan, istemsiz çalışan kas türü hangisidir?",
-        a: ["Çizgili kas", "Düz kas", "Kalp kası", "İskelet kası"],
-        c: 1,
-      },
-      {
-        q: "Proteinlerin kimyasal sindirimi nerede başlar?",
-        a: ["Ağız", "Mide", "İnce bağırsak", "Yutak"],
-        c: 1,
-      },
-      {
-        q: "Safra salgısı ve pankreas öz suyu nereye dökülür?",
-        a: [
-          "Mide",
-          "Kalın bağırsak",
-          "İnce bağırsak (Onikiparmak b.)",
-          "Yemek borusu",
-        ],
-        c: 2,
-      },
-      {
-        q: "Sindirilmiş besinlerin emilerek kana geçtiği yapı hangisidir?",
-        a: ["Villus", "Alveol", "Nefron", "Miyofibril"],
+        q: "Sindirim hangi organda başlar?",
+        a: ["Ağız", "Mide", "İnce bağırsak", "Kalın bağırsak"],
         c: 0,
       },
       {
-        q: "Küçük kan dolaşımının amacı nedir?",
-        a: [
-          "Besin taşımak",
-          "Kanı temizlemek (Oksijenlendirmek)",
-          "Vücuda kan dağıtmak",
-          "Hormon iletmek",
-        ],
+        q: "Tükürükte bulunan enzim hangisidir?",
+        a: ["Pepsin", "Amilaz", "Lipaz", "Tripsin"],
         c: 1,
       },
       {
-        q: "Kan hücrelerinden hangisi vücut savunmasında (bağışıklık) görevlidir?",
-        a: ["Alyuvar", "Akyuvar", "Kan pulcuğu", "Plazma"],
-        c: 1,
-      },
-      {
-        q: "Kalbin sol karıncığından çıkan temiz kanı vücuda dağıtan en büyük atardamar?",
-        a: ["Akciğer atardamarı", "Aort", "Şah damarı", "Böbrek atardamarı"],
-        c: 1,
-      },
-      {
-        q: "Sabit süratle 20 saniyede 400 metre yol alan bir aracın sürati kaç m/s'dir?",
-        a: ["10", "20", "40", "80"],
-        c: 1,
-      },
-      {
-        q: "Kızıl Gezegen olarak bilinen hangisidir?",
-        a: ["Jüpiter", "Mars", "Merkür", "Uranüs"],
-        c: 1,
-      },
-      {
-        q: "Halkası en belirgin olan gezegen hangisidir?",
-        a: ["Jüpiter", "Neptün", "Satürn", "Uranüs"],
-        c: 2,
-      },
-      {
-        q: "Besinlerin ağızda dişler yardımıyla parçalanmasına ne denir?",
-        a: ["Kimyasal sindirim", "Mekanik sindirim", "Emilim", "Solunum"],
-        c: 1,
-      },
-      {
-        q: "Mide öz suyu hangi besin grubunu sindirir?",
-        a: ["Yağlar", "Vitamins", "Proteinler", "Karbonhidratlar"],
-        c: 2,
-      },
-      {
-        q: "Kanın kalpten çıkıp akciğere gidip temizlenip dönmesine ne denir?",
-        a: ["Büyük dolaşım", "Küçük dolaşım", "Hızlı dolaşım", "Tam dolaşım"],
-        c: 1,
-      },
-      {
-        q: "Havadaki oksijenin kana geçtiği küçük keseciklere ne denir?",
-        a: ["Bronş", "Bronşçuk", "Alveol", "Soluk borusu"],
-        c: 2,
-      },
-      {
-        q: "Böbreklerde kanın süzüldüğü en küçük birime ne denir?",
-        a: ["Nefron", "Villus", "Alveol", "Nöron"],
+        q: "Mide asidinin pH değeri yaklaşık kaçtır?",
+        a: ["2", "7", "10", "14"],
         c: 0,
       },
       {
-        q: "İdrarın dışarı atılmadan önce toplandığı yer neresidir?",
-        a: ["Üreter", "Üretra", "İdrar kesesi", "Böbrek"],
+        q: "Besinlerin emilimi hangi organda gerçekleşir?",
+        a: ["Mide", "İnce bağırsak", "Kalın bağırsak", "Yemek borusu"],
+        c: 1,
+      },
+      {
+        q: "Safra hangi organ tarafından üretilir?",
+        a: ["Pankreas", "Mide", "Karaciğer", "Böbrek"],
         c: 2,
       },
       {
-        q: "Kuvvet ne ile ölçülür?",
-        a: ["Termometre", "Dinamometre", "Barometre", "Metre"],
-        c: 1,
-      },
-      {
-        q: "Kuvvetin birimi nedir?",
-        a: ["Kilogram", "Newton", "Metre", "Saniye"],
-        c: 1,
-      },
-      {
-        q: "Jüpiter'in en büyük uydusu?",
-        a: ["Ay", "Titan", "Ganymede", "Phobos"],
+        q: "İnce bağırsağın uzunluğu yaklaşık kaç metredir?",
+        a: ["1-2 m", "3-4 m", "6-7 m", "10-12 m"],
         c: 2,
       },
       {
-        q: "Satürn'ün en ünlü uydusu?",
-        a: ["Titan", "Ay", "Deimos", "Europa"],
-        c: 0,
-      },
-      {
-        q: "Dünya'nın ikizi olarak bilinen gezegen?",
-        a: ["Mars", "Venüs", "Merkür", "Uranüs"],
-        c: 1,
-      },
-      {
-        q: "Güneş enerjisini ne ile yayar?",
-        a: ["Elektrik", "Isı ve Işık", "Su", "Ses"],
-        c: 1,
-      },
-      {
-        q: "Ay'ın Güneş ile Dünya arasına girmesi?",
-        a: ["Ay Tutulması", "Güneş Tutulması", "Yıldız Kayması", "Dolunay"],
-        c: 1,
-      },
-      {
-        q: "Dünya'nın Ay ile Güneş arasina girmesi?",
-        a: ["Ay Tutulması", "Güneş Tutulması", "Yeni Ay", "Hilal"],
-        c: 0,
-      },
-      {
-        q: "Kısa kemiklerin boyu ve eni nasıldır?",
-        a: ["Boyu uzundur", "Eni kalındır", "Birbirine yakındır", "Sonsuzdur"],
+        q: "Hangi besin grubu ağızda sindirilmeye başlar?",
+        a: ["Proteinler", "Yağlar", "Karbonhidratlar", "Vitaminler"],
         c: 2,
       },
       {
-        q: "Sinir sistemini koruyan kemik yapısı?",
-        a: ["Kafatası", "Omurga", "Göğüs kafesi", "Hepsi"],
-        c: 3,
-      },
-      {
-        q: "Yemek borusu ile mide arasındaki kapakçık neyi engeller?",
-        a: ["Besin geçişini", "Geri kaçışı", "Çiğnemeyi", "Konuşmayı"],
-        c: 1,
-      },
-      {
-        q: "Sindirilmeyen atıklar nereden atılır?",
-        a: ["Böbrek", "Anüs", "Ağız", "Burun"],
-        c: 1,
-      },
-      {
-        q: "Büyük kan dolaşımı amacı nedir?",
-        a: [
-          "Kanı temizlemek",
-          "Vücuda besin ve O2 taşımak",
-          "Terlemek",
-          "Düşünmek",
-        ],
-        c: 1,
-      },
-      {
-        q: "Kan pulcuklarının görevi?",
-        a: ["Oksijen taşımak", "Mikrop öldürmek", "Pıhtılaşma", "Renk vermek"],
+        q: "Kalın bağırsakta ne emilir?",
+        a: ["Protein", "Yağ", "Su", "Vitamin A"],
         c: 2,
       },
       {
-        q: "Hangi damarda kan basıncı en yüksektir?",
-        a: ["Toplardamar", "Kılcal damar", "Atardamar", "Lenf"],
-        c: 2,
-      },
-      {
-        q: "Nefes alırken göğüs kafesi ne olur?",
-        a: ["Daralır", "Genişler", "Sıkışır", "Aşağı iner"],
-        c: 1,
-      },
-      {
-        q: "Hava temizleme ve nemlendirme nerede olur?",
-        a: ["Ağız", "Burun", "Yutak", "Gırtlak"],
-        c: 1,
-      },
-      {
-        q: "Böbrekler karın boşluğunun neresindedir?",
-        a: ["Önünde", "Arka tarafında (Bel hizası)", "Altında", "Kalbimizde"],
-        c: 1,
-      },
-      {
-        q: "Üre nedir?",
-        a: ["Vitamin", "Zehirli atık", "Besin", "Hücre"],
-        c: 1,
-      },
-      {
-        q: "Dinamometrelerin ölçüm sınırı neye bağlıdır?",
-        a: ["Rengine", "Boyuna", "Yayın esnekliğine", "Fiyatına"],
-        c: 2,
-      },
-      {
-        q: "Kuvvetin yönü ne ile gösterilir?",
-        a: ["Ok işareti", "Nokta", "Kare", "Daire"],
-        c: 0,
-      },
-      {
-        q: "Zıt yönlü kuvvetlerin bileşkesi nasıl bulunur?",
-        a: ["Toplayarak", "Çarparak", "Çıkararak", "Bölerek"],
-        c: 2,
-      },
-      {
-        q: "Aynı yönlü kuvvetlerin bileşkesi nasıl bulunur?",
-        a: ["Çıkararak", "Toplayarak", "Bölerek", "Kök alarak"],
-        c: 1,
-      },
-      {
-        q: "Sürati 50 km/h olan araç 2 saatte kaç km yol alır?",
-        a: ["25", "50", "100", "200"],
-        c: 2,
-      },
-      {
-        q: "Sürati 10 m/s olan araç 100 metreyi kaç saniyede alır?",
-        a: ["1", "10", "100", "1000"],
-        c: 1,
-      },
-      {
-        q: "Aşağıdakilerden hangisi sindirime yardımcı organdır?",
-        a: ["Mide", "İnce Bağırsak", "Karaciğer", "Yemek Borusu"],
-        c: 2,
-      },
-      {
-        q: "İnce bağırsakta emilim ne ile artırılır?",
-        a: ["Villuslar", "Dişler", "Asit", "Su"],
-        c: 0,
-      },
-      {
-        q: "Kalbin sol tarafında nasıl kan bulunur?",
-        a: ["Kirli", "Temiz", "Siyah", "Koyu"],
-        c: 1,
-      },
-      {
-        q: "Akciğer toplardamarı temiz mi kirli mi kan taşır?",
-        a: ["Kirli", "Temiz", "Az kirli", "Boş"],
-        c: 1,
-      },
-      {
-        q: "Yürürken hangi kaslarımız aktif çalışır?",
-        a: ["Mide kası", "İskelet kasları", "Kalp kası", "B ve C"],
-        c: 3,
-      },
-      {
-        q: "Güneş Sistemi'nde yaşam için en kritik gezegen?",
-        a: ["Mars", "Venüs", "Dünya", "Merkür"],
-        c: 2,
-      },
-      {
-        q: "Soluk borusunun yapısında ne bulunur?",
-        a: ["Sadece kas", "Kıkırdak halkalar", "Kemik", "Diş"],
-        c: 1,
-      },
-      {
-        q: "Karasal gezegenlerin diğer adı nedir?",
-        a: [
-          "Dış gezegenler",
-          "Gaz devleri",
-          "İç gezegenler",
-          "Halkalı gezegenler",
-        ],
-        c: 2,
-      },
-      {
-        q: "Vücudumuzun çatısını oluşturan ve organları koruyan sistem?",
+        q: "Pankreas hangi sistem içindedir?",
         a: [
           "Sindirim sistemi",
           "Dolaşım sistemi",
-          "Destek ve hareket sistemi",
+          "Solunum sistemi",
           "Boşaltım sistemi",
         ],
-        c: 2,
-      },
-      {
-        q: "Yarı oynar eklemler nerede bulunur?",
-        a: ["Kafatası", "Kollar", "Omurga", "Bacaklar"],
-        c: 2,
-      },
-      {
-        q: "Mekanik (fiziksel) sindirim nerede başlar?",
-        a: ["Mide", "Ağız", "Yutak", "İnce bağırsak"],
-        c: 1,
-      },
-      {
-        q: "Büyük kan dolaşımı kalbin hangi bölümünden başlar?",
-        a: ["Sağ karıncık", "Sol karıncık", "Sağ kulakçık", "Sol kulakçık"],
-        c: 1,
-      },
-      {
-        q: "Hangi kan hücresi kana kırmızı rengini verir ve oksijen taşır?",
-        a: ["Alyuvar", "Akyuvar", "Kan pulcuğu", "Lenfosit"],
         c: 0,
       },
       {
-        q: "Dengelermiş kuvvetlerin etkisindeki bir cisim için hangisi doğrudur?",
+        q: "Villusların görevi nedir?",
         a: [
-          "Hızlanır",
-          "Yavaşlar",
-          "Duruyorsa durmaya devam eder",
-          "Yön değiştirir",
+          "Emilim yüzeyini artırmak",
+          "Asit salgılamak",
+          "Besin parçalamak",
+          "Su üretmek",
         ],
+        c: 0,
+      },
+
+      // ====== DOLAŞIM SİSTEMİ ======
+      {
+        q: "Kalp dakikada kaç kez atar?",
+        a: ["20-30", "40-50", "60-80", "100-120"],
         c: 2,
       },
       {
-        q: "Sürat birimi aşağıdakilerden hangisi olabilir?",
-        a: ["m/s²", "Newton", "km/sa", "Joule"],
+        q: "Alyuvarlarda hangi protein oksijen taşır?",
+        a: ["Hemoglobin", "Fibrinojen", "Albümin", "Globulin"],
+        c: 0,
+      },
+      {
+        q: "Kan grubu AB olan biri kimden kan alabilir?",
+        a: ["Sadece AB", "AB ve O", "Herkesten", "Sadece A ve B"],
         c: 2,
       },
       {
-        q: "Besinlerin en küçük parçalara kadar parçalanıp kana geçecek hale gelmesine ne denir?",
-        a: ["Solunum", "Sindirim", "Boşaltım", "Dolaşım"],
-        c: 1,
-      },
-      {
-        q: "Kalın bağırsakta aşağıdakilerden hangisinin emilimi gerçekleşmez?",
-        a: ["Su", "Vitamin", "Mineraller", "Proteinler"],
+        q: "Evrensel kan vericisi hangi kan grubudur?",
+        a: ["A", "B", "AB", "O"],
         c: 3,
       },
       {
-        q: "Kan gruplarını belirleyen proteinler nerede bulunur?",
-        a: ["Plazmada", "Alyuvarların zarında", "Akyuvarlarda", "Kalpte"],
-        c: 1,
+        q: "Kalbin kaç odası vardır?",
+        a: ["2", "3", "4", "5"],
+        c: 2,
       },
-      { q: "Bileşke kuvvetin sembolü nedir?", a: ["F", "m", "R", "v"], c: 2 },
       {
-        q: "Süratleri aynı olan iki araçtan yolu daha kısa sürede bitiren için ne söylenir?",
+        q: "Küçük dolaşımda kan nereye gider?",
+        a: ["Beyne", "Karaciğere", "Akciğerlere", "Böbreklere"],
+        c: 2,
+      },
+      {
+        q: "Atardamarların görevi nedir?",
         a: [
-          "Daha yavaştır",
-          "Yolu daha kısadır",
-          "Yolu daha uzundur",
-          "Daha hızlıdır",
+          "Kanı kalbe getirmek",
+          "Kanı kalpten götürmek",
+          "Gaz değişimi",
+          "Pıhtılaşma",
         ],
         c: 1,
       },
       {
-        q: "Güneş Sistemi'de yaşam olduğu bilinen tek gezegen?",
-        a: ["Mars", "Dünya", "Venüs", "Satürn"],
+        q: "Akyuvarların ömrü yaklaşık kaç gündür?",
+        a: ["7-10", "30-60", "120", "200-300"],
         c: 1,
       },
       {
-        q: "Kafatası kemikleri hangi gruptadır?",
-        a: ["Uzun", "Kısa", "Yassı", "Düzensiz"],
+        q: "Kan pıhtılaşmasında hangi hücre görevlidir?",
+        a: ["Alyuvar", "Akyuvar", "Trombosit", "Plazma"],
         c: 2,
       },
       {
-        q: "İsteğimizle çalışan kaslara ne ad verilir?",
-        a: ["Düz Kas", "Kalp Kası", "Çizgili Kas", "İç Kas"],
-        c: 2,
+        q: "Nabız hangi damardan ölçülür?",
+        a: ["Atardamar", "Toplardamar", "Kılcal damar", "Lenf damarı"],
+        c: 0,
       },
+
+      // ====== SOLUNUM SİSTEMİ ======
       {
-        q: "Sindirim sisteminde emilimin en yoğun olduğu yer?",
-        a: ["Mide", "Ağız", "İnce Bağırsak", "Kalın Bağırsak"],
-        c: 2,
-      },
-      {
-        q: "Safra sıvısını hangi organ üretir?",
-        a: ["Mide", "Karaciğer", "Pankreas", "Böbrek"],
-        c: 1,
-      },
-      {
-        q: "Küçük kan dolaşımı nerede biter?",
-        a: ["Sağ Kulakçık", "Sol Kulakçık", "Sağ Karıncık", "Sol Karıncık"],
-        c: 1,
-      },
-      {
-        q: "Kanın içindeki sıvı kısma ne denir?",
-        a: ["Plazma", "Serum", "Hemoglobin", "Alyuvar"],
+        q: "Soluk borusu kaç dala ayrılır?",
+        a: ["2", "3", "4", "5"],
         c: 0,
       },
       {
-        q: "Vücudun en büyük atardamarı?",
-        a: ["Akciğer Atarı", "Aort", "Böbrek Atarı", "Toplardamar"],
+        q: "Akciğerlerde kaç tane alveol vardır?",
+        a: ["Binlerce", "Yüz binlerce", "Milyonlarca", "Milyarlarca"],
+        c: 2,
+      },
+      {
+        q: "Gaz değişimi nerede olur?",
+        a: ["Bronş", "Alveol", "Soluk borusu", "Burun"],
         c: 1,
       },
       {
-        q: "Soluk alırken akciğer hacmi ne olur?",
-        a: ["Azalır", "Artar", "Değişmez", "Kapanır"],
+        q: "Hangi kas solunumda görevlidir?",
+        a: ["Kalp kası", "Diyafram", "İskelet kası", "Düz kas"],
+        c: 1,
+      },
+      {
+        q: "Nefes alırken diyafram nasıl hareket eder?",
+        a: ["Yukarı çıkar", "Aşağı iner", "Hareket etmez", "Sağa kayar"],
+        c: 1,
+      },
+      {
+        q: "İnsanlar dakikada ortalama kaç kez nefes alır?",
+        a: ["5-10", "12-20", "30-40", "50-60"],
+        c: 1,
+      },
+      {
+        q: "Akciğerlerin hacmi nefes alırken ne olur?",
+        a: ["Azalır", "Artar", "Değişmez", "Önce artar sonra azalır"],
+        c: 1,
+      },
+      {
+        q: "Karbondioksit hangi organda atılır?",
+        a: ["Böbrek", "Karaciğer", "Akciğer", "Deri"],
+        c: 2,
+      },
+      {
+        q: "Ses telleri nerede bulunur?",
+        a: ["Burun", "Gırtlak", "Yutak", "Bronş"],
+        c: 1,
+      },
+      {
+        q: "Sağ akciğer kaç lobdan oluşur?",
+        a: ["2", "3", "4", "5"],
+        c: 1,
+      },
+
+      // ====== BOŞALTIM SİSTEMİ ======
+      {
+        q: "İnsanda kaç tane böbrek vardır?",
+        a: ["1", "2", "3", "4"],
         c: 1,
       },
       {
         q: "Böbreklerin görevi nedir?",
-        a: ["Kanı pompalamak", "Kanı süzmek", "Sindirim yapmak", "Görmek"],
+        a: ["Kan üretmek", "Kanı süzmek", "Sindirim", "Solunum"],
         c: 1,
       },
       {
-        q: "Dinamometrenin içinde ne vardır?",
-        a: ["Pil", "Su", "Yay", "Mıknatıs"],
-        c: 2,
-      },
-      {
-        q: "Dengelenmiş kuvvetlerde bileşke kuvvet kaçtır?",
-        a: ["0", "1", "10", "Sonsuz"],
-        c: 0,
-      },
-      {
-        q: "Güneş Sistemi'nde en çok uydusu olan gezegen?",
-        a: ["Dünya", "Mars", "Jüpiter", "Satürn"],
-        c: 2,
-      },
-      {
-        q: "Metallerden yapılmış sağlam dinamometreler ölçer.",
-        a: ["Küçük", "Büyük", "Hassas", "Yavaş"],
+        q: "İdrar kesesi ne kadar idrar tutar?",
+        a: ["50-100 ml", "300-500 ml", "1000-1500 ml", "2000 ml"],
         c: 1,
       },
       {
-        q: "Eklem sıvısı ne işe yarar?",
+        q: "Üre nedir?",
+        a: ["Besin", "Zehirli atık", "Hormon", "Enzim"],
+        c: 1,
+      },
+      {
+        q: "Böbreklerde filtrelenen kan miktarı günlük ne kadardır?",
+        a: ["50 litre", "100 litre", "180 litre", "300 litre"],
+        c: 2,
+      },
+      {
+        q: "İdrarın %95'i nedir?",
+        a: ["Üre", "Su", "Tuz", "Protein"],
+        c: 1,
+      },
+      {
+        q: "Üreter nedir?",
         a: [
-          "Kemikleri parlatır",
-          "Aşınmayı önler",
-          "Kemik kırar",
-          "Kan üretir",
+          "İdrarın toplandığı yer",
+          "Böbrekten idrar kesesine giden kanal",
+          "İdrarın dışarı atıldığı kanal",
+          "Kan damarı",
         ],
         c: 1,
       },
       {
-        q: "Yağların fiziksel sindirimi ne ile olur?",
-        a: ["Tükürük", "Safra", "Mide asidi", "Su"],
+        q: "Derinin boşaltım görevi nedir?",
+        a: ["İdrar atmak", "Ter atmak", "Nefes almak", "Sindirim yapmak"],
         c: 1,
       },
       {
-        q: "Villuslar nerede bulunur?",
-        a: ["Mide", "İnce Bağırsak", "Ağız", "Yutak"],
+        q: "Nefron nedir?",
+        a: [
+          "Böbreğin fonksiyonel birimi",
+          "Kan hücresi",
+          "Sinir hücresi",
+          "Kas hücresi",
+        ],
+        c: 0,
+      },
+      {
+        q: "Böbreklerin kötü çalışması hangi sistemi etkiler?",
+        a: ["Sadece boşaltım", "Dolaşım ve boşaltım", "Sindirim", "Solunum"],
+        c: 1,
+      },
+
+      // ====== KUVVET VE HAREKET ======
+      {
+        q: "Newton kuvvetin birimidir. Sembolü nedir?",
+        a: ["N", "n", "Nw", "Nt"],
+        c: 0,
+      },
+      {
+        q: "Sürtünme kuvveti hangi yönde etkir?",
+        a: [
+          "Hareket yönünde",
+          "Harekete ters yönde",
+          "Yukarı doğru",
+          "Aşağı doğru",
+        ],
         c: 1,
       },
       {
-        q: "Alyuvarlar ne taşır?",
-        a: ["Mikrop", "Oksijen", "Hormon", "Besin"],
+        q: "Bir cismin hızı 20 m/s'den 40 m/s'ye çıktı. Ne oldu?",
+        a: ["Yavaşladı", "Hızlandı", "Sabit kaldı", "Durdu"],
         c: 1,
       },
       {
-        q: "Kan grubu sıfır (0) olan biri kimden kan alabilir?",
-        a: ["A", "B", "AB", "Sadece 0"],
+        q: "Sabit hızla hareket eden cismin ivmesi kaçtır?",
+        a: ["0", "1", "10", "Değişir"],
+        c: 0,
+      },
+      {
+        q: "Ağırlık hangi kuvvetin sonucudur?",
+        a: ["Sürtünme", "Çekim", "İtme", "Manyetik"],
+        c: 1,
+      },
+      {
+        q: "120 km yolu 2 saatte alan aracın hızı km/sa cinsinden kaçtır?",
+        a: ["30", "60", "80", "240"],
+        c: 1,
+      },
+      {
+        q: "Aynı yönlü 30 N ve 20 N kuvvetlerin bileşkesi kaç N'dur?",
+        a: ["10", "25", "50", "600"],
+        c: 2,
+      },
+      {
+        q: "Zıt yönlü 50 N ve 30 N kuvvetlerin bileşkesi kaç N'dur?",
+        a: ["20", "40", "80", "1500"],
+        c: 0,
+      },
+      {
+        q: "Bir cisim serbest düşüyor. İvmesi yaklaşık kaç m/s²'dir?",
+        a: ["5", "10", "20", "100"],
+        c: 1,
+      },
+      {
+        q: "Hız = Yol / ?",
+        a: ["Kütle", "Zaman", "Kuvvet", "İvme"],
+        c: 1,
+      },
+
+      // ====== MADDE VE ISI ======
+      {
+        q: "Maddenin en küçük yapı taşı nedir?",
+        a: ["Molekül", "Atom", "Element", "Bileşik"],
+        c: 1,
+      },
+      {
+        q: "Suyun kaynama noktası kaç derecedir?",
+        a: ["0°C", "50°C", "100°C", "200°C"],
+        c: 2,
+      },
+      {
+        q: "Suyun donma noktası kaç derecedir?",
+        a: ["-10°C", "0°C", "10°C", "100°C"],
+        c: 1,
+      },
+      {
+        q: "Isı hangi yönde akar?",
+        a: ["Soğuktan sıcağa", "Sıcaktan soğuğa", "Her iki yöne", "Akmaz"],
+        c: 1,
+      },
+      {
+        q: "Termometre neyi ölçer?",
+        a: ["Kütleyi", "Hacmi", "Sıcaklığı", "Basıncı"],
+        c: 2,
+      },
+      {
+        q: "Hangi hal değişiminde ısı alınır?",
+        a: ["Donma", "Yoğunlaşma", "Erime", "Kırağılaşma"],
+        c: 2,
+      },
+      {
+        q: "Su buharlaşırken ne olur?",
+        a: ["Isı verir", "Isı alır", "Isı değişmez", "Soğur"],
+        c: 1,
+      },
+      {
+        q: "Isının SI birimi nedir?",
+        a: ["Kalori", "Joule", "Newton", "Watt"],
+        c: 1,
+      },
+      {
+        q: "Hangi madde ısıyı en iyi iletir?",
+        a: ["Plastik", "Ahşap", "Metal", "Cam"],
+        c: 2,
+      },
+      {
+        q: "Yoğunluk = Kütle / ?",
+        a: ["Hacim", "Zaman", "Kuvvet", "Isı"],
+        c: 0,
+      },
+
+      // ====== ELEKTRİK VE MANYETİZMA ======
+      {
+        q: "Elektrik akımının birimi nedir?",
+        a: ["Volt", "Amper", "Ohm", "Watt"],
+        c: 1,
+      },
+      {
+        q: "Hangi madde elektriği iletir?",
+        a: ["Plastik", "Bakır", "Kauçuk", "Ahşap"],
+        c: 1,
+      },
+      {
+        q: "Pil hangi enerjiyi elektrik enerjisine çevirir?",
+        a: ["Işık", "Kimyasal", "Hareket", "Isı"],
+        c: 1,
+      },
+      {
+        q: "Manyetiklerin zıt kutupları ne yapar?",
+        a: ["İter", "Çeker", "Nötr kalır", "Patlar"],
+        c: 1,
+      },
+      {
+        q: "Manyetiklerin aynı kutupları ne yapar?",
+        a: ["Çeker", "İter", "Nötr kalır", "Birleşir"],
+        c: 1,
+      },
+      {
+        q: "Seri bağlı devrede bir ampul yanmazsa ne olur?",
+        a: [
+          "Diğerleri yanar",
+          "Hiçbiri yanmaz",
+          "Bazıları yanar",
+          "Parlak yanar",
+        ],
+        c: 1,
+      },
+      {
+        q: "Paralel bağlı devrede bir ampul yanmazsa ne olur?",
+        a: [
+          "Hiçbiri yanmaz",
+          "Diğerleri yanar",
+          "Hepsi söner",
+          "Kısa devre olur",
+        ],
+        c: 1,
+      },
+      {
+        q: "Elektrik direncinin birimi nedir?",
+        a: ["Volt", "Amper", "Ohm", "Watt"],
+        c: 2,
+      },
+      {
+        q: "Topraklama ne için yapılır?",
+        a: ["Parlak ışık için", "Güvenlik için", "Hız için", "Renk için"],
+        c: 1,
+      },
+      {
+        q: "Hangi enerji türü yenilenebilir değildir?",
+        a: ["Güneş", "Rüzgar", "Kömür", "Su"],
+        c: 2,
+      },
+      // ====== EKOSİSTEM VE MADDE ÖZELLİKLERİ ======
+      {
+        q: "Bir bölgedeki canlı ve cansız varlıkların tamamına ne denir?",
+        a: ["Popülasyon", "Ekosistem", "Topluluk", "Habitat"],
+        c: 1,
+      },
+      {
+        q: "Bitkilerin kendi besinlerini üretmesine ne denir?",
+        a: ["Solunum", "Sindirim", "Fotosentez", "Boşaltım"],
+        c: 2,
+      },
+      {
+        q: "Hangi gaz fotosentez için gereklidir?",
+        a: ["Oksijen", "Azot", "Karbondioksit", "Helyum"],
+        c: 2,
+      },
+      {
+        q: "Havadaki nemi ölçen alet hangisidir?",
+        a: ["Barometre", "Higrometre", "Anemometre", "Termometre"],
+        c: 1,
+      },
+      {
+        q: "Sıvıların yüzeyindeki buharlaşma ne zaman olur?",
+        a: [
+          "Sadece kaynarken",
+          "Her sıcaklıkta",
+          "Sadece güneş varken",
+          "Sadece gece",
+        ],
+        c: 1,
+      },
+      {
+        q: "Mıknatıs hangi maddeyi çekmez?",
+        a: ["Demir", "Nikel", "Kobalt", "Alüminyum"],
         c: 3,
       },
       {
-        q: "Diyafram kası nefes verirken nasıl bir şekil alır?",
-        a: ["Düzleşir", "Kubbeleşir", "Kısalır", "Döner"],
+        q: "Gözle görülemeyecek kadar küçük canlıları görmek için ne kullanılır?",
+        a: ["Teleskop", "Mikroskop", "Dürbün", "Periskop"],
         c: 1,
       },
       {
-        q: "Akciğerlerde gaz değişiminin olduğu yer?",
-        a: ["Bronşcuk", "Alveol", "Burun", "Yutak"],
-        c: 1,
-      },
-      {
-        q: "Kuvvetin büyüklüğünü ölçen alet?",
-        a: ["Terazi", "Dinamometre", "Termometre", "Saat"],
-        c: 1,
-      },
-      {
-        q: "Sürat = Yol / ?",
-        a: ["Zaman", "Kütle", "Kuvvet", "Ağırlık"],
-        c: 0,
-      },
-      {
-        q: "Hangi kan hücresi pıhtılaşmayı sağlar?",
-        a: ["Alyuvar", "Akyuvar", "Kan pulcuğu", "Plazma"],
+        q: "Hangi organımız kanı tüm vücuda pompalar?",
+        a: ["Akciğer", "Mide", "Kalp", "Beyin"],
         c: 2,
       },
-      { q: "Kalp kaç odacıktan oluşur?", a: ["2", "3", "4", "5"], c: 2 },
       {
-        q: "Kılcal damarların görevi nedir?",
-        a: [
-          "Kan pompalamak",
-          "Madde alışverişi",
-          "Kirli kan toplamak",
-          "Oksijen üretmek",
-        ],
-        c: 1,
+        q: "Dünya'nın en dış katmanına ne denir?",
+        a: ["Çekirdek", "Manto", "Yer kabuğu", "Atmosfer"],
+        c: 2,
       },
       {
-        q: "Soluk borusunun başlangıcına ne denir?",
-        a: ["Yutak", "Gırtlak", "Burun", "Ağız"],
-        c: 1,
-      },
-      {
-        q: "Büyük kan dolaşımı nereden başlar?",
-        a: ["Sağ Karıncık", "Sol Karıncık", "Sağ Kulakçık", "Sol Kulakçık"],
-        c: 1,
-      },
-      {
-        q: "Küçük kan dolaşımı nereden başlar?",
-        a: ["Sağ Karıncık", "Sol Karıncık", "Sağ Kulakçık", "Sol Kulakçık"],
-        c: 0,
-      },
-      {
-        q: "Kanın kalbe geri dönmesini sağlayan damar?",
-        a: ["Atardamar", "Toplardamar", "Kılcal damar", "Aort"],
-        c: 1,
-      },
-      {
-        q: "Vücut ısısını düzenleyen sistem hangisidir?",
-        a: ["Dolaşım", "Sindirim", "Boşaltım", "Hepsi"],
-        c: 0,
-      },
-      {
-        q: "Güneş Sistemi'nde en sıcak gezegen hangisidir?",
-        a: ["Merkür", "Venüs", "Dünya", "Mars"],
-        c: 1,
-      },
-      {
-        q: "Asteroit kuşağı hangi gezegenler arasındadır?",
-        a: ["Dünya-Mars", "Mars-Jüpiter", "Jüpiter-Satürn", "Venüs-Dünya"],
+        q: "Yıldızların yaydığı enerji hangi yolla üretilir?",
+        a: ["Yanma", "Çekirdek tepkimesi", "Sürtünme", "Elektrik"],
         c: 1,
       },
     ],
+
     turkce: [
+      // ====== SÖZCÜKLERİN ANLAMI ======
       {
-        q: "Aşağıdaki cümlelerin hangisinde 'ince' sözcüğü mecaz anlamda kullanılmıştır?",
-        a: [
-          "İnce elbiseler giymişti",
-          "İnce bir ip koptu",
-          "Çok ince bir insansın",
-          "İnce bir dilim ekmek yedi",
-        ],
+        q: "'Çıra gibi yanmak' deyiminin anlamı nedir?",
+        a: ["Üşümek", "Çok parlak olmak", "Çok kızmak", "Ağlamak"],
         c: 2,
       },
       {
-        q: "Aşağıdakilerin hangisinde terim anlamlı bir sözcük vardır?",
-        a: [
-          "Oyuncular sahneye çıktı",
-          "Dışarıda çok soğuk var",
-          "Bugün çok neşeliyim",
-          "Pencereyi kapatır mısın?",
-        ],
-        c: 0,
-      },
-      {
-        q: "'Kar yağdığı için yollar kapandı.' cümlesindeki anlam ilişkisi nedir?",
-        a: ["Amaç-Sonuç", "Neden-Sonuç", "Koşul-Sonuç", "Karşılaştırma"],
+        q: "'El emeği göz nuru' deyiminin anlamı nedir?",
+        a: ["Çok pahalı", "Özenle yapılmış", "Kırık", "Yeni"],
         c: 1,
       },
       {
-        q: "Aşağıdaki sözcüklerden hangisi sadece çekim eki almıştır?",
-        a: ["Kitaplık", "Gözlükçü", "Sulu", "Kalemler"],
+        q: "'Ayağını yorganına göre uzat' atasözünün anlamı nedir?",
+        a: [
+          "Çok uyumak",
+          "Gücüne göre yaşamak",
+          "Egzersiz yapmak",
+          "Temiz olmak",
+        ],
+        c: 1,
+      },
+      {
+        q: "'Ateş' sözcüğü aşağıdakilerden hangisinde mecaz anlamdadır?",
+        a: ["Ateş yandı", "Ateşli konuştu", "Ateşi söndü", "Ateş yaktı"],
+        c: 1,
+      },
+      {
+        q: "'Kök' sözcüğü aşağıdakilerden hangisinde terim anlamlıdır?",
+        a: ["Ağacın kökü", "Kelimenin kökü", "Saçın kökü", "Diş kökü"],
+        c: 1,
+      },
+      {
+        q: "Eş anlamlısı 'mutlu' olan sözcük hangisidir?",
+        a: ["Neşeli", "Üzgün", "Sinirli", "Yorgun"],
+        c: 0,
+      },
+      {
+        q: "Zıt anlamlısı 'soğuk' olan sözcük hangisidir?",
+        a: ["Serin", "Ilık", "Sıcak", "Buğulu"],
+        c: 2,
+      },
+      {
+        q: "'Başını kuma gömmek' deyiminin anlamı nedir?",
+        a: ["Oyun oynamak", "Gerçeklerden kaçmak", "Dinlenmek", "Düşünmek"],
+        c: 1,
+      },
+      {
+        q: "'Burnundan kıl aldırmamak' deyiminin anlamı nedir?",
+        a: ["Kibar olmak", "Kimseyi dinlememek", "Hasta olmak", "Güzel olmak"],
+        c: 1,
+      },
+      {
+        q: "'Ağzı kulaklarında olmak' ne demektir?",
+        a: ["Hasta olmak", "Çok mutlu olmak", "Susmak", "Yemek yemek"],
+        c: 1,
+      },
+
+      // ====== CÜMLENİN ÖĞELERİ ======
+      {
+        q: "'Ali okula gitti.' cümlesinde yüklem hangisidir?",
+        a: ["Ali", "Okula", "Gitti", "Ali okula"],
+        c: 2,
+      },
+      {
+        q: "'Kitap okudum.' cümlesinde nesne hangisidir?",
+        a: ["Kitap", "Okudum", "Kitap okudum", "Nesne yok"],
+        c: 0,
+      },
+      {
+        q: "'Annem bana hediye aldı.' cümlesinde dolaylı tümleç hangisidir?",
+        a: ["Annem", "Bana", "Hediye", "Aldı"],
+        c: 1,
+      },
+      {
+        q: "'Bugün hava çok güzel.' cümlesinde yüklem hangisidir?",
+        a: ["Bugün", "Hava", "Çok", "Güzel"],
         c: 3,
       },
       {
-        q: "'Gözlükçü' sözcüğünün kökü ve türü nedir?",
-        a: ["Gözlük - İsim", "Göz - İsim", "Gözle - Fiil", "Göz - Fiil"],
-        c: 1,
-      },
-      {
-        q: "Aşağıdakilerden hangisi soyut bir isimdir?",
-        a: ["Hava", "Su", "Rüya", "Işık"],
-        c: 2,
-      },
-      {
-        q: "Aşağıdakilerin hangisinde özel isim vardır?",
-        a: ["Kedi", "Şehir", "Ankara", "Okul"],
-        c: 2,
-      },
-      {
-        q: "'Burnu havada' deyiminin anlamı nedir?",
-        a: [
-          "Çok nefes almak",
-          "Kibirli olmak",
-          "Hava tahmini yapmak",
-          "Grip olmak",
-        ],
-        c: 1,
-      },
-      {
-        q: "Aşağıdaki cümlelerden hangisi nesneldir?",
-        a: [
-          "En güzel renk mavidir",
-          "Türkiye'nin başkenti Ankara'dır",
-          "Bu film çok sıkıcı",
-          "Çay kahveden daha güzel",
-        ],
-        c: 1,
-      },
-      {
-        q: "Yapım eki almış sözcüğe ne denir?",
-        a: ["Basit", "Türemiş", "Birleşik", "Kök"],
-        c: 1,
-      },
-      {
-        q: "Hangisi birleşik bir sözcüktür?",
-        a: ["Kalemlik", "Hanımeli", "Silgi", "Gözlük"],
-        c: 1,
-      },
-      {
-        q: "Aşağıdakilerden hangisi bir 'belirtme sıfatı' değildir?",
-        a: ["Bu çocuk", "İki elma", "Güzel çiçek", "Bazı insanlar"],
-        c: 2,
-      },
-      {
-        q: "Hangi kelimenin yazımı yanlıştır?",
-        a: ["Herkez", "Spor", "Tren", "Kirbit"],
+        q: "'Bahçede çiçek açtı.' cümlesinde yer tamlayıcısı hangisidir?",
+        a: ["Bahçede", "Çiçek", "Açtı", "Bahçede çiçek"],
         c: 0,
       },
       {
-        q: "'Ova' kelimesine hangi ek gelirse türemiş kelime olur?",
-        a: ["-lar", "-da", "-mız", "-lı"],
+        q: "'Öğretmen öğrencilere ders anlattı.' cümlesinde nesne hangisidir?",
+        a: ["Öğretmen", "Öğrencilere", "Ders", "Anlattı"],
+        c: 2,
+      },
+      {
+        q: "'Sabah erkenden kalktım.' cümlesinde zaman tamlayıcısı hangisidir?",
+        a: ["Sabah erkenden", "Sabah", "Erkenden", "Kalktım"],
+        c: 0,
+      },
+      {
+        q: "'Kardeşim hızlı koşuyor.' cümlesinde nasıl tamlayıcısı hangisidir?",
+        a: ["Kardeşim", "Hızlı", "Koşuyor", "Hızlı koşuyor"],
+        c: 1,
+      },
+      {
+        q: "'Ali ile Veli geldi.' cümlesinde özne hangisidir?",
+        a: ["Ali", "Veli", "Ali ile Veli", "Geldi"],
+        c: 2,
+      },
+      {
+        q: "'Yavaş yavaş yoruldum.' cümlesinde kaç tane öğe vardır?",
+        a: ["1", "2", "3", "4"],
+        c: 1,
+      },
+
+      // ====== FİİLLER ======
+      {
+        q: "'Gel-' fiili hangi kiple çekimlenir: 'Gelecek'",
+        a: ["Şimdiki zaman", "Gelecek zaman", "Geçmiş zaman", "Geniş zaman"],
+        c: 1,
+      },
+      {
+        q: "'Okuyor' fiilindeki ek hangisidir?",
+        a: ["-yor", "-di", "-ecek", "-ir"],
+        c: 0,
+      },
+      {
+        q: "'Yazmıştı' fiili hangi zamandadır?",
+        a: [
+          "Şimdiki zaman",
+          "Gelecek zaman",
+          "Öğrenilen geçmiş zaman",
+          "Görülen geçmiş zaman",
+        ],
         c: 3,
       },
       {
-        q: "'Evimiz çok uzakta.' cümlesindeki 'evimiz' sözcüğündeki ek nedir?",
-        a: ["Çoğul eki", "İyelik eki", "Hal eki", "İlgi eki"],
-        c: 1,
-      },
-      {
-        q: "'Sarı saçlı' ifadesindeki sıfat hangisidir?",
-        a: ["Sarı", "Saç", "Saçlı", "Sarı saçlı"],
-        c: 0,
-      },
-      {
-        q: "Aşağıdakilerden hangisi bir 'topluluk ismi'dir?",
-        a: ["Çiçekler", "Ağaçlar", "Orman", "Kuşlar"],
-        c: 2,
-      },
-      {
-        q: "'Oku' fiili hangi kipi almıştır?",
-        a: ["Şimdiki zaman", "Geniş zaman", "Emir kipi", "Gelecek zaman"],
-        c: 2,
-      },
-      {
-        q: "Zıt anlamlı kelimeler hangisidir?",
-        a: ["Okul-Mektep", "Yaşlı-İhtiyar", "Açık-Kapalı", "Doktor-Hekim"],
-        c: 2,
-      },
-      {
-        q: "Hangisi bir 'niteleme sıfatı'dır?",
-        a: ["Bu", "Şu", "Kırmızı", "Bazı"],
-        c: 2,
-      },
-      {
-        q: "Aşağıdaki cümlelerden hangisi 'koşul-sonuç' cümlesidir?",
-        a: [
-          "Ödevini yaparsan dışarı çıkabilirsin",
-          "Güneş açtı diye ısındık",
-          "Kitap okumak için kütüphaneye gitti",
-          "Çok yorulduğu için uyudu",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'bağlaç'tır?",
-        a: ["Gibi", "Kadar", "İçin", "Çünkü"],
-        c: 3,
-      },
-      {
-        q: "'Çalışkan çocuk' tamlamasında tamlayan hangisidir?",
-        a: ["Çalışkan", "Çocuk", "Çalış", "Kan"],
-        c: 0,
-      },
-      {
-        q: "'Dağ gibi borcu var.' cümlesindeki söz sanatı nedir?",
-        a: ["Kişileştirme", "Benzetme", "Konuşturma", "Zıtlık"],
-        c: 1,
-      },
-      {
-        q: "Hangisi bir 'atasözü'dür?",
-        a: [
-          "Gözden düşmek",
-          "Ayağını yorganına göre uzat",
-          "Kulak misafiri olmak",
-          "Etekleri zil çalmak",
-        ],
-        c: 1,
-      },
-      {
-        q: "'Etekleri zil çalmak' deyiminin anlamı nedir?",
-        a: ["Çok üzülmek", "Çok sevinmek", "Çok sinirlenmek", "Çok acıkmak"],
-        c: 1,
-      },
-      {
-        q: "Aşağıdakilerden hangisi bir 'fiil'dir?",
-        a: ["Kalem", "Masa", "Yürü-", "Güzel"],
-        c: 2,
-      },
-      {
-        q: "Hangisi bir 'isim'dir?",
-        a: ["Koş-", "Bak-", "Çiçek", "Sev-"],
-        c: 2,
-      },
-      {
-        q: "Hangisi bir 'kişi zamiri'dir?",
-        a: ["O", "Şu", "Bu", "Hangi"],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'belgisiz zamir'dir?",
-        a: ["Hepsi", "Ben", "Kim", "Öteki"],
-        c: 0,
-      },
-      {
-        q: "'Okul' sözcüğünün kökü nedir?",
-        a: ["Ok", "Oku-", "Okul", "O"],
-        c: 1,
-      },
-      {
-        q: "'Sevgi' sözcüğündeki ek nedir?",
-        a: ["Çekim eki", "Yapım eki", "İyelik eki", "Hal eki"],
-        c: 1,
-      },
-      {
-        q: "Hangisi 'yönelme hal eki'dir?",
-        a: ["-de", "-e", "-i", "-den"],
-        c: 1,
-      },
-      {
-        q: "Hangisi 'ayrılma hal eki'dir?",
-        a: ["-i", "-e", "-de", "-den"],
-        c: 3,
-      },
-      {
-        q: "Aşağıdakilerden hangisi birleşik fiildir?",
-        a: ["Sevebilir", "Yürüdü", "Bakıyor", "Gelecek"],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'deyim'dir?",
-        a: [
-          "Balık baştan kokar",
-          "Göze girmek",
-          "Damlaya damlaya göl olur",
-          "Sakla samanı gelir zamanı",
-        ],
-        c: 1,
-      },
-      {
-        q: "Hangisi 'eş' anlamlıdır?",
-        a: ["Cevap-Yanıt", "Soru-Sorun", "Ak-Kara", "Dolu-Boş"],
-        c: 0,
-      },
-      {
-        q: "Aşağıdaki cümlelerden hangisi 'amaç-sonuç' cümlesidir?",
-        a: [
-          "Sınavı kazanmak için çok çalışıyor",
-          "Yağmur yağınca ıslandık",
-          "Dışarı çıkarsan üşürsün",
-          "Geç kaldığı için özür diledi",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'tanımlama' cümlesidir?",
-        a: [
-          "Kitap, en iyi dosttur",
-          "Bugün hava çok güzel",
-          "Yarın okul yok",
-          "Sinemaya gidelim mi?",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'olasılık' cümlesidir?",
-        a: [
-          "Yarın kar yağabilir",
-          "Ders çalışmalısın",
-          "Hemen gel!",
-          "Neden gitmedin?",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'abartma' cümlesidir?",
-        a: [
-          "Dünya kadar ödevim var",
-          "Biraz ders çalıştım",
-          "Sınava girdim",
-          "Okula gittim",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi bir 'hayal ürünü' ifadedir?",
-        a: [
-          "Ay dede bize gülümsedi",
-          "Kar yağıyor",
-          "Kuşlar uçuyor",
-          "Çiçekler açtı",
-        ],
-        c: 0,
-      },
-      {
-        q: "Aşağıdakilerin hangisinde yazım yanlışı vardır?",
-        a: ["T.B.M.M.", "Herkez", "Birtakım", "Hiçbir"],
-        c: 1,
-      },
-      {
-        q: "Hangisi 'ki'nin yazımıyla ilgili bir yanlıştır?",
-        a: [
-          "Baktımki gelmiyor",
-          "Sendeki kalem",
-          "Duydum ki",
-          "Okuldaki çocuklar",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi soru eki 'mi'nin yazımıyla ilgili bir yanlıştır?",
-        a: ["Gelecekmi?", "Geldin mi?", "Okur musun?", "Güzel mi?"],
-        c: 0,
-      },
-      {
-        q: "Hangisi 'nokta'nın görevlerinden biri değildir?",
-        a: [
-          "Cümle sonuna konur",
-          "Sıra bildiren sayılardan sonra konur",
-          "Soru sormak için konur",
-          "Kısaltmalarda konur",
-        ],
-        c: 2,
-      },
-      {
-        q: "Ünlem işareti (!) nerede kullanılır?",
-        a: [
-          "Korku, sevinç, şaşkınlık anında",
-          "Soru sorarken",
-          "Cümle sonunda",
-          "Eş görevli kelimeleri ayırırken",
-        ],
-        c: 0,
-      },
-      {
-        q: "Kesme işareti ( ' ) nerede kullanılır?",
-        a: [
-          "Özel isimlere gelen ekleri ayırmada",
-          "Cümle sonunda",
-          "Soru sorarken",
-          "Sıfatları ayırmada",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangisi 'paragraf'ın ana düşüncesini belirtir?",
-        a: [
-          "Yazarın okuyucuya vermek istediği mesaj",
-          "Paragrafın konusu",
-          "Paragrafın başlığı",
-          "Paragrafın uzunluğu",
-        ],
-        c: 0,
-      },
-      {
-        q: "'Göz' kökünden türetilmiş 'gözlemci' sözcüğü kaç tane yapım eki almıştır?",
+        q: "'Gidecekmiş' fiilinde kaç tane ek vardır?",
         a: ["1", "2", "3", "4"],
         c: 1,
       },
       {
-        q: "Aşağıdaki cümlelerin hangisinde amaç-sonuç ilişkisi vardır?",
-        a: [
-          "Seni görmek için geldim",
-          "Çok yoruldum",
-          "Dün akşam bize uğradı",
-          "Hava çok soğuk",
-        ],
+        q: "'Koş!' cümlesi hangi kiptedir?",
+        a: ["Emir kipi", "İstek kipi", "Şart kipi", "Gereklilik kipi"],
         c: 0,
       },
       {
-        q: "'Kalem' sözcüğü hangisinde belirtme hali eki almıştır?",
-        a: [
-          "Kalemi masada bırakmış",
-          "Kalemde mürekkep az",
-          "Kalemden ses geliyor",
-          "Kaleme bakıyordu",
-        ],
+        q: "'Keşke gelseydi.' cümlesinde kaç fiil vardır?",
+        a: ["1", "2", "3", "Fiil yok"],
         c: 0,
       },
       {
-        q: "Hangisi bir topluluk ismidir?",
-        a: ["Masalar", "Ordu", "Şehirler", "Öğrenciler"],
-        c: 1,
+        q: "'Yazmalıyım' fiilinde hangi ek vardır?",
+        a: ["Gereklilik", "İstek", "Şart", "Emir"],
+        c: 0,
       },
       {
-        q: "Atasözlerinden hangisi 'tasarruf' ile ilgilidir?",
-        a: [
-          "Ak akçe kara gün içindir",
-          "Damlaya damlaya göl olur",
-          "Her ikisi de",
-          "Hiçbiri",
-        ],
+        q: "'Okursam' fiili hangi kiptedir?",
+        a: ["Emir", "İstek", "Şart", "Gereklilik"],
         c: 2,
       },
       {
-        q: "'Korku' kelimesinin kökü nedir?",
-        a: ["Kor", "Kork", "Korku", "Korkunç"],
+        q: "'Gidelim' fiili hangi kiptedir?",
+        a: ["Emir", "İstek", "Şart", "Gereklilik"],
         c: 1,
       },
       {
-        q: "Aşağıdaki tamlamalardan hangisi bir sıfat tamlamasıdır?",
-        a: ["Okul kapısı", "Kırmızı çanta", "Annenin çantası", "Sınıf camı"],
+        q: "Fiillerin çekiminde değişmeyen kısma ne denir?",
+        a: ["Ek", "Kök", "Hece", "Zaman"],
         c: 1,
-      },
-      {
-        q: "Hangisinde ünlem işareti doğru kullanılmıştır?",
-        a: [
-          "Eyvah, süt taştı!",
-          "Nereye gidiyorsun!",
-          "Bugün hava güzel!",
-          "Kitap okudum!",
-        ],
-        c: 0,
-      },
-      {
-        q: "Hangi kelime büyük ünlü uyumuna uymaz?",
-        a: ["Kitap", "Kalem", "Tiyatro", "Hepsi"],
-        c: 3,
-      },
-      {
-        q: "Sözlükte en sonda hangisi bulunur?",
-        a: ["Zarf", "Zaman", "Zahit", "Zebra"],
-        c: 3,
-      },
-      {
-        q: "'Yaz-' fiili hangisinde farklı bir anlamda kullanılmıştır?",
-        a: [
-          "Deftere yazı yazdı",
-          "Bu yaz tatile gideceğiz",
-          "Mektup yazdı",
-          "Şiir yazıyor",
-        ],
-        c: 1,
-      },
-      {
-        q: "'Küçük' kelimesinin zıt anlamlısı nedir?",
-        a: ["Ufak", "Minik", "Büyük", "İri"],
-        c: 2,
-      },
-      {
-        q: "'Mecbur' kelimesinin eş anlamlısı nedir?",
-        a: ["Zorunlu", "İstekli", "Özgür", "Gönüllü"],
-        c: 0,
-      },
-      {
-        q: "Deyimlerden hangisi 'çok sevinmek' anlamındadır?",
-        a: [
-          "Etekleri zil çalmak",
-          "Gözden düşmek",
-          "Kulak asmamak",
-          "Burnu havada olmak",
-        ],
-        c: 0,
-      },
-      {
-        q: "'Okul' sözcüğündeki 'okul' kelimesi basit mi türemiş mi?",
-        a: ["Basit", "Türemiş", "Birleşik", "Yabancı"],
-        c: 1,
-      },
-      {
-        q: "'Kitapçı' kelimesindeki yapım eki hangisidir?",
-        a: ["-çı", "-ap", "-kitap", "-ki"],
-        c: 0,
-      },
-      {
-        q: "'Sev-' köküne hangi ek gelirse isim olur?",
-        a: ["-gi", "-di", "-iyor", "-ecek"],
-        c: 0,
-      },
-      {
-        q: "'Yolculuk' kelimesi kaç hecelidir?",
-        a: ["2", "3", "4", "1"],
-        c: 1,
-      },
-      { q: "Alfabemizde kaç harf vardır?", a: ["28", "29", "30", "27"], c: 1 },
-      {
-        q: "Kaç tane ünlü (sesli) harf vardır?",
-        a: ["7", "8", "9", "10"],
-        c: 1,
-      },
-      {
-        q: "Kalın ünlüler hangileridir?",
-        a: ["a,ı,o,u", "e,i,ö,ü", "a,e,i,o", "u,ü,o,ö"],
-        c: 0,
-      },
-      {
-        q: "İnce ünlüler hangileridir?",
-        a: ["a,ı,o,u", "e,i,ö,ü", "a,b,c,d", "k,l,m,n"],
-        c: 1,
-      },
-      {
-        q: "Hangi kelime hecelerine yanlış ayrılmıştır?",
-        a: ["A-ra-ba", "Ki-tap-lık", "O-ku-l-ar", "Ka-lem-lik"],
-        c: 2,
-      },
-      {
-        q: "Özel isimler her zaman ... harfle başlar.",
-        a: ["Küçük", "Büyük", "Eğik", "Kalın"],
-        c: 1,
-      },
-      {
-        q: "Cümlenin ilk harfi her zaman ... harfle başlar.",
-        a: ["Büyük", "Küçük", "Renkli", "Süslü"],
-        c: 0,
-      },
-      {
-        q: "Hangi cümlede yazım yanlışı yoktur?",
-        a: [
-          "Ayşeyi gördüm",
-          "İzmir'e gittim",
-          "her sabah koşarım",
-          "Tren'e bindik",
-        ],
-        c: 1,
-      },
-      {
-        q: "Kesme işareti hangi ekleri ayırır?",
-        a: [
-          "Özel isme gelen",
-          "Cins isme gelen",
-          "Fiile gelen",
-          "Sıfata gelen",
-        ],
-        c: 0,
-      },
-      {
-        q: "Satır sonuna sığmayan sözcükler ne ile bölünür?",
-        a: ["Nokta", "Virgül", "Kısa çizgi", "Ünlem"],
-        c: 2,
-      },
-      {
-        q: "Bitmiş cümlelerin sonuna ne konur?",
-        a: ["?", "!", ".", ","],
-        c: 2,
-      },
-      {
-        q: "Soru cümlelerinin sonuna ne konur?",
-        a: ["!", "?", ".", ":"],
-        c: 1,
-      },
-      {
-        q: "Şaşırma anında hangi işaret kullanılır?",
-        a: ["!", "?", ".", ";"],
-        c: 0,
-      },
-      {
-        q: "Sözlük sıralamasında 'Elma' mı önce gelir 'Erik' mi?",
-        a: ["Elma", "Erik", "Aynı", "Bilinmez"],
-        c: 0,
-      },
-      {
-        q: "'Başak' mı önce gelir 'Baston' mu?",
-        a: ["Başak", "Baston", "Baston önce", "Eşit"],
-        c: 0,
-      },
-      {
-        q: "Kök nedir?",
-        a: [
-          "Anlamlı en küçük parça",
-          "Kelimenin sonu",
-          "Sadece fiil",
-          "Sadece isim",
-        ],
-        c: 0,
-      },
-      {
-        q: "'Gözlük' kelimesinin kökü nedir?",
-        a: ["Gözlük", "Göz", "Gözle", "Gör-"],
-        c: 1,
-      },
-      {
-        q: "'Durak' kelimesinin kökü nedir?",
-        a: ["Dur-", "Durak", "Dura", "Duru"],
-        c: 0,
-      },
-      {
-        q: "Yapım eki kelimenin ... değiştirir.",
-        a: ["Rengini", "Anlamını", "Okunuşunu", "Harf sayısını"],
-        c: 1,
-      },
-      {
-        q: "Çekim eki kelimenin ... değiştirmez.",
-        a: ["Anlamını", "Şeklini", "Yerini", "Sırasını"],
-        c: 0,
-      },
-      {
-        q: "'-ler, -lar' eki nedir?",
-        a: ["Çoğul eki", "Soru eki", "Yapım eki", "İyelik eki"],
-        c: 0,
-      },
-      {
-        q: "'Defterim' kelimesindeki '-im' eki nedir?",
-        a: ["Çoğul", "İyelik", "Soru", "Hal"],
-        c: 1,
-      },
-      {
-        q: "Hangisi belirtisiz isim tamlamasıdır?",
-        a: ["Kapı kolu", "Kapının kolu", "Mavi kapı", "Demir kapı"],
-        c: 0,
-      },
-      {
-        q: "Hangisi belirtili isim tamlamasıdır?",
-        a: ["Okul çantası", "Okulun çantası", "Yeni çanta", "Bez çanta"],
-        c: 1,
-      },
-      {
-        q: "Zamirler neyin yerini tutar?",
-        a: ["Fiilin", "İsmin", "Sıfatın", "Zarfın"],
-        c: 1,
-      },
-      {
-        q: "'Bu' kelimesi hangisinde zamirdir?",
-        a: ["Bu kitabı al", "Bu benimdir", "Bu ev büyük", "Bu yol uzun"],
-        c: 1,
-      },
-      {
-        q: "'Kırmızı' kelimesi hangisinde sıfattır?",
-        a: [
-          "Kırmızı kalem",
-          "Kırmızıyı sev",
-          "En güzeli kırmızı",
-          "Kırmızıdır o",
-        ],
-        c: 0,
-      },
-      {
-        q: "Somut isim hangisidir?",
-        a: ["Sevgi", "Masa", "Korku", "Mutluluk"],
-        c: 1,
-      },
-      { q: "Soyut isim hangisidir?", a: ["Taş", "Su", "Saygı", "Hava"], c: 2 },
-      {
-        q: "Terim anlam hangisidir?",
-        a: ["Perde (Tiyatro)", "Perde (Pencere)", "Mecaz perde", "İnce perde"],
-        c: 0,
-      },
-      {
-        q: "Zıt anlamlısı 'Alt' olan kelime?",
-        a: ["Yan", "Üst", "Arka", "Ön"],
-        c: 1,
-      },
-      {
-        q: "Eş anlamlısı 'Güz' olan kelime?",
-        a: ["Bahar", "Yaz", "Sonbahar", "Kış"],
-        c: 2,
-      },
-      {
-        q: "İsim tamlamasında ilk kelimeye ne denir?",
-        a: ["Tamlayan", "Tamlanan", "Ek", "Kök"],
-        c: 0,
-      },
-    ],
-    ingilizce: [
-      {
-        q: "What time is it? (08:30)",
-        a: [
-          "It is eight o'clock",
-          "It is half past eight",
-          "It is quarter past eight",
-          "It is eight to half",
-        ],
-        c: 1,
-      },
-      {
-        q: "Which one is a 'yummy' breakfast food?",
-        a: ["Cloud", "Honey", "Pencil", "Rain"],
-        c: 1,
-      },
-      {
-        q: "I _____ breakfast every morning.",
-        a: ["do", "has", "have", "am"],
-        c: 2,
-      },
-      {
-        q: "A city is _____ than a village.",
-        a: ["noisy", "noisier", "more noisy", "noisiest"],
-        c: 1,
-      },
-      {
-        q: "Where can you buy bread?",
-        a: [
-          "At the bakery",
-          "At the library",
-          "At the hospital",
-          "At the school",
-        ],
-        c: 0,
-      },
-      {
-        q: "What does a 'teacher' do?",
-        a: ["He cooks", "He teaches", "He flies planes", "He helps animals"],
-        c: 1,
-      },
-      {
-        q: "How is the weather? (☀️)",
-        a: ["It is rainy", "It is snowy", "It is sunny", "It is stormy"],
-        c: 2,
-      },
-      {
-        q: "I feel _____ on rainy days. (😔)",
-        a: ["happy", "energetic", "sad", "surprised"],
-        c: 2,
-      },
-      {
-        q: "Where do you go to have fun and ride on a 'roller coaster'?",
-        a: ["Hospital", "Fair", "Bakery", "Bank"],
-        c: 1,
-      },
-      {
-        q: "Which one is 'slower' than a car?",
-        a: ["A plane", "A bicycle", "A rocket", "A train"],
-        c: 1,
-      },
-      {
-        q: "She _____ her homework in the evenings.",
-        a: ["do", "doing", "does", "done"],
-        c: 2,
-      },
-      {
-        q: "Which animal is 'taller' than a horse?",
-        a: ["A cat", "A giraffe", "A dog", "A mouse"],
-        c: 1,
-      },
-      {
-        q: "My mother is a nurse. She works at a _____.",
-        a: ["Post office", "Hospital", "Police station", "Farm"],
-        c: 1,
-      },
-      {
-        q: "_____ you like olives? - Yes, I do.",
-        a: ["Does", "Are", "Is", "Do"],
-        c: 3,
-      },
-      {
-        q: "What is 'kuyu' in English?",
-        a: ["Well", "River", "Lake", "Sea"],
-        c: 0,
       },
 
+      // ====== İSİMLER VE EKLER ======
       {
-        q: "What time is it? (03:15)",
+        q: "'Kitaplarımız' sözcüğünde kaç tane ek vardır?",
+        a: ["1", "2", "3", "4"],
+        c: 2,
+      },
+      {
+        q: "'Okulumuzdan' sözcüğünde kaç tane çekim eki vardır?",
+        a: ["1", "2", "3", "4"],
+        c: 2,
+      },
+      {
+        q: "'-lik, -lık' eki ne tür bir ektir?",
+        a: ["Çekim eki", "Yapım eki", "İyelik eki", "Hal eki"],
+        c: 1,
+      },
+      {
+        q: "'Karanlık' sözcüğünün kökü nedir?",
+        a: ["Kara", "Karanlık", "Karan", "Kara-"],
+        c: 0,
+      },
+      {
+        q: "'-sız, -siz' eki ne tür bir ektir?",
+        a: ["Çekim eki", "Yapım eki", "Çoğul eki", "Hal eki"],
+        c: 1,
+      },
+      {
+        q: "'Masada' sözcüğündeki '-da' eki nedir?",
+        a: ["Çoğul eki", "İyelik eki", "Bulunma hali eki", "Belirtme hali eki"],
+        c: 2,
+      },
+      {
+        q: "'Kapıyı' sözcüğündeki '-yı' eki nedir?",
+        a: ["Çoğul eki", "Belirtme hali eki", "İyelik eki", "Yönelme hali eki"],
+        c: 1,
+      },
+      {
+        q: "'Eve' sözcüğündeki '-e' eki nedir?",
+        a: ["Bulunma hali", "Yönelme hali", "Çıkma hali", "İlgi hali"],
+        c: 1,
+      },
+      {
+        q: "'Evden' sözcüğündeki '-den' eki nedir?",
+        a: ["Bulunma hali", "Yönelme hali", "Çıkma hali", "Belirtme hali"],
+        c: 2,
+      },
+      {
+        q: "'Annenin' sözcüğündeki '-in' eki nedir?",
+        a: ["İyelik eki", "İlgi hali eki", "Çoğul eki", "Hal eki"],
+        c: 1,
+      },
+
+      // ====== TAMLAMALAR ======
+      {
+        q: "'Demir kapı' tamlaması hangi türdendir?",
         a: [
-          "It is quarter past three",
-          "It is half past three",
-          "It is quarter to three",
-          "It is three o'clock",
+          "Belirtili isim tamlaması",
+          "Belirtisiz isim tamlaması",
+          "Sıfat tamlaması",
+          "İsim tamlaması değil",
+        ],
+        c: 1,
+      },
+      {
+        q: "'Okul müdürü' tamlaması hangi türdendir?",
+        a: [
+          "Belirtili isim tamlaması",
+          "Belirtisiz isim tamlaması",
+          "Sıfat tamlaması",
+          "Takısız tamlama",
+        ],
+        c: 1,
+      },
+      {
+        q: "'Annemin çantası' tamlaması hangi türdendir?",
+        a: [
+          "Belirtili isim tamlaması",
+          "Belirtisiz isim tamlaması",
+          "Sıfat tamlaması",
+          "Takısız tamlama",
         ],
         c: 0,
       },
       {
-        q: "What time is it? (09:45)",
+        q: "'Güzel çocuk' tamlaması hangi türdendir?",
         a: [
-          "It is quarter past nine",
-          "It is quarter to ten",
-          "It is half past ten",
-          "It is ten o'clock",
+          "Belirtili isim tamlaması",
+          "Belirtisiz isim tamlaması",
+          "Sıfat tamlaması",
+          "İsim tamlaması",
+        ],
+        c: 2,
+      },
+      {
+        q: "'Bahçe kapısı' tamlamasında tamlayan hangisidir?",
+        a: ["Bahçe", "Kapı", "Bahçe kapısı", "Kapısı"],
+        c: 0,
+      },
+      {
+        q: "'Elmanın suyu' tamlamasında tamlanan hangisidir?",
+        a: ["Elma", "Su", "Suyu", "Elmanın"],
+        c: 2,
+      },
+      {
+        q: "'Yeni araba' tamlamasında sıfat hangisidir?",
+        a: ["Yeni", "Araba", "Yeni araba", "İkisi de"],
+        c: 0,
+      },
+      {
+        q: "Belirtisiz isim tamlamasında tamlayan nasıl olur?",
+        a: ["İyelik eki alır", "Hal eki alır", "Ek almaz", "Çoğul eki alır"],
+        c: 2,
+      },
+      {
+        q: "Belirtili isim tamlamasında tamlayan hangi eki alır?",
+        a: ["İyelik eki", "İlgi hali eki", "Çoğul eki", "Hal eki"],
+        c: 1,
+      },
+      {
+        q: "'Türkiye Cumhuriyeti' tamlaması hangi türdendir?",
+        a: ["Belirtili", "Belirtisiz", "Sıfat", "Takısız"],
+        c: 3,
+      },
+
+      // ====== NOKTALAMA İŞARETLERİ ======
+      {
+        q: "Virgül hangi durumlarda kullanılır?",
+        a: [
+          "Cümle sonunda",
+          "Soru sormak için",
+          "Eş görevli kelimeleri ayırmak için",
+          "Ünlem anında",
+        ],
+        c: 2,
+      },
+      {
+        q: "İki nokta üst üste (:) ne zaman kullanılır?",
+        a: [
+          "Cümle sonunda",
+          "Açıklama yapmadan önce",
+          "Soru sormak için",
+          "Şaşırmak için",
         ],
         c: 1,
       },
       {
-        q: "He _____ up at 7 o'clock.",
-        a: ["get", "gets", "getting", "got"],
+        q: "Noktalı virgül (;) ne zaman kullanılır?",
+        a: [
+          "Cümle sonunda",
+          "Uzun cümlelerin öğelerini ayırmada",
+          "Soru cümlelerinde",
+          "Ünlem cümlelerinde",
+        ],
         c: 1,
       },
       {
-        q: "I _____ TV after school.",
+        q: 'Tırnak işareti ("") ne zaman kullanılır?',
+        a: [
+          "Cümle sonunda",
+          "Doğrudan aktarmalarda",
+          "Soru sormak için",
+          "Virgül yerine",
+        ],
+        c: 1,
+      },
+      {
+        q: "Üç nokta (...) ne zaman kullanılır?",
+        a: [
+          "Devam eden düşünceyi göstermek için",
+          "Soru sormak için",
+          "Ünlem için",
+          "Virgül yerine",
+        ],
+        c: 0,
+      },
+      {
+        q: "Tire (-) ne zaman kullanılır?",
+        a: [
+          "Cümle sonunda",
+          "Konuşmaları ayırmada",
+          "Soru sormak için",
+          "Ünlem için",
+        ],
+        c: 1,
+      },
+      {
+        q: "'Yarın, öbür gün, her zaman buradayım.' cümlesinde kaç virgül vardır?",
+        a: ["1", "2", "3", "4"],
+        c: 1,
+      },
+      {
+        q: "Kesme işareti hangi kelimelerde kullanılır?",
+        a: ["Tüm kelimelerde", "Özel isimlerde", "Fiillerde", "Sıfatlarda"],
+        c: 1,
+      },
+      {
+        q: "'Kitap, defter, kalem aldım.' cümlesinde kaç virgül vardır?",
+        a: ["1", "2", "3", "Virgül yok"],
+        c: 1,
+      },
+      {
+        q: "Soru işareti (?) hangi cümlelerde kullanılır?",
+        a: ["Haber cümlesi", "Emir cümlesi", "Soru cümlesi", "Ünlem cümlesi"],
+        c: 2,
+      },
+
+      // ====== PARAGRAF VE METİN ======
+      {
+        q: "Paragrafın en önemli cümlesi hangisidir?",
+        a: ["İlk cümle", "Son cümle", "Ana fikir cümlesi", "En uzun cümle"],
+        c: 2,
+      },
+      {
+        q: "Metnin konusunu nasıl buluruz?",
+        a: [
+          "İlk cümleye bakarak",
+          "Son cümleye bakarak",
+          "Metnin tamamını okuyarak",
+          "Başlığa bakarak",
+        ],
+        c: 2,
+      },
+      {
+        q: "Ana fikir nedir?",
+        a: [
+          "Metnin başlığı",
+          "Yazarın vermek istediği mesaj",
+          "Metnin ilk cümlesi",
+          "Metnin uzunluğu",
+        ],
+        c: 1,
+      },
+      {
+        q: "Yardımcı fikirler neyi destekler?",
+        a: ["Başlığı", "Ana fikri", "Yazarı", "Okuyucuyu"],
+        c: 1,
+      },
+      {
+        q: "Paragrafta kaç tane ana fikir olur?",
+        a: ["Birden fazla", "Sadece 1", "Hiç olmaz", "En az 3"],
+        c: 1,
+      },
+      {
+        q: "Metinde neden-sonuç ilişkisi nasıl gösterilir?",
+        a: ["Virgülle", "Bağlaçlarla", "Nokta ile", "Ünlemle"],
+        c: 1,
+      },
+      {
+        q: "'Çünkü' bağlacı hangi ilişkiyi gösterir?",
+        a: ["Amaç-sonuç", "Neden-sonuç", "Zaman", "Koşul"],
+        c: 1,
+      },
+      {
+        q: "'Bu nedenle' ifadesi hangi ilişkiyi gösterir?",
+        a: ["Neden", "Sonuç", "Koşul", "Zaman"],
+        c: 1,
+      },
+      {
+        q: "Metindeki olayların sırasını gösteren kelimeler hangileridir?",
+        a: [
+          "Çünkü, bu yüzden",
+          "Önce, sonra, ardından",
+          "Ama, fakat, ancak",
+          "Ve, ile, de",
+        ],
+        c: 1,
+      },
+      {
+        q: "Bir metnin ana fikri nerede olabilir?",
+        a: [
+          "Sadece başta",
+          "Sadece sonda",
+          "Başta, ortada veya sonda",
+          "Hiçbir yerde",
+        ],
+        c: 2,
+      },
+
+      // ====== YAZIM KURALLARI ======
+      {
+        q: "'Ki' bağlacı nasıl yazılır?",
+        a: ["Bitişik", "Ayrı", "Kesme işaretiyle", "Tire ile"],
+        c: 1,
+      },
+      {
+        q: "'De' bağlacı nasıl yazılır?",
+        a: ["Bitişik", "Ayrı", "Kesme işaretiyle", "Tire ile"],
+        c: 1,
+      },
+      {
+        q: "'mi' soru eki nasıl yazılır?",
+        a: ["Bitişik", "Ayrı", "Kesme işaretiyle", "Tire ile"],
+        c: 1,
+      },
+      {
+        q: "'Ankara'ya' kelimesinde kesme işareti neden var?",
+        a: ["Çünkü özel isim", "Çünkü soru eki", "Çünkü bağlaç", "Çünkü fiil"],
+        c: 0,
+      },
+      {
+        q: "Hangi kelime yanlış yazılmıştır?",
+        a: ["Herkes", "Hiçbir", "Birçok", "Herkez"],
+        c: 3,
+      },
+      {
+        q: "Sayılar yazıyla yazılırken nasıl yazılır?",
+        a: ["Bitişik", "Ayrı", "Tire ile", "Kesme ile"],
+        c: 0,
+      },
+      {
+        q: "'T.C.' kısaltması neyi ifade eder?",
+        a: [
+          "Türk Cumhuriyeti",
+          "Türkiye Cumhuriyeti",
+          "Türk Çocuğu",
+          "Tarih Cumhuriyeti",
+        ],
+        c: 1,
+      },
+      {
+        q: "Cümle hangi harfle başlar?",
+        a: ["Küçük", "Büyük", "İtalik", "Kalın"],
+        c: 1,
+      },
+      {
+        q: "Özel isimler hangi harfle başlar?",
+        a: ["Küçük", "Büyük", "Eğik", "Renkli"],
+        c: 1,
+      },
+      {
+        q: "'Sendeki' kelimesinde 'de' nasıl yazılır?",
+        a: ["Ayrı", "Bitişik", "Kesme ile", "Tire ile"],
+        c: 1,
+      },
+
+      // ====== SÖZ SANATLARI ======
+      {
+        q: "'Güneş gibi parlak' cümlesinde hangi söz sanatı vardır?",
+        a: ["Benzetme", "Kişileştirme", "Abartma", "Konuşturma"],
+        c: 0,
+      },
+      {
+        q: "'Ağaçlar fısıldıyor' cümlesinde hangi söz sanatı vardır?",
+        a: ["Benzetme", "Kişileştirme", "Abartma", "Konuşturma"],
+        c: 1,
+      },
+      {
+        q: "'Saçları ak kar' ifadesinde hangi söz sanatı vardır?",
+        a: ["Benzetme", "Kişileştirme", "Abartma", "Karşıtlık"],
+        c: 0,
+      },
+      {
+        q: "'Dünya kadar ödevim var' cümlesinde hangi söz sanatı vardır?",
+        a: ["Benzetme", "Kişileştirme", "Abartma", "Konuşturma"],
+        c: 2,
+      },
+      {
+        q: "Benzetme yapılırken kullanılan kelimeler hangileridir?",
+        a: ["Ve, ile", "Gibi, kadar", "Ama, fakat", "Çünkü, bu yüzden"],
+        c: 1,
+      },
+      {
+        q: "'Çiçekler konuşuyor' cümlesinde hangi söz sanatı vardır?",
+        a: ["Benzetme", "Kişileştirme", "Abartma", "Konuşturma"],
+        c: 3,
+      },
+      {
+        q: "'Güneş battı, ay doğdu' cümlesinde hangi ilişki vardır?",
+        a: ["Benzetme", "Zıtlık", "Abartma", "Neden-sonuç"],
+        c: 1,
+      },
+      {
+        q: "Kişileştirme nedir?",
+        a: [
+          "İnsana özgü özelliklerin cansızlara verilmesi",
+          "Karşılaştırma yapmak",
+          "Abartma yapmak",
+          "Soru sormak",
+        ],
+        c: 0,
+      },
+      {
+        q: "'Kuş kadar yedim' ifadesinde hangi söz sanatı vardır?",
+        a: ["Abartma", "Benzetme", "Kişileştirme", "Konuşturma"],
+        c: 1,
+      },
+      {
+        q: "'Bulutlar ağlıyor' cümlesinde hangi söz sanatı vardır?",
+        a: ["Benzetme", "Kişileştirme", "Abartma", "Konuşturma"],
+        c: 1,
+      },
+      // ====== EDEBÎ TÜRLER VE GENEL TEKRAR ======
+      {
+        q: "Olağanüstü olayların anlatıldığı, yer ve zamanın belli olmadığı tür hangisidir?",
+        a: ["Hikaye", "Roman", "Masal", "Deneme"],
+        c: 2,
+      },
+      {
+        q: "Hayvanların konuşturulduğu ve sonunda ders verme amacı güden türe ne denir?",
+        a: ["Masal", "Fabl", "Destan", "Anı"],
+        c: 1,
+      },
+      {
+        q: "Bir kişinin kendi hayatını anlattığı yazı türüne ne denir?",
+        a: ["Biyografi", "Otobiyografi", "Günlük", "Gezi Yazısı"],
+        c: 1,
+      },
+      {
+        q: "Gezilen yerlerin anlatıldığı yazı türüne ne denir?",
+        a: ["Gezi Yazısı", "Anı", "Mektup", "Haber"],
+        c: 0,
+      },
+      {
+        q: "Dizelerin sonlarındaki ses benzerliğine ne denir?",
+        a: ["Kafiye (Uyak)", "Redif", "Ölçü", "Tema"],
+        c: 0,
+      },
+      {
+        q: "Şiir yazan kişiye ne denir?",
+        a: ["Yazar", "Ressam", "Şair", "Besteci"],
+        c: 2,
+      },
+      {
+        q: "Bir duyguyu veya düşünceyi coşkulu bir dille anlatan tür hangisidir?",
+        a: ["Makale", "Tiyatro", "Şiir", "Eleştiri"],
+        c: 2,
+      },
+      {
+        q: "Sahnede oynanmak üzere yazılan eserlere ne denir?",
+        a: ["Roman", "Hikaye", "Tiyatro", "Röportaj"],
+        c: 2,
+      },
+      {
+        q: "Deyimler ve atasözleri dilimizin hangi zenginliğini gösterir?",
+        a: [
+          "Kısalığını",
+          "Mecaz ve anlam derinliğini",
+          "Zorluğunu",
+          "Eskiliğini",
+        ],
+        c: 1,
+      },
+      {
+        q: "Bir metnin ilk cümlesi genellikle ne cümlesidir?",
+        a: ["Sonuç", "Giriş", "Gelişme", "Özet"],
+        c: 1,
+      },
+    ],
+
+    ingilizce: [
+      // ====== PRESENT SIMPLE (Geniş Zaman) ======
+      {
+        q: "I _____ to school every day.",
+        a: ["go", "goes", "going", "went"],
+        c: 0,
+      },
+      {
+        q: "She _____ her homework after dinner.",
+        a: ["do", "does", "doing", "did"],
+        c: 1,
+      },
+      {
+        q: "They _____ football on Sundays.",
+        a: ["play", "plays", "playing", "played"],
+        c: 0,
+      },
+      {
+        q: "My father _____ work at 8 o'clock.",
+        a: ["start", "starts", "starting", "started"],
+        c: 1,
+      },
+      {
+        q: "_____ you like pizza?",
+        a: ["Do", "Does", "Are", "Is"],
+        c: 0,
+      },
+      {
+        q: "_____ she speak English?",
+        a: ["Do", "Does", "Is", "Are"],
+        c: 1,
+      },
+      {
+        q: "We _____ TV in the evenings.",
         a: ["watch", "watches", "watching", "watched"],
         c: 0,
       },
       {
-        q: "She _____ to school by bus.",
-        a: ["go", "goes", "going", "gone"],
+        q: "He _____ milk every morning.",
+        a: ["drink", "drinks", "drinking", "drank"],
         c: 1,
       },
       {
-        q: "We _____ football on Sundays.",
-        a: ["plays", "play", "playing", "played"],
+        q: "I _____ like vegetables.",
+        a: ["doesn't", "don't", "isn't", "aren't"],
         c: 1,
       },
       {
-        q: "He is _____ late.",
-        a: ["always", "sometimes", "never", "usually"],
+        q: "She _____ live in Istanbul.",
+        a: ["doesn't", "don't", "isn't", "aren't"],
+        c: 0,
+      },
+
+      // ====== PRESENT CONTINUOUS (Şimdiki Zaman) ======
+      {
+        q: "I _____ my homework now.",
+        a: ["do", "doing", "am doing", "does"],
         c: 2,
       },
       {
-        q: "I _____ go to bed at 10 p.m. every day.",
-        a: ["always", "never", "sometimes", "hardly"],
+        q: "She _____ a book at the moment.",
+        a: ["read", "reads", "reading", "is reading"],
+        c: 3,
+      },
+      {
+        q: "They _____ football now.",
+        a: ["play", "plays", "are playing", "is playing"],
+        c: 2,
+      },
+      {
+        q: "_____ you listening to music?",
+        a: ["Do", "Does", "Are", "Is"],
+        c: 2,
+      },
+      {
+        q: "My mother _____ dinner right now.",
+        a: ["cook", "cooks", "cooking", "is cooking"],
+        c: 3,
+      },
+      {
+        q: "We _____ TV at the moment.",
+        a: ["watch", "watches", "watching", "are watching"],
+        c: 3,
+      },
+      {
+        q: "He _____ to school now.",
+        a: ["go", "goes", "going", "is going"],
+        c: 3,
+      },
+      {
+        q: "_____ she doing her homework?",
+        a: ["Do", "Does", "Is", "Are"],
+        c: 2,
+      },
+      {
+        q: "I _____ playing games now.",
+        a: ["am not", "isn't", "aren't", "don't"],
         c: 0,
       },
       {
-        q: "My brother _____ his teeth twice a day.",
-        a: ["brush", "brushes", "brushing", "brushed"],
+        q: "They _____ sleeping. They are studying.",
+        a: ["am not", "isn't", "aren't", "don't"],
+        c: 2,
+      },
+
+      // ====== PAST SIMPLE (Geçmiş Zaman) ======
+      {
+        q: "I _____ to the cinema yesterday.",
+        a: ["go", "goes", "went", "going"],
+        c: 2,
+      },
+      {
+        q: "She _____ a book last night.",
+        a: ["read", "reads", "readed", "reading"],
+        c: 0,
+      },
+      {
+        q: "They _____ football last Sunday.",
+        a: ["play", "plays", "played", "playing"],
+        c: 2,
+      },
+      {
+        q: "_____ you see the movie?",
+        a: ["Do", "Does", "Did", "Are"],
+        c: 2,
+      },
+      {
+        q: "We _____ pizza for dinner last night.",
+        a: ["eat", "eats", "ate", "eating"],
+        c: 2,
+      },
+      {
+        q: "He _____ his homework yesterday.",
+        a: ["do", "does", "did", "doing"],
+        c: 2,
+      },
+      {
+        q: "My parents _____ to Ankara last year.",
+        a: ["go", "goes", "went", "going"],
+        c: 2,
+      },
+      {
+        q: "I _____ like the movie.",
+        a: ["doesn't", "don't", "didn't", "wasn't"],
+        c: 2,
+      },
+      {
+        q: "She _____ come to school yesterday.",
+        a: ["doesn't", "don't", "didn't", "wasn't"],
+        c: 2,
+      },
+      {
+        q: "_____ they visit their grandparents last weekend?",
+        a: ["Do", "Does", "Did", "Are"],
+        c: 2,
+      },
+
+      // ====== COMPARATIVES (Karşılaştırma Sıfatları) ======
+      {
+        q: "An elephant is _____ than a mouse.",
+        a: ["big", "bigger", "biggest", "more big"],
         c: 1,
       },
       {
-        q: "Which one is a hobby?",
+        q: "My car is _____ than yours.",
+        a: ["fast", "faster", "fastest", "more fast"],
+        c: 1,
+      },
+      {
+        q: "This book is _____ than that one.",
         a: [
-          "Reading books",
-          "Running late",
-          "Driving a bus",
-          "Sleeping in class",
+          "interesting",
+          "more interesting",
+          "most interesting",
+          "interestinger",
         ],
-        c: 0,
+        c: 1,
       },
       {
-        q: "I like _____ to music.",
-        a: ["listen", "listens", "listening", "listened"],
-        c: 2,
+        q: "Summer is _____ than winter.",
+        a: ["hot", "hotter", "hottest", "more hot"],
+        c: 1,
       },
       {
-        q: "In the morning, I _____ my face.",
-        a: ["wash", "washes", "washing", "washed"],
-        c: 0,
+        q: "Gold is _____ than silver.",
+        a: ["expensive", "more expensive", "most expensive", "expensiver"],
+        c: 1,
       },
       {
-        q: "Where do you live?",
-        a: ["In a city", "In a sandwich", "In a pencil", "In a rain"],
-        c: 0,
+        q: "This test is _____ than the last one.",
+        a: ["easy", "easier", "easiest", "more easy"],
+        c: 1,
       },
       {
-        q: "Which one is a daily activity?",
-        a: ["Do homework", "Ride a camel", "Climb a mountain", "Fly a rocket"],
-        c: 0,
+        q: "Lions are _____ than cats.",
+        a: ["dangerous", "more dangerous", "most dangerous", "dangerouser"],
+        c: 1,
       },
       {
-        q: "What is the opposite of 'early'?",
-        a: ["Late", "Fast", "Quiet", "Tall"],
-        c: 0,
+        q: "My house is _____ than his house.",
+        a: ["large", "larger", "largest", "more large"],
+        c: 1,
+      },
+      {
+        q: "She is _____ than her sister.",
+        a: ["tall", "taller", "tallest", "more tall"],
+        c: 1,
+      },
+      {
+        q: "This movie is _____ than that movie.",
+        a: ["good", "better", "best", "gooder"],
+        c: 1,
       },
 
+      // ====== SUPERLATIVES (Üstünlük Sıfatları) ======
       {
-        q: "Milk is a _____.",
-        a: ["drink", "place", "job", "animal"],
-        c: 0,
-      },
-      {
-        q: "Which one is countable?",
-        a: ["Bread", "Cheese", "An egg", "Butter"],
+        q: "Mount Everest is the _____ mountain in the world.",
+        a: ["high", "higher", "highest", "more high"],
         c: 2,
       },
       {
-        q: "Which one is uncountable?",
-        a: ["Apple", "Sandwich", "Bread", "Tomato"],
+        q: "This is the _____ book I have ever read.",
+        a: [
+          "interesting",
+          "more interesting",
+          "most interesting",
+          "interestingest",
+        ],
         c: 2,
       },
       {
-        q: "How many _____ are there? - Two.",
-        a: ["milk", "apples", "bread", "cheese"],
-        c: 1,
-      },
-      {
-        q: "How much _____ do you need? - A little.",
-        a: ["eggs", "apples", "cheese", "sandwiches"],
+        q: "She is the _____ student in the class.",
+        a: ["smart", "smarter", "smartest", "more smart"],
         c: 2,
       },
       {
-        q: "There is _____ butter on the table.",
-        a: ["some", "any", "a", "an"],
-        c: 0,
-      },
-      {
-        q: "There aren't _____ tomatoes in the fridge.",
-        a: ["some", "any", "much", "a"],
-        c: 1,
-      },
-      {
-        q: "I would like _____ orange juice.",
-        a: ["some", "any", "many", "a"],
-        c: 0,
-      },
-      {
-        q: "Do you like _____?",
-        a: ["potato", "potatoes", "a potatoes", "potatos"],
-        c: 1,
-      },
-      {
-        q: "Which one is a breakfast utensil?",
-        a: ["Spoon", "Cloud", "Street", "Garden"],
-        c: 0,
-      },
-      {
-        q: "What is 'peynir' in English?",
-        a: ["Cheese", "Chicken", "Cherry", "Chips"],
-        c: 0,
-      },
-      {
-        q: "What is 'zeytin' in English?",
-        a: ["Onion", "Olives", "Orange", "Oil"],
-        c: 1,
-      },
-      {
-        q: "Let's make a sandwich. First, _____ the bread.",
-        a: ["slice", "sleep", "swim", "sit"],
-        c: 0,
-      },
-      {
-        q: "I don't like carrots. I _____ eat them.",
-        a: ["don't", "doesn't", "isn't", "aren't"],
-        c: 0,
-      },
-      {
-        q: "My favorite breakfast is _____.",
-        a: ["scrambled eggs", "a hospital", "a library", "a bicycle"],
-        c: 0,
-      },
-      {
-        q: "We need _____ eggs for the cake.",
-        a: ["some", "any", "much", "a"],
-        c: 0,
-      },
-      {
-        q: "Is there _____ milk?",
-        a: ["some", "any", "many", "a"],
-        c: 1,
-      },
-      {
-        q: "Do you prefer tea _____ coffee?",
-        a: ["and", "but", "or", "because"],
+        q: "The cheetah is the _____ animal.",
+        a: ["fast", "faster", "fastest", "more fast"],
         c: 2,
       },
       {
-        q: "Yummy means _____.",
-        a: ["delicious", "dangerous", "difficult", "dirty"],
-        c: 0,
+        q: "This is the _____ day of my life.",
+        a: ["happy", "happier", "happiest", "more happy"],
+        c: 2,
       },
       {
-        q: "There _____ some milk in the fridge.",
-        a: ["is", "are", "am", "be"],
-        c: 0,
+        q: "Gold is the _____ expensive metal.",
+        a: ["more", "most", "much", "many"],
+        c: 1,
+      },
+      {
+        q: "January is the _____ month of the year.",
+        a: ["cold", "colder", "coldest", "more cold"],
+        c: 2,
+      },
+      {
+        q: "He is the _____ player in the team.",
+        a: ["good", "better", "best", "gooder"],
+        c: 2,
+      },
+      {
+        q: "This is the _____ pizza in town.",
+        a: ["delicious", "more delicious", "most delicious", "deliciouser"],
+        c: 2,
+      },
+      {
+        q: "She is the _____ person I know.",
+        a: ["kind", "kinder", "kindest", "more kind"],
+        c: 2,
       },
 
+      // ====== PREPOSITIONS (Edatlar) ======
       {
-        q: "Where can you buy medicine?",
-        a: ["Pharmacy", "Bakery", "Museum", "Playground"],
+        q: "The cat is _____ the table.",
+        a: ["on", "in", "at", "by"],
         c: 0,
       },
       {
-        q: "Where can you borrow a book?",
-        a: ["Library", "Hospital", "Bank", "Restaurant"],
+        q: "We live _____ Istanbul.",
+        a: ["on", "in", "at", "by"],
+        c: 1,
+      },
+      {
+        q: "The meeting is _____ 3 o'clock.",
+        a: ["on", "in", "at", "by"],
+        c: 2,
+      },
+      {
+        q: "My birthday is _____ May.",
+        a: ["on", "in", "at", "by"],
+        c: 1,
+      },
+      {
+        q: "The book is _____ the shelf.",
+        a: ["on", "in", "at", "under"],
         c: 0,
       },
       {
-        q: "Turn _____ at the traffic lights.",
-        a: ["left", "sleep", "hungry", "yummy"],
-        c: 0,
+        q: "She is _____ home.",
+        a: ["on", "in", "at", "by"],
+        c: 2,
       },
       {
-        q: "Go _____ and then turn right.",
-        a: ["straight", "sweet", "slow", "small"],
+        q: "The dog is hiding _____ the bed.",
+        a: ["on", "in", "at", "under"],
+        c: 3,
+      },
+      {
+        q: "We go to school _____ bus.",
+        a: ["on", "in", "at", "by"],
+        c: 3,
+      },
+      {
+        q: "There is a picture _____ the wall.",
+        a: ["on", "in", "at", "under"],
         c: 0,
       },
       {
         q: "The bank is _____ the post office.",
-        a: ["next to", "under", "inside", "behind of"],
-        c: 0,
-      },
-      {
-        q: "The park is _____ the cinema.",
-        a: ["in front of", "yesterday", "delicious", "sleepy"],
-        c: 0,
-      },
-      {
-        q: "The café is _____ the street.",
-        a: ["on", "at", "in", "from"],
-        c: 0,
-      },
-      {
-        q: "There _____ two schools in my town.",
-        a: ["is", "are", "am", "be"],
-        c: 1,
-      },
-      {
-        q: "_____ there a hospital near here?",
-        a: ["Is", "Are", "Do", "Does"],
-        c: 0,
-      },
-      {
-        q: "How can I get to the museum?",
-        a: [
-          "Go straight and turn left",
-          "Eat breakfast and sleep",
-          "It is rainy and sad",
-          "Brush your teeth at 7",
-        ],
-        c: 0,
-      },
-      {
-        q: "Which one is a place in downtown?",
-        a: ["Bakery", "Season", "Emotion", "Breakfast"],
-        c: 0,
-      },
-      {
-        q: "I want to buy a ticket. I go to the _____.",
-        a: ["bus station", "kitchen", "bedroom", "classroom"],
-        c: 0,
-      },
-      {
-        q: "Excuse me, _____ is the bus stop?",
-        a: ["where", "what", "when", "who"],
-        c: 0,
-      },
-      {
-        q: "The supermarket is _____ the corner.",
-        a: ["on", "in", "at", "to"],
-        c: 0,
-      },
-      {
-        q: "Opposite means _____.",
-        a: ["across from", "next to", "behind", "between"],
-        c: 0,
-      },
-      {
-        q: "Between means _____.",
-        a: [
-          "in the middle of two places",
-          "on the left",
-          "in the morning",
-          "in the fridge",
-        ],
-        c: 0,
-      },
-      {
-        q: "The police officer works at the _____.",
-        a: ["police station", "post office", "bakery", "museum"],
-        c: 0,
-      },
-      {
-        q: "You can watch a movie at the _____.",
-        a: ["cinema", "pharmacy", "farm", "classroom"],
-        c: 0,
-      },
-      {
-        q: "I need to send a letter. I go to the _____.",
-        a: ["post office", "zoo", "pool", "forest"],
-        c: 0,
-      },
-      {
-        q: "Let's meet _____ the park gate.",
-        a: ["at", "on", "in", "from"],
+        a: ["next to", "on", "in", "under"],
         c: 0,
       },
 
+      // ====== MODAL VERBS (Yardımcı Fiiller) ======
       {
-        q: "How is the weather? (🌧️)",
-        a: ["It is rainy", "It is sunny", "It is windy", "It is hot"],
+        q: "You _____ study for the exam.",
+        a: ["can", "must", "may", "might"],
+        c: 1,
+      },
+      {
+        q: "_____ I use your pen?",
+        a: ["Must", "Should", "Can", "Need"],
+        c: 2,
+      },
+      {
+        q: "She _____ speak three languages.",
+        a: ["can", "must", "should", "might"],
         c: 0,
       },
       {
-        q: "In winter, it is usually _____.",
-        a: ["cold", "hot", "yummy", "noisy"],
+        q: "You _____ be quiet in the library.",
+        a: ["can", "must", "may", "might"],
+        c: 1,
+      },
+      {
+        q: "_____ you help me with my homework?",
+        a: ["Must", "Should", "Could", "Need"],
+        c: 2,
+      },
+      {
+        q: "We _____ go to the party tonight.",
+        a: ["can", "must", "might", "need"],
+        c: 2,
+      },
+      {
+        q: "Students _____ wear uniforms at school.",
+        a: ["can", "must", "may", "might"],
+        c: 1,
+      },
+      {
+        q: "You _____ eat more vegetables.",
+        a: ["can", "must", "should", "might"],
+        c: 2,
+      },
+      {
+        q: "_____ I ask you a question?",
+        a: ["Must", "Should", "May", "Need"],
+        c: 2,
+      },
+      {
+        q: "He _____ be at home now.",
+        a: ["can", "must", "might", "need"],
+        c: 2,
+      },
+
+      // ====== QUESTION WORDS (Soru Kelimeleri) ======
+      {
+        q: "_____ is your name?",
+        a: ["What", "Where", "When", "Who"],
         c: 0,
       },
       {
-        q: "Which season comes after winter?",
-        a: ["Spring", "Summer", "Autumn", "Monday"],
+        q: "_____ do you live?",
+        a: ["What", "Where", "When", "Who"],
+        c: 1,
+      },
+      {
+        q: "_____ is your birthday?",
+        a: ["What", "Where", "When", "Who"],
+        c: 2,
+      },
+      {
+        q: "_____ is your best friend?",
+        a: ["What", "Where", "When", "Who"],
+        c: 3,
+      },
+      {
+        q: "_____ are you doing?",
+        a: ["What", "Where", "When", "Who"],
         c: 0,
       },
       {
-        q: "I feel _____ when I get a good grade.",
-        a: ["happy", "sad", "angry", "bored"],
+        q: "_____ old are you?",
+        a: ["What", "How", "When", "Who"],
+        c: 1,
+      },
+      {
+        q: "_____ books do you have?",
+        a: ["How much", "How many", "How old", "How long"],
+        c: 1,
+      },
+      {
+        q: "_____ does it cost?",
+        a: ["How much", "How many", "How old", "How long"],
         c: 0,
       },
       {
-        q: "Why are you tired? - Because I _____ to bed late.",
-        a: ["go", "goes", "going", "gone"],
+        q: "_____ did you go yesterday?",
+        a: ["What", "Where", "When", "Who"],
+        c: 1,
+      },
+      {
+        q: "_____ do you go to school? - By bus.",
+        a: ["What", "How", "When", "Who"],
+        c: 1,
+      },
+
+      // ====== THERE IS / THERE ARE ======
+      {
+        q: "_____ a book on the table.",
+        a: ["There is", "There are", "There was", "There were"],
         c: 0,
+      },
+      {
+        q: "_____ three cats in the garden.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 1,
+      },
+      {
+        q: "_____ any milk in the fridge?",
+        a: ["Is there", "Are there", "Was there", "Were there"],
+        c: 0,
+      },
+      {
+        q: "_____ many students in the classroom.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 1,
+      },
+      {
+        q: "_____ a pencil in my bag.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 0,
+      },
+      {
+        q: "_____ two apples on the plate.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 1,
+      },
+      {
+        q: "_____ a problem with the computer.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 0,
+      },
+      {
+        q: "_____ any questions?",
+        a: ["Is there", "Are there", "Was there", "Were there"],
+        c: 1,
+      },
+      {
+        q: "_____ a park near my house.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 0,
+      },
+      {
+        q: "_____ some water in the bottle.",
+        a: ["There is", "There are", "There was", "There were"],
+        c: 0,
+      },
+
+      // ====== COUNTABLE / UNCOUNTABLE ======
+      {
+        q: "How _____ apples do you want?",
+        a: ["much", "many", "long", "old"],
+        c: 1,
+      },
+      {
+        q: "How _____ water do you need?",
+        a: ["much", "many", "long", "old"],
+        c: 0,
+      },
+      {
+        q: "There isn't _____ milk.",
+        a: ["some", "any", "many", "few"],
+        c: 1,
+      },
+      {
+        q: "There are _____ books on the shelf.",
+        a: ["some", "any", "much", "a"],
+        c: 0,
+      },
+      {
+        q: "I need _____ sugar.",
+        a: ["some", "any", "many", "few"],
+        c: 0,
+      },
+      {
+        q: "Do you have _____ brothers?",
+        a: ["some", "any", "much", "a"],
+        c: 1,
+      },
+      {
+        q: "There are _____ people in the park.",
+        a: ["a lot of", "much", "a", "an"],
+        c: 0,
+      },
+      {
+        q: "I don't have _____ time.",
+        a: ["some", "any", "many", "few"],
+        c: 1,
+      },
+      {
+        q: "Would you like _____ tea?",
+        a: ["some", "any", "many", "few"],
+        c: 0,
+      },
+      {
+        q: "There isn't _____ cheese in the fridge.",
+        a: ["some", "any", "many", "few"],
+        c: 1,
       },
     ],
   };
@@ -2388,6 +2445,7 @@ const EduPlatform = () => {
     setAnswered(false);
     setSelectedAnswer(null);
     setPassedQuestions([]);
+    setIsRevisitMode(false);
     setQuizComplete(false);
     setQuizStartTime(Date.now());
     setView("quiz");
@@ -2492,8 +2550,16 @@ const EduPlatform = () => {
     saveData(updatedData);
 
     setTimeout(() => {
-      if (currentQ < questions.length - 1) {
+      if (!isRevisitMode && currentQ < questions.length - 1) {
         setCurrentQ(currentQ + 1);
+        setAnswered(false);
+        setSelectedAnswer(null);
+        setQuizStartTime(Date.now());
+      } else if (passedQuestions.length > 0) {
+        setIsRevisitMode(true);
+        const nextQ = passedQuestions[0];
+        setPassedQuestions(passedQuestions.slice(1));
+        setCurrentQ(nextQ);
         setAnswered(false);
         setSelectedAnswer(null);
         setQuizStartTime(Date.now());
@@ -2532,7 +2598,7 @@ const EduPlatform = () => {
       skippedQuestions.push(activityId);
     }
 
-    // Pas geçilen soruları arttır
+    // Pas geçilen soruları artır
     const passedBySubject = studentData.passedQuestionsBySubject || {
       matematik: 0,
       fen: 0,
@@ -2555,9 +2621,20 @@ const EduPlatform = () => {
 
     saveData(updatedData);
 
+    const updatedPassed = [...passedQuestions, currentQ];
+    setPassedQuestions(updatedPassed);
+
     setTimeout(() => {
-      if (currentQ < questions.length - 1) {
+      if (!isRevisitMode && currentQ < questions.length - 1) {
         setCurrentQ(currentQ + 1);
+        setAnswered(false);
+        setSelectedAnswer(null);
+        setQuizStartTime(Date.now());
+      } else if (updatedPassed.length > 0) {
+        setIsRevisitMode(true);
+        const nextQ = updatedPassed[0];
+        setPassedQuestions(updatedPassed.slice(1));
+        setCurrentQ(nextQ);
         setAnswered(false);
         setSelectedAnswer(null);
         setQuizStartTime(Date.now());

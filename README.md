@@ -18,21 +18,27 @@ Modern, etkileşimli ve gamification öğeleriyle donatılmış bir eğitim plat
 
 ### 🎮 Gamification Sistemi
 
-- **Puan Sistemi**: Her doğru cevap için puan kazanma
-- **Seviye Sistemi**: Puanlara göre otomatik seviye atlama
+- **Puan Sistemi**: Her doğru cevap için puan kazanma (+20 Puan)
+- **Seviye Sistemi**: Puanlara göre otomatik seviye atlama (Bronz, Gümüş, Altın, Platin, Elmas)
 - **Rozet Sistemi**: Başarılar için özel rozetler
-  - 🌟 İlk Adım (İlk soruyu doğru cevaplama)
-  - 🔥 Ateş Topu (5 soruyu üst üste doğru cevaplama)
-  - 🏆 Şampiyon (100 puan toplama)
-  - 📚 Bilge (Her dersten en az 1 soru çözme)
-  - ⚡ Hız Canavarı (Bir quizi 2 dakikadan kısa sürede bitirme)
+  - 🎯 İlk Adım (Herhangi bir aktivite tamamlama)
+  - 🧮 Matematik Dehası (10+ doğru matematik)
+  - 🔭 Fen Kaşifi (10+ doğru fen)
+  - 📖 Kelime Ustası (10+ doğru türkçe)
+  - 🇬🇧 English Master (10+ doğru ingilizce)
+  - 👑 Şampiyon (500+ puan)
 
 ### 📚 Ders Modülleri
 
-- **Matematik**: 100+ soru (Temel işlemler, geometri, kümeler, olasılık)
-- **Fen Bilgisi**: 100+ soru (Güneş sistemi, insan vücudu, fizik)
-- **Türkçe**: 100+ soru (Dil bilgisi, sözcük türleri, cümle bilgisi)
-- **İngilizce**: 100+ soru (Kelime bilgisi, gramer, zaman yapıları)
+- **Matematik**: 100 soru (Sayılar, Kesirler, Geometri, Cebir, Veri Analizi, Koordinat Sistemi)
+- **Fen Bilgisi**: 100 soru (Güneş Sistemi, İnsan Vücudu, Sindirim, Dolaşım, Ekosistem)
+- **Türkçe**: 100 soru (Sözcük Anlamı, Dil Bilgisi, Fiiller, Noktalama, Edebî Türler)
+- **İngilizce**: 100 soru (Present Simple, Past Simple, Comparatives, Modal Verbs)
+
+### 🤖 Akıllı Öğrenme
+
+- **AI Öğrenme Planı**: Emir Taha'nın zayıf olduğu konuları tespit eden ve özel çalışma önerileri sunan AI destekli panel.
+- **Ders Analizi**: Hangi derslerde başarılı, hangilerinde daha çok vakit harcadığını analiz eder.
 
 ### 📊 İstatistik ve Takip
 
@@ -48,7 +54,7 @@ Modern, etkileşimli ve gamification öğeleriyle donatılmış bir eğitim plat
 - Ders bazında başarı oranları
 - Günlük aktivite geçmişi
 - Toplam çözülen soru sayısı
-- Şifre korumalı erişim (Varsayılan: `2024`)
+- Şifre korumalı erişim (Şifre: `168859`)
 
 ### 💾 Veri Yönetimi
 
@@ -165,16 +171,16 @@ Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 ### Veli Girişi
 
 1. Ana sayfada "Veli Girişi" butonuna tıklayın
-2. Şifreyi girin (Varsayılan: `2024`)
+2. Şifreyi girin (Şifre: `168859`)
 3. Öğrenci istatistiklerini görüntüleyin
 
 ### Quiz Sistemi
 
-- Her quiz 10 sorudan oluşur
-- Doğru cevap: +10 puan
-- Yanlış cevap: Puan kaybı yok
-- Soru atlama: İstatistiklerde kaydedilir
-- Quiz sonunda detaylı sonuç ekranı
+- Her quiz dersin tüm sorularını kapsar.
+- Doğru cevap: **+20 puan**
+- **Pas Geçme Döngüsü**: Pas geçilen sorular kaybolmaz! Quiz sonunda otomatik olarak tekrar önünüze gelir.
+- **Başarı Takibi**: Pas geçilen bir soru çözüldüğünde, istatistiklerdeki "Pas geçilen" sayısı otomatik olarak düşer.
+- Quiz sonunda detaylı sonuç ekranı ve confetti kutlaması.
 
 ## 📁 Proje Yapısı
 
@@ -343,7 +349,7 @@ npx tsc --noEmit
 `src/pages/index.tsx` dosyasında:
 
 ```typescript
-const PARENT_PASSWORD = "2024"; // Buradan değiştirin
+const PARENT_PASSWORD = "168859"; // Buradan değiştirin
 ```
 
 ### Yeni Ders Ekleme

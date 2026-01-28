@@ -108,11 +108,11 @@ export async function analyzeStudentPerformance(
   // Başarılı modeli belirle
   const successfulModel = result.model as string;
   const modelDisplayMap: Record<string, string> = {
-    "gemini-3-pro-preview": "Gemini 3 Pro",
     "gemini-3-flash-preview": "Gemini 3 Flash",
-    "gemini-2.5-pro": "Gemini 2.5 Pro",
-    "gemini-2.5-flash": "Gemini 2.5 Flash",
+    "gemini-3-pro-preview": "Gemini 3 Pro",
     "gemini-2.0-flash": "Gemini 2.0 Flash",
+    "gemini-2.5-flash": "Gemini 2.5 Flash",
+    "gemini-2.5-pro": "Gemini 2.5 Pro",
   };
 
   const aiResponse = result.text as string;
